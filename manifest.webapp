@@ -1,0 +1,14 @@
+{
+"name":"Pixel Painter",
+"version":"1.0.0",
+"description":"A pixel painter app in kaios",
+"icons": {
+ "56": "/icons/icon56_56.png",
+ "112": "/icons/icon112_112.png"
+},
+"launch_path": "/index.html",
+ "developer":{
+ 	"name":"Sarayu and Gabriel!"
+ },
+ "categories":["games","entertainment"]
+}
