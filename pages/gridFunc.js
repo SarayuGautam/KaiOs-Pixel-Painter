@@ -1,26 +1,29 @@
 $(document).ready(function () {
   const sizeOfPixel = localStorage.getItem("sizeOfPixel");
   const canvasSize = localStorage.getItem("canvasSize");
-
   const padding = localStorage.getItem("padding");
-  const grid = localStorage.getItem("grid");
+  const numberOfPixels = localStorage.getItem("numberOfPixels");
+  const availableColors=localStorage.getItem("availableColors");
+  const colorGrid=JSON.parse(localStorage.getItem("colorGrid"));
+
 
   $(".canvas").css({
     padding: padding,
     width:canvasSize,
     height:canvasSize,
-    "grid-template-columns": `repeat(${grid},${sizeOfPixel}px)`,
-    "grid-template-rows": `repeat(${grid},${sizeOfPixel}px)`,
+    "grid-template-columns": `repeat(${numberOfPixels},${sizeOfPixel}px)`,
+    "grid-template-rows": `repeat(${numberOfPixels},${sizeOfPixel}px)`,
 
   });
-  for (let i = 0; i < Math.pow(grid,2); i++) {
-    $(".canvas").append(`<div class="pixel" id="id${i}" tabIndex="${i+1}"></div>`);
+  for (let i = 0; i < Math.pow(numberOfPixels,2); i++) {
+    $(".canvas").append(`<div class="pixel" id="id${i}" tabIndex="${i+1} style="background-color:${colorGrid[i]};"></div>`);
     
   }
 
+
   $(".pixel").each(function () {
     $(this).css({
-      border: "1px solid black",//To be fixed
+      border: "1px solid rgba(34, 167, 240, 0.25)",
       height: sizeOfPixel,
       width: sizeOfPixel,
     });
@@ -51,23 +54,23 @@ const softkeycallbackGridColor= {
 document.addEventListener('keydown',handleKeyDownGrid);
 
 function handleKeyDownGrid(e){
-  const grid = localStorage.getItem("grid");
+  const numberOfPixels = localStorage.getItem("numberOfPixels");
   const currentIndex = document.activeElement.tabIndex;
   const numberOfElements=document.getElementsByClassName("pixel").length;
   switch(e.key){
     case 'ArrowUp':
       if(currentIndex==1){
          navGrid(numberOfElements-1);
-      }else if(currentIndex<=grid){
+      }else if(currentIndex<=numberOfPixels){
         navGrid(-1);
       }
       else{
-        navGrid(-grid);
+        navGrid(-numberOfPixels);
       }
       break;
     case 'ArrowDown':
-      if(currentIndex==numberOfElements||currentIndex>(numberOfElements-grid)){
-        navGrid(+grid-numberOfElements);
+      if(currentIndex==numberOfElements||currentIndex>(numberOfElements-numberOfPixels)){
+        navGrid(+numberOfPixels-numberOfElements);
       }else{
         navGrid(+grid);
       }

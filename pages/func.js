@@ -1,13 +1,23 @@
 function drawCanvas(grid) {
+  const numberOfPixels = grid.pixelsPerLine;
+  const drawing=grid.drawing;
+  const association=grid.drawingColorAssociation;
+  
+   const colorGrid=drawing.map((drawPixel)=>{
+     return (association[drawPixel]);
+  });
+  const availableColors=grid.availableColors;
   const screenWidth = document.documentElement.clientWidth;
   const screenHeight = document.documentElement.clientHeight;
-  const padding = 10;
+  const padding = 5;
   const canvasSize =
     screenWidth < screenHeight
       ? screenWidth - 2*padding 
       : screenHeight - 2*padding ;
-  var sizeOfPixel = (canvasSize / grid);
-  localStorage.setItem("grid", grid);
+  var sizeOfPixel = (canvasSize / numberOfPixels);
+  localStorage.setItem("numberOfPixels", numberOfPixels);
+  localStorage.setItem("availableColors",availableColors);
+  localStorage.setItem("colorGrid",colorGrid);
   localStorage.setItem("padding", padding);
   localStorage.setItem("sizeOfPixel", sizeOfPixel);
   localStorage.setItem("canvasSize",canvasSize);
@@ -26,7 +36,6 @@ const softkeyCallbackTempPage= {
   center: function() { 
     const currentElement=$(":focus");
     const drawGrid=currentElement.data("grid");
-    window.location.href="./displayGrid.html";
     drawCanvas(drawGrid);
    },
 };
@@ -54,7 +63,7 @@ function handlekeyDownTemplate(e) {
       break;
     case 'ArrowDown':
     if(currentIndex==numberOfElements||currentIndex==numberOfElements-1){
-      navTemp(1-numberOfElements);
+      navTemp(2-numberOfElements);
     }else{
       navTemp(2);
      }
@@ -86,3 +95,48 @@ function navTemp(move) {
   $(".active").removeClass("active");
   targetElement.focus().addClass("active");
 }
+
+let template ={
+
+  "pixelsPerLine" : 29,
+  "availableColors" : [],
+  "drawingColorAssociation" : {
+      "0" : "#d2d2d2", 
+      "1" : "#505050", 
+      "2" : "#9e9e9e", 
+      "3" : "#8b8b8b", 
+      "4" : "#5f5f5f"
+  },
+  "drawing" : [
+      1,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,2,2,2,1,1,
+      1,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,2,2,2,2,1,1,
+      1,2,2,2,0,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,3,2,2,2,2,0,1,1,
+      1,2,2,2,0,2,2,2,1,1,1,3,2,2,2,2,2,1,1,1,3,2,2,0,2,2,2,1,1,
+      1,2,2,2,2,0,0,2,2,2,2,2,0,0,2,0,2,2,2,2,2,2,0,2,2,2,2,1,1,
+      1,2,2,2,2,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,0,1,1,
+      1,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2,1,1,
+      1,2,2,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,1,1,
+      1,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1,1,
+      1,2,2,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,
+      1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,1,
+      1,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
+      1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
+      1,2,2,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,4,0,0,0,0,0,0,0,1,1,
+      2,2,0,2,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,2,1,
+      2,2,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,2,1,
+      2,2,2,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,1,
+      2,2,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,
+      1,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,
+      3,2,2,2,2,2,2,2,0,0,0,0,0,1,1,0,0,0,0,0,2,2,2,2,2,2,2,3,3,
+      1,1,2,2,0,0,0,2,2,0,0,0,0,0,0,0,0,0,0,2,2,0,0,0,0,0,1,1,1,
+      1,1,2,2,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,0,0,1,1,1,
+      1,4,2,2,2,0,0,0,0,2,2,0,2,2,2,2,0,2,2,0,0,0,0,0,2,2,3,1,1,
+      3,1,1,1,2,2,2,0,0,0,0,2,2,3,3,3,2,0,0,0,0,0,0,0,1,1,1,4,1,
+      1,1,1,1,1,2,2,0,0,0,0,0,3,3,3,3,0,0,0,0,0,0,0,1,1,1,1,1,1,
+      1,1,1,1,1,1,2,2,0,2,0,0,0,3,3,2,0,0,0,0,0,0,1,1,1,1,1,1,1,
+      1,1,1,1,1,1,1,2,2,0,0,2,2,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,
+      1,1,1,1,1,1,1,1,1,1,2,2,0,0,2,0,2,0,1,1,1,1,1,1,1,1,1,1,1
+  ]
+}
+
+$('div[tabIndex=1]').data("grid", template); 
