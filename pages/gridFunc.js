@@ -4,8 +4,7 @@ $(document).ready(function () {
   const padding = localStorage.getItem("padding");
   const numberOfPixels = localStorage.getItem("numberOfPixels");
   const availableColors=localStorage.getItem("availableColors");
-  const colorGrid=JSON.parse(localStorage.getItem("colorGrid"));
-
+  const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
 
   $(".canvas").css({
     padding: padding,
@@ -16,7 +15,7 @@ $(document).ready(function () {
 
   });
   for (let i = 0; i < Math.pow(numberOfPixels,2); i++) {
-    $(".canvas").append(`<div class="pixel" id="id${i}" tabIndex="${i+1} style="background-color:${colorGrid[i]};"></div>`);
+    $(".canvas").append(`<div class="pixel" id="id${i}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
     
   }
 

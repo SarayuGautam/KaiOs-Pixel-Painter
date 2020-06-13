@@ -17,7 +17,7 @@ function drawCanvas(grid) {
   var sizeOfPixel = (canvasSize / numberOfPixels);
   localStorage.setItem("numberOfPixels", numberOfPixels);
   localStorage.setItem("availableColors",availableColors);
-  localStorage.setItem("colorGrid",colorGrid);
+  localStorage.setItem('colorGrid', JSON.stringify(colorGrid))
   localStorage.setItem("padding", padding);
   localStorage.setItem("sizeOfPixel", sizeOfPixel);
   localStorage.setItem("canvasSize",canvasSize);
