@@ -28,9 +28,6 @@ $(document).ready(function () {
       height: sizeOfPixel,
       width: sizeOfPixel,
     });
-    $(this).click(function () {
-      $(this).css({ "background-color": getRandomColor() });
-    });
   });
 
   $('.pixel[tabIndex=1]').focus();
