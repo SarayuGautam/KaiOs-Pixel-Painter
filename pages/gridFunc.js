@@ -1,10 +1,15 @@
+
 $(document).ready(function () {
   const sizeOfPixel = localStorage.getItem("sizeOfPixel");
   const canvasSize = localStorage.getItem("canvasSize");
   const padding = localStorage.getItem("padding");
   const numberOfPixels = localStorage.getItem("numberOfPixels");
-  const availableColors=localStorage.getItem("availableColors");
   const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
+  // const availableColors = JSON.parse(localStorage.getItem('availableColors'));
+  const availableColors=[];
+  const numberOfColors=availableColors.length;
+  var isGrid =true;
+  
 
   $(".canvas").css({
     padding: padding,
@@ -15,14 +20,11 @@ $(document).ready(function () {
 
   });
   for (let i = 0; i < Math.pow(numberOfPixels,2); i++) {
-    $(".canvas").append(`<div class="pixel" id="id${i}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
+    $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
     
   }
-
-
   $(".pixel").each(function () {
     $(this).css({
-      border: "1px solid rgba(34, 167, 240, 0.25)",
       height: sizeOfPixel,
       width: sizeOfPixel,
     });
@@ -30,74 +32,141 @@ $(document).ready(function () {
       $(this).css({ "background-color": getRandomColor() });
     });
   });
-  $('div[tabIndex=1]').focus().addClass("active_grid");
-});
-function getRandomColor() {
-  var letters = "0123456789ABCDEF";
-  var color = "#";
-  for (var i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
+
+  $('.pixel[tabIndex=1]').focus();
+ 
+  if(availableColors.length>0){
+    for(let i=0;i<availableColors.length;i++){
+      $(".bottomPicker").append(`<div class="color_bottom" id="color${i+1}" tabIndex="${i+1}" style="background-color:${availableColors[i]};"></div>`);
+    }
+    $(".bottomPicker").append(`<div class="space"></div>`);
   }
-  return color;
-}
 
-const softkeycallbackGridColor= {
-  center: function() { 
-    const currentElement=$(":focus");
-    currentElement.css({"background-color":getRandomColor()});
-   },
-};
+  $(".color_bottom").each(function(){
+    $(this).keydown(function(){
+    let currentColor = $(this).css("background-color");
+    localStorage.setItem("currentColor",currentColor);
+    localStorage.setItem("fColor",$(this).attr("id"));
+    });
+  });
 
-
-
-document.addEventListener('keydown',handleKeyDownGrid);
+  const softkeycallbackGridColor= {
+    center: function() { 
+      let focused=$(":focus");
+      if(focused.hasClass("pixel")){
+        availableColors.length>0?$(":focus").css({"background-color":localStorage.getItem("currentColor")}):$(":focus").css({"background-color":null});
+      } 
+     },
+     left:function(){  
+       if(availableColors.length>0){
+        isGrid=!isGrid;
+        var fGrid= document.getElementById(localStorage.getItem("fGrid"));
+        var fColor=document.getElementById(localStorage.getItem("fColor"));
+        $(":focus").blur();
+        if(isGrid){
+         fGrid?fGrid.focus():$("#pixel1").focus();
+        }else{
+          fColor?fColor.focus():$("#color1").focus();
+        } 
+       } else{
+        window.location.href = "./displayColor.html";
+       }  
+     }
+  };
+  document.addEventListener('keydown',handleKeyDownGrid);
 
 function handleKeyDownGrid(e){
-  const numberOfPixels = localStorage.getItem("numberOfPixels");
   const currentIndex = document.activeElement.tabIndex;
   const numberOfElements=document.getElementsByClassName("pixel").length;
   switch(e.key){
     case 'ArrowUp':
-      if(currentIndex==1){
-         navGrid(numberOfElements-1);
-      }else if(currentIndex<=numberOfPixels){
-        navGrid(-1);
-      }
-      else{
-        navGrid(-numberOfPixels);
+      if(isGrid){
+        if(currentIndex==1){
+          navGrid(numberOfElements-1);
+       }else if(currentIndex<=numberOfPixels){
+         navGrid(-1);
+       }
+       else{
+         navGrid(-numberOfPixels);
+       }
+      }else{
+       if(currentIndex==numberOfColors){
+          navColor(1-numberOfColors);
+        }else{
+          navColor(+1);
+        }
       }
       break;
     case 'ArrowDown':
+     if(isGrid){
       if(currentIndex==numberOfElements||currentIndex>(numberOfElements-numberOfPixels)){
         navGrid(+numberOfPixels-numberOfElements);
       }else{
-        navGrid(+grid);
+        navGrid(+numberOfPixels);
       }
+     }else{
+      if(currentIndex==1){
+        navColor(numberOfColors-1);
+      }else {
+        navColor(-1);
+      }
+     }
       break;
     case 'ArrowRight':
+     if(isGrid){
       if(currentIndex==numberOfElements){
         navGrid(1-numberOfElements);
       }else{
         navGrid(1);
       }
+     }else{
+      if(currentIndex==numberOfColors){
+         navColor(1-numberOfColors);
+       }else{
+         navColor(+1);
+       }
+     }
       break;
     case 'ArrowLeft':
-      if(currentIndex==1){
-        navGrid(numberOfElements-1);
-     }else{
-      navGrid(-1);
-     }
+      if(isGrid){
+        if(currentIndex==1){
+          navGrid(numberOfElements-1);
+       }else{
+        navGrid(-1);
+       }
+      }else{
+        if(currentIndex==1){
+          navColor(numberOfColors-1);
+        }else {
+          navColor(-1);
+        }
+       }
       break;
     case 'Enter':
       softkeycallbackGridColor.center();
       break;
+    case 'SoftLeft':
+      softkeycallbackGridColor.left();
+      break;
   }
-}
+};
 
 function navGrid(move) {
   const currentIndex = document.activeElement.tabIndex;
   const next = currentIndex + move;
-  const targetElement = $(`div[tabIndex=${next}]`).eq(0);
-  $(".active_grid").removeClass("active_grid");
-  targetElement.focus().addClass("active_grid");
+  const targetElement = $(`.pixel[tabIndex=${next}]`).eq(0);
+  targetElement.focus();
+  localStorage.setItem("fGrid",targetElement.attr("id"));
 }
+function navColor(move) {
+  const currentIndex = document.activeElement.tabIndex;
+  const next = currentIndex + move;
+  const targetElement = $(`.color_bottom[tabIndex=${next}]`).eq(0);
+  targetElement.focus();
+}
+});
+
+
+
+
+

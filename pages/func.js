@@ -7,6 +7,7 @@ function drawCanvas(grid) {
      return (association[drawPixel]);
   });
   const availableColors=grid.availableColors;
+ 
   const screenWidth = document.documentElement.clientWidth;
   const screenHeight = document.documentElement.clientHeight;
   const padding = 5;
@@ -16,8 +17,8 @@ function drawCanvas(grid) {
       : screenHeight - 2*padding ;
   var sizeOfPixel = (canvasSize / numberOfPixels);
   localStorage.setItem("numberOfPixels", numberOfPixels);
-  localStorage.setItem("availableColors",availableColors);
-  localStorage.setItem('colorGrid', JSON.stringify(colorGrid))
+  localStorage.setItem('colorGrid', JSON.stringify(colorGrid));
+  localStorage.setItem('availableColors', JSON.stringify(availableColors));
   localStorage.setItem("padding", padding);
   localStorage.setItem("sizeOfPixel", sizeOfPixel);
   localStorage.setItem("canvasSize",canvasSize);
@@ -41,7 +42,7 @@ const softkeyCallbackTempPage= {
 };
 
 
-$('div[tabIndex=1]').focus().addClass("active");
+$('div[tabIndex=1]').focus();
 
 document.addEventListener('keydown',handlekeyDownTemplate);
 
@@ -92,14 +93,13 @@ function navTemp(move) {
   const currentIndex = document.activeElement.tabIndex;
   const next = currentIndex + move;
   const targetElement = $(`div[tabIndex=${next}]`).eq(0);
-  $(".active").removeClass("active");
-  targetElement.focus().addClass("active");
+  targetElement.focus();
 }
 
 let template ={
 
   "pixelsPerLine" : 29,
-  "availableColors" : [],
+  "availableColors" : ["#ff6f00","#fcbe37","#81d8d0","#f9c2cc","#bf929a","#8bbf8c","#0c6772","#2c5e00","#782351"],
   "drawingColorAssociation" : {
       "0" : "#d2d2d2", 
       "1" : "#505050", 
