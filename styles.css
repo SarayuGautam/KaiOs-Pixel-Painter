@@ -4,7 +4,6 @@ body {
   align-items: center;
 }
 
-
 a {
   color: inherit;
 }
@@ -14,30 +13,35 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.wrapper{
+
+.wrapper {
   justify-content: center;
 }
+
 .canvas {
   display: grid;
 }
 
-.center{
+.center {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.template{
+
+.template {
   display: grid;
-  grid-template-columns: auto auto ;
+  grid-template-columns: auto auto;
 }
-.center_img{
+
+.center_img {
   display: block;
   margin-left: auto;
   margin-right: auto;
   width: 50%;
 }
-.softkey{
+
+.softkey {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -45,59 +49,74 @@ a:hover {
   background-color: grey;
   color: white;
 }
+
 .box {
   width: 80px;
   height: 80px;
   margin: 10px;
   background-color: grey;
-  border: 1px solid black ;
+  border: 1px solid black;
 }
-.box:focus{
+
+.box:focus {
   border: 2px solid red;
 }
 
-.pixel{
+.pixel {
   border: 1px solid rgba(34, 167, 240, 0.25);
-
 }
-.colorPixel{
+
+.colorPixel {
   border: 1px solid rgba(34, 167, 240, 0.25);
-
-}
-.pixel:focus{
-  border: 2px solid red !important; 
+  border-radius: 50%;
 }
 
-.bottomPicker{
-    min-width: 100%;
-    height: 40px;
-    margin:10px 0;
-    overflow-x: auto;
-    display: flex;
+.pixel:focus {
+  border: 2px solid red !important;
 }
+
+.bottomPicker {
+  min-width: 100%;
+  height: 40px;
+  margin: 10px 0;
+  overflow-x: auto;
+  display: flex;
+}
+
 .color_bottom {
   min-width: 25px;
   margin: 5px;
   height: 20px;
 }
-.color_bottom:focus{
-  border: 2px solid red !important; 
+
+.color_bottom:focus {
+  border: 2px solid red !important;
 }
-.space{
+
+.space {
   min-width: 5px;
 }
 
-.customPicker{
-  margin:10px auto;
-  max-width:35px;
-  height:30px;
+.customPicker {
+  margin: 10px auto;
+  max-width: 35px;
+  height: 30px;
   background-color: red;
-  border: 2px solid blueviolet; 
-}
-.customPicker:focus{
-  box-shadow:inset 0 0 5px #888888
+  border: 2px solid blueviolet;
 }
 
-.modalColor{
+.customPicker:focus {
+  box-shadow: inset 0 0 5px #888888;
+}
+
+.modal {
+  padding: 10px;
+}
+
+.modalColor {
   display: grid;
+}
+.colorPixel:focus{
+  border: 2px solid black;
+  box-shadow: inset 0 0 5px white;
 }
