@@ -9,8 +9,13 @@
   <title>PixelPainter</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="locales" content="en-US, fr, de">
+  <meta name="default_locale" content="en-US">
   <link rel="stylesheet" href="./extras/bootstrap.min.css">
   <link rel="stylesheet" href="./css/styles.css">
+  <script src="./js/l10n.js"></script>
+  <link rel="localization" href="locales/painter.{locale}.properties" />
+  <link rel="manifest" href="./manifest.webapp" />
 </head>
 
 <body>
@@ -25,6 +30,6 @@
   <script src="./js/main.js"></script>
 </body>
 <footer class="softkey">
-  <div id="softkey-center" style="text-align:center;">SELECT</div>
+  <div id="softkey-center" data-l10n-id="select" style="text-align:center;">SELECT</div>
 </footer>
 </html>

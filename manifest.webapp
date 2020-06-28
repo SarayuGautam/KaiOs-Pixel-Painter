@@ -10,5 +10,20 @@
  "developer":{
  	"name":"Sarayu and Gabriel!"
  },
- "categories":["games","entertainment"]
+ "categories":["games","entertainment"],
+ "default_locale": "en",
+"locales": {
+  "ar": {
+    "name" : " ... ",
+    "description" : " ... "
+ },
+ "fr": {
+    "name" : " ... ",
+    "description" : " ... "
+ },
+ "zh-TW": {
+    "name" : " ... ",
+    "description" : " ... "
+  }
+}
 }

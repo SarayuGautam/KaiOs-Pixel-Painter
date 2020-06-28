@@ -22,9 +22,14 @@ $('.box[tabIndex=1]').focus();
   var templates =data.templates;
   var numberOfTemplates= Object.keys(templates).length;
   for(var i=1;i<=numberOfTemplates;i++){
-    $(".template").append(`<div tabIndex="${i}" class="box"></div>`)
+    $(".template").append(`<div tabIndex="${i}" class="box"></div>`);
     $(`.box[tabIndex=${i}]`).data("grid", JSON.stringify(templates[i]));
-    $(`.box[tabIndex=${i}]`).css({"background-image":`url("${templates[i].previewUrl}")`,"background-position": "center", "background-size": "cover"});
+    if(i<3){//cache x number of templates  
+      $(`.box[tabIndex=${i}]`).cacheImages({url: `${templates[i].previewUrl}`});
+      $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function(url, image){ });
+    }else{
+      $(`.box[tabIndex=${i}]`).css({"background-image":`url("${templates[i].previewUrl}")`});
+    }
   }
 });
 

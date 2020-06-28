@@ -55,6 +55,8 @@ a:hover {
   height: 80px;
   margin: 10px;
   border: 1px solid black;
+  background-position: center; 
+  background-size: cover;
 }
 
 .box:focus {
