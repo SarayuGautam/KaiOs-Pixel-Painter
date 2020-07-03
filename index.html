@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="./css/styles.css">
   <script src="./js/l10n.js"></script>
   <link rel="localization" href="locales/painter.{locale}.properties" />
-  <link rel="manifest" href="./manifest.webapp" />
+  <link rel="manifest" href="./manifest.webapp" />  
 </head>
 
 <body>
@@ -28,6 +28,24 @@
   </div>
   <script src="./extras/jquery-3.5.1.min.js"></script>
   <script src="./js/main.js"></script>
+  <script src="./extras/kaiads.v3.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      getKaiAd({
+	publisher: 'bc247e7b-cd8a-4dda-be8c-e766a729f6b8',
+	app: 'yourAppName',
+	slot: 'yourSlotName',
+	onerror: err => console.error('Custom catch:', err),
+	onready: ad => {
+		let button = document.getElementById('softkey-center')
+		button.addEventListener('click', function btnListener() {
+      button.removeEventListener("click", btnListener)
+			ad.call('display')
+		})
+	}
+})	
+  });
+  </script>
 </body>
 <footer class="softkey">
   <div id="softkey-center" data-l10n-id="select" style="text-align:center;">SELECT</div>

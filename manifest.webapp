@@ -25,5 +25,10 @@
     "name" : " ... ",
     "description" : " ... "
   }
-}
+},
+
+	"dependencies": {
+		"ads-sdk": "1.3.0"
+	}
+
 }

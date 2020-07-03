@@ -17,7 +17,6 @@ function readJsonFile(file, callback) {
   rawFile.send(null);
 }
 readJsonFile("../template/templates.json", function(text){
-$('.box[tabIndex=1]').focus();
   var data = JSON.parse(text);
   var templates =data.templates;
   var numberOfTemplates= Object.keys(templates).length;
@@ -31,11 +30,14 @@ $('.box[tabIndex=1]').focus();
       $(`.box[tabIndex=${i}]`).css({"background-image":`url("${templates[i].previewUrl}")`});
     }
   }
+$('.box[tabIndex=1]').focus();
 });
 
 
 
 
+
+//function to choose between the modes of coloring
 
 
 
@@ -45,9 +47,7 @@ $('.box[tabIndex=1]').focus();
 
 //Function to draw canvas
 
-function drawCanvas(grid) {
-
-
+function drawCanvas(grid,index) {
 
   //defining constants
 
@@ -74,6 +74,13 @@ function drawCanvas(grid) {
   localStorage.setItem("padding", padding);
   localStorage.setItem("sizeOfPixel", sizeOfPixel);
   localStorage.setItem("canvasSize",canvasSize);
+  localStorage.setItem("buttonIndex",index);
+  if(index==2){
+    const coloringNumber = grid.coloringNumber;
+    const numberColorAssociation = grid.numberColorAssociation;
+    localStorage.setItem("coloringNumber",JSON.stringify(coloringNumber));
+    localStorage.setItem("numberColorAssociation",JSON.stringify(numberColorAssociation));
+  }
   window.location.href = "./displayGrid.html";
 }
 
@@ -84,22 +91,23 @@ function drawCanvas(grid) {
 
 //send grid display
 
-$(document).ready(function () {
-  $('.box[tabIndex=1]').focus();
-  $(".box").click(function () {
-    const grid = JSON.parse($(this).data("grid"));
-    drawCanvas(grid);
-  });
-});
 
 
 const softkeyCallbackTempPage= {
   center: function() { 
     const currentElement=$(":focus");
     const drawGrid=JSON.parse(currentElement.data("grid"));
-    drawCanvas(drawGrid);
+    $("#chooseModal").modal(); 
+    $("#chooseModal").on('shown.bs.modal', function(e){
+      $(".mode[tabIndex=1]").focus();
+      $(".mode").data("currentGrid",drawGrid);
+    });  
    },
 };
+
+
+
+
 
 
 
@@ -124,40 +132,63 @@ document.addEventListener('keydown',handlekeyDownTemplate);
 
 function handlekeyDownTemplate(e) {
   const currentIndex = document.activeElement.tabIndex;
+  const isModalOpen = $('#chooseModal').is(':visible');
   const numberOfElements=document.getElementsByClassName("box").length;
   switch(e.key) {
     case 'ArrowUp':
-      if (currentIndex == 1) {
-        navTemp(numberOfElements - 1);
-      } else if (currentIndex <= 2) {
-        navTemp(-1);
-      } else {
-        navTemp(-2);
+      if(isModalOpen){
+        navMode(-1);
+      }else{
+        if (currentIndex == 1) {
+          navTemp(numberOfElements - 1);
+        } else if (currentIndex <= 2) {
+          navTemp(-1);
+        } else {
+          navTemp(-2);
+        }
       }
       break;
     case 'ArrowDown':
+     if(isModalOpen){
+      navMode(+1);
+     }else{
       if (currentIndex == numberOfElements || currentIndex > (numberOfElements - 2)) {
         navTemp(+2 - numberOfElements);
       } else {
         navTemp(+2);
       }
+     }
       break;
     case 'ArrowRight':
+     if(!isModalOpen){
       if (currentIndex == numberOfElements) {
         navTemp(1 - numberOfElements);
       } else {
         navTemp(1);
       }
       break;
+     }
     case 'ArrowLeft':
+     if(!isModalOpen){
       if (currentIndex == 1) {
         navTemp(numberOfElements - 1);
       } else {
         navTemp(-1);
       }
+     }
       break;
     case 'Enter':
-      softkeyCallbackTempPage.center();
+      if(isModalOpen){
+            const currentGrid=$(".mode").data("currentGrid");
+            drawCanvas(currentGrid,currentIndex);
+      }else{
+        softkeyCallbackTempPage.center();
+      }
+      break;
+    case 'SoftRight':
+     if(isModalOpen){
+      $("#chooseModal").modal('hide');
+     }
       break;
   }
 }
@@ -178,7 +209,12 @@ function navTemp(move) {
   targetElement.focus();
 }
 
-
+function navMode(move) {
+  const currentIndex = document.activeElement.tabIndex;
+  const next = currentIndex + move;
+  const targetElement = $(`.mode[tabIndex=${next}]`).eq(0);
+  targetElement.focus();
+}
 
 
 
