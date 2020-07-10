@@ -1,7 +1,6 @@
 $(document).ready(function () {
   const sizeOfPixel = localStorage.getItem("sizeOfPixel");
   const canvasSize = localStorage.getItem("canvasSize");
-  const padding = localStorage.getItem("padding");
   const numberOfPixels = localStorage.getItem("numberOfPixels");
   const buttonIndex = localStorage.getItem("buttonIndex");
  
@@ -25,7 +24,6 @@ $(document).ready(function () {
 
   //Grid
   $(".canvas").css({
-    padding: padding,
     width: canvasSize,
     height: canvasSize,
     "grid-template-columns": `repeat(${numberOfPixels},${sizeOfPixel}px)`,

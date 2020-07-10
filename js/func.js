@@ -1,6 +1,5 @@
 
 
-  
 
 
 //render template from json file
@@ -23,11 +22,12 @@ readJsonFile("../template/templates.json", function(text){
   for(var i=1;i<=numberOfTemplates;i++){
     $(".template").append(`<div tabIndex="${i}" class="box"></div>`);
     $(`.box[tabIndex=${i}]`).data("grid", JSON.stringify(templates[i]));
+    $(`.box[tabIndex=${i}]`).append(`<div class="image" id="preview${i}"></div>`);
     if(i<3){//cache x number of templates  
-      $(`.box[tabIndex=${i}]`).cacheImages({url: `${templates[i].previewUrl}`});
+      $(`#preview${i}`).cacheImages({url: `${templates[i].previewUrl}`});
       $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function(url, image){ });
     }else{
-      $(`.box[tabIndex=${i}]`).css({"background-image":`url("${templates[i].previewUrl}")`});
+      $(`#preview${i}`).css({"background-image":`url("${templates[i].previewUrl}")`});
     }
   }
 $('.box[tabIndex=1]').focus();
@@ -62,11 +62,11 @@ function drawCanvas(grid,index) {
  
   const screenWidth = document.documentElement.clientWidth;
   const screenHeight = document.documentElement.clientHeight;
-  const padding = 5;
+  const padding = 0.06*screenHeight;
   const canvasSize =
     screenWidth < screenHeight
-      ? screenWidth - 2*padding 
-      : screenHeight - 2*padding ;
+      ? screenWidth-padding
+      : screenHeight-padding;
   var sizeOfPixel = (canvasSize / numberOfPixels);
   localStorage.setItem("numberOfPixels", numberOfPixels);
   localStorage.setItem('colorGrid', JSON.stringify(colorGrid));

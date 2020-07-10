@@ -14,29 +14,28 @@
   <link rel="stylesheet" href="../css/styles.css">
 </head>
 
-<body>
-  <h6 class="my-3" style="text-align: center;">Templates</h6>
- <div class="templateContainer"> 
-   <div class="template"></div>
-<div class="modal fade" id="chooseModal" role="dialog">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h6 class="modal-title">Choose Painting Mode</h6>
-      </div>
-      <div class="modal-body">
-        <button type="button"  tabIndex="1" class="btn btn btn-outline-primary btn-block mode">Free Mode</button>
-        <button type="button"  tabIndex="2" class="btn btn btn-outline-success btn-block mode">Challenge Mode</button>
+<body class="template-page">
+<div>
+  <div id="ad-container-temp"></div>
+  <div class ="d-flex temp-container"><div class="template"></div></div>
+  <div class="modal fade" id="chooseModal" role="dialog">
+    <div class="modal-dialog modal-lg ">
+      <div class="modal-content">
+        <div class="modal-body">
+          <button type="button" id="mode1" tabIndex="1" class="btn btn-block mode">TIME CHALLENGE<img src="../images/clock.png"></button>
+          <div class="best-time"><p>Best time 12 seconds</p></div>
+          <button type="button" id="mode2" tabIndex="2" class="btn btn-block mode">FREE DRAW<img src="../images/edit.png"></button>
+        </div>
       </div>
     </div>
-  </div>
-</div></div>
+</div>
+</div>
+<footer class="softkey">
+  <div id="softkey-center" style="text-align:center;">SELECT</div>
+</footer>
   <script src="../extras/jquery-3.5.1.min.js"></script>
   <script src="../extras/jquery.cacheImages.min.js"></script>
   <script src="../extras/bootstrap.min.js"></script>
   <script src="../js/func.js" async defer></script>
 </body>
-<footer class="softkey">
-  <div id="softkey-center" style="text-align:center;">SELECT</div>
-</footer>
 </html>
