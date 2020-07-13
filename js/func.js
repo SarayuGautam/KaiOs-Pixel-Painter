@@ -87,7 +87,7 @@ function drawCanvas(grid, index) {
   localStorage.setItem("buttonIndex", index);
   localStorage.setItem("canvasHeight", canvasHeight);
   localStorage.setItem("canvasWidth", canvasWidth);
-  if (index == 2) {
+  if (index == 1) {
     const coloringNumber = grid.coloringNumber;
     const numberColorAssociation = grid.numberColorAssociation;
     localStorage.setItem("coloringNumber", JSON.stringify(coloringNumber));
@@ -229,3 +229,9 @@ function navMode(move) {
   const targetElement = $(`.mode[tabIndex=${next}]`).eq(0);
   targetElement.focus();
 }
+
+getNewAd("ad-container");
+
+document.addEventListener("DOMContentLoaded", () => {
+  getFullAd();
+});
