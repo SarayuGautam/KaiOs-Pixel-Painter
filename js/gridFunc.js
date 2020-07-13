@@ -103,10 +103,11 @@ $(document).ready(function () {
 
   //Modal
 
-  // $(".modal").css({
-  //   width: canvasWidth,
-  //   height: canvasWidth,
-  // });
+  $(".modal").css({
+    width: auto,
+    height: auto,
+    padding: 5
+  });
 
   $(".modalColor").css({
     // width: canvasWidth,
