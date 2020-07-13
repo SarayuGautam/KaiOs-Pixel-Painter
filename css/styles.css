@@ -1,78 +1,76 @@
-/* body {
+body {
   height: 100vh;
   justify-content: center;
   align-items: center;
-} */
-@font-face {
-  font-family: 'press_start_2pregular';
-  src: url('../fonts/pressstart2p-regular-webfont.woff2') format('woff2'),
-       url('../fonts/pressstart2p-regular-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-
 }
 @font-face {
-  font-family: 'Chalkduster';
-  src: url('../fonts/Chalkduster.woff2') format('woff2'),
-      url('../fonts/Chalkduster.woff') format('woff');
+  font-family: "press_start_2pregular";
+  src: url("../fonts/pressstart2p-regular-webfont.woff2") format("woff2"),
+    url("../fonts/pressstart2p-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Chalkduster";
+  src: url("../fonts/Chalkduster.woff2") format("woff2"), url("../fonts/Chalkduster.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
-.splash-screen{
+.splash-screen {
   background-color: #57c2e0;
 }
-.pixel-splash{
+.pixel-splash {
   background-image: url("../images/892f154a-cdb1-48f3-9182-30c8deffdece.svg");
   background-repeat: repeat space;
   background-size: 80px;
-  height:25vh;
-  width:20vw;
+  height: 25vh;
+  width: 20vw;
 }
-#splash1{
+#splash1 {
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
 }
-#splash2{
+#splash2 {
   position: absolute;
-  bottom:0;
-  right:0;
+  bottom: 0;
+  right: 0;
 }
-.pixel-text{
-  font-family: 'press_start_2pregular';
+.pixel-text {
+  font-family: "press_start_2pregular";
   font-weight: bold;
   font-size: 9vh;
   margin-bottom: 0;
 }
-.painter-text{
-  font-family:  'Chalkduster';
+.painter-text {
+  font-family: "Chalkduster";
   color: white;
   text-align: center;
   font-size: 7.5vh;
   margin-top: 0;
 }
 
-.new-label{
-  width:30px;
+.new-label {
+  width: 30px;
   position: absolute;
-  top:-5px;
-  left:-5px;
+  top: -5px;
+  left: -5px;
 }
-.center-text{
+.center-text {
   position: absolute;
-  top:42vh;
+  top: 42vh;
   left: 22vw;
 }
-.template-page{
+.template-page {
   background-color: #f2f4f5;
   scrollbar-width: none;
   scrollbar-color: #f2f4f5;
-  overflow-y:scroll;
-  overflow-x:hidden;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
-#ad-container-temp{
+#ad-container-temp {
   height: 17vh;
   width: 100vw;
   background-color: #9013fe !important;
@@ -80,37 +78,37 @@
 a {
   color: inherit;
 }
-.mode{
+.mode {
   position: relative;
-  color:white;
+  color: white;
   font-size: 5vh;
   font-weight: bold;
 }
-.mode>img{
+.mode > img {
   position: absolute;
-  width:13vw;
+  width: 13vw;
   height: 13vw;
-  top:-10px;
-  right:-5px;
+  top: -10px;
+  right: -5px;
 }
-#mode1{
+#mode1 {
   background-color: #f5a623;
-  box-shadow: 0px 7px 0px 0px rgba(211,144,33,1);
+  box-shadow: 0px 7px 0px 0px rgba(211, 144, 33, 1);
   margin-top: 12vh;
 }
-#mode2{
+#mode2 {
   background-color: #4a90e2;
-  box-shadow:0px 7px 0px 0px rgba(51,118,195,1);
+  box-shadow: 0px 7px 0px 0px rgba(51, 118, 195, 1);
   margin-bottom: 12vh;
 }
-.best-time{
+.best-time {
   margin: 10px auto;
 }
 
-.best-time>p{
+.best-time > p {
   font-size: 4vh;
   font-weight: bold;
-  color:#d39021;
+  color: #d39021;
   text-align: center;
 }
 a:hover {
@@ -118,7 +116,7 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
-.grid-page{
+.grid-page {
   background-color: #333333;
   overflow: hidden;
 }
@@ -154,7 +152,7 @@ a:hover {
   left: 0;
   bottom: 0;
   width: 100%;
-  height:7vh;
+  height: 7vh;
   border: solid 1px #3f93ab;
   background-color: #57c2e0;
   color: white;
@@ -166,39 +164,39 @@ a:hover {
   margin: 1.5vw;
   border: 1px solid black;
   background-color: #ffffff;
-  position: relative ;
+  position: relative;
 }
-.box-overlay{
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
+.box-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   bottom: 0;
   width: 46vw;
   height: 46vw;
-  background-color: rgba(0,0,0,0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
-.image{
+.image {
   position: absolute;
   top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%) ;
-  width:30vw;
+  transform: translate(-50%, -50%);
+  width: 30vw;
   height: 30vw;
-  background-position: center; 
+  background-position: center;
   background-size: cover;
 }
 
-.tick-img{
+.tick-img {
   position: absolute;
   bottom: 0;
-  right:0;
-  width:20px;
+  right: 0;
+  width: 20px;
 }
 .box:focus {
-  border:2px solid red !important;
+  border: 2px solid red !important;
 }
 
 .pixel {
@@ -252,13 +250,14 @@ a:hover {
 }
 
 .modal {
-  padding: 10px;
+  padding: 5px;
+  height: revert;
 }
 
 .modalColor {
   display: grid;
 }
-.colorPixel:focus{
+.colorPixel:focus {
   border: 2px solid black;
   box-shadow: inset 0 0 5px white;
 }

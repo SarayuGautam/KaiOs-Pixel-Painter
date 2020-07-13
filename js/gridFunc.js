@@ -1,14 +1,14 @@
 $(document).ready(function () {
   const widthOfPixel = localStorage.getItem("widthOfPixel");
   const heightOfPixel = localStorage.getItem("heightOfPixel");
-  const canvasWidth =localStorage.getItem("canvasWidth");
-  const canvasHeight =localStorage.getItem("canvasHeight");
+  const canvasWidth = localStorage.getItem("canvasWidth");
+  const canvasHeight = localStorage.getItem("canvasHeight");
   const numberOfPixelsWidth = localStorage.getItem("numberOfPixelsWidth");
   const numberOfPixelsHeight = localStorage.getItem("numberOfPixelsHeight");
   const buttonIndex = localStorage.getItem("buttonIndex");
- 
-  const coloringNumber  = JSON.parse(localStorage.getItem("coloringNumber"));
-  const numberColorAssociation =JSON.parse(localStorage.getItem("numberColorAssociation"));
+
+  const coloringNumber = JSON.parse(localStorage.getItem("coloringNumber"));
+  const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
   const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
   const availableColors = JSON.parse(localStorage.getItem('availableColors'));
   // const availableColors = [];
@@ -20,8 +20,8 @@ $(document).ready(function () {
 
 
 
-  
- 
+
+
 
 
 
@@ -33,13 +33,13 @@ $(document).ready(function () {
     "grid-template-rows": `repeat(${numberOfPixelsHeight},${heightOfPixel}px)`,
 
   });
-  for (let i = 0; i < numberOfPixelsHeight*numberOfPixelsWidth; i++) {
-     if(coloringNumber[i]>=0){
-      buttonIndex==2?$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"><p style="font-size: ${heightOfPixel-2}px; text-align: center;">${coloringNumber[i]}</p></div>`):$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
+  for (let i = 0; i < numberOfPixelsHeight * numberOfPixelsWidth; i++) {
+    if (coloringNumber[i] >= 0) {
+      buttonIndex == 2 ? $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"><p style="font-size: ${heightOfPixel-2}px; text-align: center;">${coloringNumber[i]}</p></div>`) : $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
 
-     }else{
-      buttonIndex==2?$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`):$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
-     }
+    } else {
+      buttonIndex == 2 ? $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`) : $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
+    }
   }
   $(".pixel").each(function () {
     $(this).css({
@@ -60,15 +60,15 @@ $(document).ready(function () {
 
 
   //Available Colors
-  if(buttonIndex==2){
+  if (buttonIndex == 2) {
     const numberedColor = Object.values(numberColorAssociation);
     $(".wrapper").append('<div class="bottomPicker"></div>');
     $(".bottomPicker").append(`<div class="space"></div>`);
-      for (let i = 0; i < numberedColor.length; i++) {
-        $(".bottomPicker").append(`<div class="color_bottom" id="color${i+1}" tabIndex="${i+1}" style="background-color:${numberedColor[i]};"><p style="font-size: 15px; color:white; text-align: center;">${i}</p></div>`);
-      }
-      $(".bottomPicker").append(`<div class="space"></div>`);
-  }else{
+    for (let i = 0; i < numberedColor.length; i++) {
+      $(".bottomPicker").append(`<div class="color_bottom" id="color${i+1}" tabIndex="${i+1}" style="background-color:${numberedColor[i]};"><p style="font-size: 15px; color:white; text-align: center;">${i}</p></div>`);
+    }
+    $(".bottomPicker").append(`<div class="space"></div>`);
+  } else {
     if (availableColors.length > 0) {
       $(".wrapper").append('<div class="bottomPicker"></div>');
       $(".bottomPicker").append(`<div class="space"></div>`);
@@ -76,11 +76,11 @@ $(document).ready(function () {
         $(".bottomPicker").append(`<div class="color_bottom" id="color${i+1}" tabIndex="${i+1}" style="background-color:${availableColors[i]};"></div>`);
       }
       $(".bottomPicker").append(`<div class="space"></div>`);
-    } else{
+    } else {
       $(".wrapper").append('<div tabIndex="1" class="customPicker"></div>');
     }
   }
-  
+
 
 
 
@@ -94,7 +94,7 @@ $(document).ready(function () {
     $(this).keydown(function () {
       let currentColor = $(this).css("background-color");
       localStorage.setItem("currentColor", currentColor);
-      localStorage.setItem("fColor", $(this).attr("id")); 
+      localStorage.setItem("fColor", $(this).attr("id"));
     });
   });
 
@@ -107,12 +107,12 @@ $(document).ready(function () {
 
 
 
-//Modal
+  //Modal
 
-  $(".modal").css({
-    width: canvasWidth,
-    height: canvasWidth,
-  });
+  // $(".modal").css({
+  //   width: canvasWidth,
+  //   height: canvasWidth,
+  // });
 
   $(".modalColor").css({
     width: canvasHeight,
@@ -122,7 +122,7 @@ $(document).ready(function () {
   });
 
   for (let i = 0; i < paletteColors.length; i++) {
-    $(".modalColor").append(`<div class="colorPixel" id="colorPixel${i + 1}" tabIndex="${i + 1}" style="background-color:${paletteColors[i]};height:${sizeOfColor}px;width:${sizeOfColor}px;"></div>`);
+    $(".modalColor").append(`<div class="colorPixel" id="colorPixel${i + 1}" tabIndex="${i + 1}" style="background-color:${paletteColors[i]};height:${sizeOfColor*0.75}px;width:${sizeOfColor*0.75}px;"></div>`);
   }
 
 
@@ -132,7 +132,7 @@ $(document).ready(function () {
 
 
 
-//Press Grid or Custom Palette
+  //Press Grid or Custom Palette
 
   const softkeycallbackGridColor = {
     center: function () {
@@ -143,21 +143,21 @@ $(document).ready(function () {
         }) : $(":focus").css({
           "background-color": localStorage.getItem("paletteColor")
         });
-      }else if(focused.hasClass("colorPixel")){ 
+      } else if (focused.hasClass("colorPixel")) {
         let currentColor = focused.css("background-color");
         localStorage.setItem("paletteColor", currentColor);
         localStorage.setItem("fPalette", focused.attr("id"));
         $.modal.close();
         var fGrid = document.getElementById(localStorage.getItem("fGrid"));
         fGrid ? fGrid.focus() : $("#pixel1").focus();
-        isGrid=true;
-      }else if(focused.hasClass("customPicker")){
+        isGrid = true;
+      } else if (focused.hasClass("customPicker")) {
         var fPalette = document.getElementById(localStorage.getItem("fPalette"));
         $("#colorModal").modal({
           showClose: false,
         });
-        fPalette?fPalette.focus():$("#colorPixel1").focus();
-        isGrid=false;
+        fPalette ? fPalette.focus() : $("#colorPixel1").focus();
+        isGrid = false;
       }
     },
     left: function () {
@@ -200,7 +200,7 @@ $(document).ready(function () {
   function handleKeyDownGrid(e) {
     const currentIndex = document.activeElement.tabIndex;
     const numberOfElements = document.getElementsByClassName("pixel").length;
-    const numberOfPalette=paletteColors.length;
+    const numberOfPalette = paletteColors.length;
     switch (e.key) {
       case 'ArrowUp':
         if (isGrid) {
@@ -212,13 +212,13 @@ $(document).ready(function () {
             navGrid(-numberOfPixelsWidth);
           }
         } else {
-          if(availableColors.length>0){
+          if (availableColors.length > 0) {
             if (currentIndex == numberOfColors) {
               navColor(1 - numberOfColors);
             } else {
               navColor(+1);
             }
-          }else{
+          } else {
             if (currentIndex == 1) {
               navPalette(numberOfPalette - 1);
             } else if (currentIndex <= numberOfPaletteColors) {
@@ -226,7 +226,7 @@ $(document).ready(function () {
             } else {
               navPalette(-numberOfPaletteColors);
             }
-          }  
+          }
         }
         break;
       case 'ArrowDown':
@@ -237,13 +237,13 @@ $(document).ready(function () {
             navGrid(+numberOfPixelsWidth);
           }
         } else {
-          if(availableColors.length>0){
+          if (availableColors.length > 0) {
             if (currentIndex == 1) {
               navColor(numberOfColors - 1);
             } else {
               navColor(-1);
             }
-          }else{
+          } else {
             if (currentIndex == numberOfPalette || currentIndex > (numberOfPalette - numberOfPaletteColors)) {
               navPalette(+numberOfPaletteColors - numberOfPalette);
             } else {
@@ -260,13 +260,13 @@ $(document).ready(function () {
             navGrid(1);
           }
         } else {
-          if(availableColors.length>0){
+          if (availableColors.length > 0) {
             if (currentIndex == numberOfColors) {
               navColor(1 - numberOfColors);
             } else {
               navColor(+1);
             }
-          }else{
+          } else {
             if (currentIndex == numberOfPalette) {
               navPalette(1 - numberOfPalette);
             } else {
@@ -283,13 +283,13 @@ $(document).ready(function () {
             navGrid(-1);
           }
         } else {
-          if(availableColors.length>0){
+          if (availableColors.length > 0) {
             if (currentIndex == 1) {
               navColor(numberOfColors - 1);
             } else {
               navColor(-1);
             }
-          }else{
+          } else {
             if (currentIndex == 1) {
               navPalette(numberOfPalette - 1);
             } else {
@@ -315,7 +315,7 @@ $(document).ready(function () {
 
 
 
-  
+
 
   //Navigation Functions
   function navGrid(move) {
