@@ -3,9 +3,66 @@
   justify-content: center;
   align-items: center;
 } */
+@font-face {
+  font-family: 'press_start_2pregular';
+  src: url('../fonts/pressstart2p-regular-webfont.woff2') format('woff2'),
+       url('../fonts/pressstart2p-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 
+}
+@font-face {
+  font-family: 'Chalkduster';
+  src: url('../fonts/Chalkduster.woff2') format('woff2'),
+      url('../fonts/Chalkduster.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 .splash-screen{
   background-color: #57c2e0;
+}
+.pixel-splash{
+  background-image: url("../images/892f154a-cdb1-48f3-9182-30c8deffdece.svg");
+  background-repeat: repeat space;
+  background-size: 80px;
+  height:25vh;
+  width:20vw;
+}
+#splash1{
+  position: absolute;
+  top:0;
+  left:0;
+}
+#splash2{
+  position: absolute;
+  bottom:0;
+  right:0;
+}
+.pixel-text{
+  font-family: 'press_start_2pregular';
+  font-weight: bold;
+  font-size: 9vh;
+  margin-bottom: 0;
+}
+.painter-text{
+  font-family:  'Chalkduster';
+  color: white;
+  text-align: center;
+  font-size: 7.5vh;
+  margin-top: 0;
+}
+
+.new-label{
+  width:30px;
+  position: absolute;
+  top:-5px;
+  left:-5px;
+}
+.center-text{
+  position: absolute;
+  top:42vh;
+  left: 22vw;
 }
 .template-page{
   background-color: #f2f4f5;
@@ -61,7 +118,10 @@ a:hover {
   text-decoration: none;
   cursor: pointer;
 }
-
+.grid-page{
+  background-color: #333333;
+  overflow: hidden;
+}
 .wrapper {
   justify-content: center;
 }
@@ -108,6 +168,17 @@ a:hover {
   background-color: #ffffff;
   position: relative ;
 }
+.box-overlay{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom: 0;
+  width: 46vw;
+  height: 46vw;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 2;
+}
 .image{
   position: absolute;
   top: 50%;
@@ -118,6 +189,13 @@ a:hover {
   height: 30vw;
   background-position: center; 
   background-size: cover;
+}
+
+.tick-img{
+  position: absolute;
+  bottom: 0;
+  right:0;
+  width:20px;
 }
 .box:focus {
   border:2px solid red !important;
@@ -138,17 +216,18 @@ a:hover {
 
 .bottomPicker {
   min-width: 100%;
-  height: 40px;
-  margin: 10px 0;
+  height: 12vh;
   overflow-x: auto;
   display: flex;
   justify-content: center;
+  scrollbar-color: #333333;
 }
 
 .color_bottom {
-  min-width: 25px;
-  margin: 5px;
-  height: 20px;
+  min-width: 12vw;
+  margin: 0 5px;
+  height: 7.5vh;
+  border-radius: 2px;
 }
 
 .color_bottom:focus {
@@ -156,7 +235,8 @@ a:hover {
 }
 
 .space {
-  min-width: 5px;
+  min-width: 5vw;
+  min-height: 12vh;
 }
 
 .customPicker {

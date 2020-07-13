@@ -1,7 +1,10 @@
 $(document).ready(function () {
-  const sizeOfPixel = localStorage.getItem("sizeOfPixel");
-  const canvasSize = localStorage.getItem("canvasSize");
-  const numberOfPixels = localStorage.getItem("numberOfPixels");
+  const widthOfPixel = localStorage.getItem("widthOfPixel");
+  const heightOfPixel = localStorage.getItem("heightOfPixel");
+  const canvasWidth =localStorage.getItem("canvasWidth");
+  const canvasHeight =localStorage.getItem("canvasHeight");
+  const numberOfPixelsWidth = localStorage.getItem("numberOfPixelsWidth");
+  const numberOfPixelsHeight = localStorage.getItem("numberOfPixelsHeight");
   const buttonIndex = localStorage.getItem("buttonIndex");
  
   const coloringNumber  = JSON.parse(localStorage.getItem("coloringNumber"));
@@ -13,7 +16,7 @@ $(document).ready(function () {
   var isGrid = true;
   const paletteColors = ["#003366", "#336699", "#3366CC", "#003399", "#000099", "#0000CC", "#000066", "#006666", "#006699", "#0099CC", "#0066CC", "#0033CC", "#0000FF", "#3333FF", "#333399", "#669999", "#009999", "#33CCCC", "#00CCFF", "#0099FF", "#0066FF", "#3366FF", "#3333CC", "#666699", "#339966", "#00CC99", "#00FFCC", "#00FFFF", "#33CCFF", "#3399FF", "#6699FF", "#6666FF", "#6600FF", "#6600CC", "#339933", "#00CC66", "#00FF99", "#66FFFF", "#99CCFF", "#9999FF", "#9966FF", "#9933FF", "#9900FF", "#006600", "#00CC00", "#00FF00", "#66FF99", "#99FFCC", "#CCCCFF", "#CC99FF", "#CC66FF", "#CC33FF", "#CC00FF", "#9900CC", "#003300", "#009933", "#33CC33", "#66FF66", "#99FF99", "#CCFFCC", "#FF99FF", "#FF66FF", "#FF00FF", "#CC00CC", "#660066", "#336600", "#009900", "#66FF33", "#99FF66", "#CCFF99", "#FFFFCC", "#FFCCCC", "#FF99CC", "#FF33CC", "#CC0099", "#993399", "#333300", "#669900", "#99FF33", "#CCFF66", "#FFFF99", "#FFCC99", "#FF9999", "#FF6699", "#FF3399", "#CC3399", "#990099", "#666633", "#99CC00", "#CCFF33", "#FFFF66", "#FFCC66", "#FF9966", "#FF6666", "#FF0066", "#CC6699", "#993366", "#999966", "#CCCC00", "#FFFF00", "#FFCC00", "#FF9933", "#FF6600", "#FF5050", "#CC0066", "#660033", "#996633", "#CC9900", "#FF9900", "#CC6600", "#FF3300", "#FF0000", "#CC0000", "#990033", "#663300", "#996600", "#CC3300", "#993300", "#990000", "#800000", "#993333"];
   const numberOfPaletteColors = Math.floor(Math.sqrt(paletteColors.length));
-  const sizeOfColor = (canvasSize - 60) / numberOfPaletteColors;
+  const sizeOfColor = (canvasWidth) / numberOfPaletteColors;
 
 
 
@@ -24,15 +27,15 @@ $(document).ready(function () {
 
   //Grid
   $(".canvas").css({
-    width: canvasSize,
-    height: canvasSize,
-    "grid-template-columns": `repeat(${numberOfPixels},${sizeOfPixel}px)`,
-    "grid-template-rows": `repeat(${numberOfPixels},${sizeOfPixel}px)`,
+    width: canvasWidth,
+    height: canvasHeight,
+    "grid-template-columns": `repeat(${numberOfPixelsWidth},${widthOfPixel}px)`,
+    "grid-template-rows": `repeat(${numberOfPixelsHeight},${heightOfPixel}px)`,
 
   });
-  for (let i = 0; i < Math.pow(numberOfPixels, 2); i++) {
+  for (let i = 0; i < numberOfPixelsHeight*numberOfPixelsWidth; i++) {
      if(coloringNumber[i]>=0){
-      buttonIndex==2?$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"><p style="font-size: ${sizeOfPixel-2}px; text-align: center;">${coloringNumber[i]}</p></div>`):$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
+      buttonIndex==2?$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"><p style="font-size: ${heightOfPixel-2}px; text-align: center;">${coloringNumber[i]}</p></div>`):$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
 
      }else{
       buttonIndex==2?$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`):$(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
@@ -40,8 +43,8 @@ $(document).ready(function () {
   }
   $(".pixel").each(function () {
     $(this).css({
-      height: sizeOfPixel,
-      width: sizeOfPixel,
+      height: heightOfPixel,
+      width: widthOfPixel,
     });
   });
 
@@ -107,13 +110,13 @@ $(document).ready(function () {
 //Modal
 
   $(".modal").css({
-    width: canvasSize - 40,
-    height: canvasSize - 40,
+    width: canvasWidth,
+    height: canvasWidth,
   });
 
   $(".modalColor").css({
-    width: canvasSize - 60,
-    height: canvasSize - 60,
+    width: canvasHeight,
+    height: canvasHeight,
     "grid-template-columns": `repeat(${numberOfPaletteColors},${sizeOfColor}px)`,
     "grid-template-rows": `repeat(${numberOfPaletteColors},${sizeOfColor}px)`,
   });
@@ -203,10 +206,10 @@ $(document).ready(function () {
         if (isGrid) {
           if (currentIndex == 1) {
             navGrid(numberOfElements - 1);
-          } else if (currentIndex <= numberOfPixels) {
+          } else if (currentIndex <= numberOfPixelsWidth) {
             navGrid(-1);
           } else {
-            navGrid(-numberOfPixels);
+            navGrid(-numberOfPixelsWidth);
           }
         } else {
           if(availableColors.length>0){
@@ -228,10 +231,10 @@ $(document).ready(function () {
         break;
       case 'ArrowDown':
         if (isGrid) {
-          if (currentIndex == numberOfElements || currentIndex > (numberOfElements - numberOfPixels)) {
-            navGrid(+numberOfPixels - numberOfElements);
+          if (currentIndex == numberOfElements || currentIndex > (numberOfElements - numberOfPixelsWidth)) {
+            navGrid(+numberOfPixelsWidth - numberOfElements);
           } else {
-            navGrid(+numberOfPixels);
+            navGrid(+numberOfPixelsWidth);
           }
         } else {
           if(availableColors.length>0){

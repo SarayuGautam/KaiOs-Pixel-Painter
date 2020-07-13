@@ -20,9 +20,18 @@ readJsonFile("../template/templates.json", function(text){
   var templates =data.templates;
   var numberOfTemplates= Object.keys(templates).length;
   for(var i=1;i<=numberOfTemplates;i++){
-    $(".template").append(`<div tabIndex="${i}" class="box"></div>`);
+    $(".template").append(`<div tabIndex="${i}" id="T${i}" class="box"></div>`);
     $(`.box[tabIndex=${i}]`).data("grid", JSON.stringify(templates[i]));
     $(`.box[tabIndex=${i}]`).append(`<div class="image" id="preview${i}"></div>`);
+     $('.box[tabIndex=1]').focus();
+     $(":focus");
+     if(localStorage.getItem(`OverlayedT${i}`)){
+       $(`.box[id="T${i}"]`).append(`<div class="box-overlay"></div>`);
+       $(`.box[id="T${i}"]`).append(`<img class="tick-img" src="../images/tick.png">`);
+     }
+    if(templates[i].isNew==true){
+      $(`.box[tabIndex=${i}]`).append(`<img src="../images/new.png" class="new-label">`);
+    }
     if(i<3){//cache x number of templates  
       $(`#preview${i}`).cacheImages({url: `${templates[i].previewUrl}`});
       $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function(url, image){ });
@@ -30,9 +39,7 @@ readJsonFile("../template/templates.json", function(text){
       $(`#preview${i}`).css({"background-image":`url("${templates[i].previewUrl}")`});
     }
   }
-$('.box[tabIndex=1]').focus();
 });
-
 
 
 
@@ -51,7 +58,8 @@ function drawCanvas(grid,index) {
 
   //defining constants
 
-  const numberOfPixels = grid.pixelsPerLine;
+  const numberOfPixelsWidth = grid.pixelsPerWidth;
+  const numberOfPixelsHeight = grid.pixelsPerHeight;
   const drawing=grid.drawing;
   const association=grid.drawingColorAssociation;
   
@@ -62,17 +70,19 @@ function drawCanvas(grid,index) {
  
   const screenWidth = document.documentElement.clientWidth;
   const screenHeight = document.documentElement.clientHeight;
-  const padding = 0.06*screenHeight;
-  const canvasSize =
-    screenWidth < screenHeight
-      ? screenWidth-padding
-      : screenHeight-padding;
-  var sizeOfPixel = (canvasSize / numberOfPixels);
-  localStorage.setItem("numberOfPixels", numberOfPixels);
+  const padding = 0.17*screenHeight;
+  const canvasHeight= screenHeight-2.2*padding;
+  const canvasWidth= screenWidth;
+  const canvasSize =canvasHeight*canvasWidth;
+  var widthOfPixel = (canvasWidth / numberOfPixelsWidth);
+  var heightOfPixel=(canvasHeight/numberOfPixelsHeight);
+  localStorage.setItem("numberOfPixelsWidth", numberOfPixelsWidth);
+  localStorage.setItem("numberOfPixelsHeight", numberOfPixelsHeight);
   localStorage.setItem('colorGrid', JSON.stringify(colorGrid));
   localStorage.setItem('availableColors', JSON.stringify(availableColors));
   localStorage.setItem("padding", padding);
-  localStorage.setItem("sizeOfPixel", sizeOfPixel);
+  localStorage.setItem("widthOfPixel", widthOfPixel);
+  localStorage.setItem("heightOfPixel", heightOfPixel);
   localStorage.setItem("canvasSize",canvasSize);
   localStorage.setItem("buttonIndex",index);
   if(index==2){
@@ -96,12 +106,14 @@ function drawCanvas(grid,index) {
 const softkeyCallbackTempPage= {
   center: function() { 
     const currentElement=$(":focus");
+    const tempId = currentElement.attr("id");
     const drawGrid=JSON.parse(currentElement.data("grid"));
     $("#chooseModal").modal(); 
     $("#chooseModal").on('shown.bs.modal', function(e){
       $(".mode[tabIndex=1]").focus();
       $(".mode").data("currentGrid",drawGrid);
-    });  
+    }); 
+    localStorage.setItem(`Overlayed${tempId}`,tempId);
    },
 };
 
