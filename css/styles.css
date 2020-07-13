@@ -1,8 +1,8 @@
 body {
   height: 100vh;
-  justify-content: center;
-  align-items: center;
+
 }
+
 @font-face {
   font-family: "press_start_2pregular";
   src: url("../fonts/pressstart2p-regular-webfont.woff2") format("woff2"),
@@ -10,6 +10,7 @@ body {
   font-weight: normal;
   font-style: normal;
 }
+
 @font-face {
   font-family: "Chalkduster";
   src: url("../fonts/Chalkduster.woff2") format("woff2"), url("../fonts/Chalkduster.woff") format("woff");
@@ -17,9 +18,11 @@ body {
   font-style: normal;
   font-display: swap;
 }
+
 .splash-screen {
   background-color: #57c2e0;
 }
+
 .pixel-splash {
   background-image: url("../images/892f154a-cdb1-48f3-9182-30c8deffdece.svg");
   background-repeat: repeat space;
@@ -27,22 +30,26 @@ body {
   height: 25vh;
   width: 20vw;
 }
+
 #splash1 {
   position: absolute;
   top: 0;
   left: 0;
 }
+
 #splash2 {
   position: absolute;
   bottom: 0;
   right: 0;
 }
+
 .pixel-text {
   font-family: "press_start_2pregular";
   font-weight: bold;
   font-size: 9vh;
   margin-bottom: 0;
 }
+
 .painter-text {
   font-family: "Chalkduster";
   color: white;
@@ -57,11 +64,13 @@ body {
   top: -5px;
   left: -5px;
 }
+
 .center-text {
   position: absolute;
   top: 42vh;
   left: 22vw;
 }
+
 .template-page {
   background-color: #f2f4f5;
   scrollbar-width: none;
@@ -75,53 +84,65 @@ body {
   width: 100vw;
   background-color: #9013fe !important;
 }
+
 a {
   color: inherit;
 }
+
 .mode {
   position: relative;
   color: white;
   font-size: 5vh;
   font-weight: bold;
 }
-.mode > img {
+
+.mode>img {
   position: absolute;
   width: 13vw;
   height: 13vw;
   top: -10px;
   right: -5px;
 }
+
 #mode1 {
   background-color: #f5a623;
   box-shadow: 0px 7px 0px 0px rgba(211, 144, 33, 1);
   margin-top: 12vh;
 }
+
 #mode2 {
   background-color: #4a90e2;
   box-shadow: 0px 7px 0px 0px rgba(51, 118, 195, 1);
   margin-bottom: 12vh;
 }
+
 .best-time {
   margin: 10px auto;
 }
 
-.best-time > p {
+.best-time>p {
   font-size: 4vh;
   font-weight: bold;
   color: #d39021;
   text-align: center;
 }
+
 a:hover {
   color: inherit;
   text-decoration: none;
   cursor: pointer;
 }
+
 .grid-page {
   background-color: #333333;
   overflow: hidden;
 }
+
 .wrapper {
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 76vh;
 }
 
 .canvas {
@@ -166,6 +187,7 @@ a:hover {
   background-color: #ffffff;
   position: relative;
 }
+
 .box-overlay {
   position: absolute;
   top: 0;
@@ -177,6 +199,7 @@ a:hover {
   background-color: rgba(0, 0, 0, 0.3);
   z-index: 2;
 }
+
 .image {
   position: absolute;
   top: 50%;
@@ -195,6 +218,7 @@ a:hover {
   right: 0;
   width: 20px;
 }
+
 .box:focus {
   border: 2px solid red !important;
 }
@@ -203,22 +227,31 @@ a:hover {
   border: 1px solid rgba(34, 167, 240, 0.25);
 }
 
-.colorPixel {
-  border: 1px solid rgba(34, 167, 240, 0.25);
-  border-radius: 50%;
-}
 
 .pixel:focus {
   border: 2px solid red !important;
 }
 
+.bottomWrapper {
+  padding: 0 5px;
+
+}
+
 .bottomPicker {
   min-width: 100%;
   height: 12vh;
-  overflow-x: auto;
+  overflow: hidden;
+  border-radius: 2px;
   display: flex;
-  justify-content: center;
-  scrollbar-color: #333333;
+  justify-content: start;
+  align-items: center;
+  scrollbar-color: white;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.bottomPicker::-webkit-scrollbar {
+  display: none;
 }
 
 .color_bottom {
@@ -232,13 +265,9 @@ a:hover {
   border: 2px solid red !important;
 }
 
-.space {
-  min-width: 5vw;
-  min-height: 12vh;
-}
-
 .customPicker {
   margin: 10px auto;
+  padding: 5px 20px;
   max-width: 35px;
   height: 30px;
   background-color: red;
@@ -251,13 +280,17 @@ a:hover {
 
 .modal {
   padding: 5px;
-  height: revert;
+  height: auto !important;
+  width: auto !important;
 }
 
 .modalColor {
   display: grid;
+  border-radius: 8px;
+  overflow: hidden;
 }
+
 .colorPixel:focus {
   border: 2px solid black;
-  box-shadow: inset 0 0 5px white;
+  /* box-shadow: inset 0 0 5px white; */
 }
