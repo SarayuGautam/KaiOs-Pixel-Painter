@@ -7,7 +7,7 @@ $(document).ready(function () {
   const numberOfPixelsHeight = localStorage.getItem("numberOfPixelsHeight");
   const buttonIndex = localStorage.getItem("buttonIndex");
 
-  const coloringNumber = JSON.parse(localStorage.getItem("coloringNumber"));
+  const coloringNumber = JSON.parse(localStorage.getItem("coloringNumber"))||0;
   const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
   const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
   const availableColors = JSON.parse(localStorage.getItem('availableColors'));
@@ -35,10 +35,10 @@ $(document).ready(function () {
   });
   for (let i = 0; i < numberOfPixelsHeight * numberOfPixelsWidth; i++) {
     if (coloringNumber[i] >= 0) {
-      buttonIndex == 2 ? $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"><p style="font-size: ${heightOfPixel-2}px; text-align: center;">${coloringNumber[i]}</p></div>`) : $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
+      buttonIndex == 1 ? $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"><p style="font-size: ${heightOfPixel-2}px; text-align: center;">${coloringNumber[i]}</p></div>`) : $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
 
     } else {
-      buttonIndex == 2 ? $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`) : $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
+      buttonIndex == 1 ? $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`) : $(".canvas").append(`<div class="pixel" id="pixel${i+1}" tabIndex="${i+1}" style="background-color:${colorGrid[i]};"></div>`);
     }
   }
   $(".pixel").each(function () {
@@ -60,7 +60,7 @@ $(document).ready(function () {
 
 
   //Available Colors
-  if (buttonIndex == 2) {
+  if (buttonIndex == 1) {
     const numberedColor = Object.values(numberColorAssociation);
     $(".wrapper").append('<div class="bottomPicker"></div>');
     $(".bottomPicker").append(`<div class="space"></div>`);
@@ -339,4 +339,11 @@ $(document).ready(function () {
     const targetElement = $(`.colorPixel[tabIndex=${next}]`).eq(0);
     targetElement.focus();
   }
+});
+
+
+getNewAd("ad-container");
+
+document.addEventListener("DOMContentLoaded", () => {
+  getFullAd();
 });
