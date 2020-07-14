@@ -6,7 +6,7 @@ $(document).ready(function () {
   const numberOfPixelsWidth = localStorage.getItem("numberOfPixelsWidth");
   const numberOfPixelsHeight = localStorage.getItem("numberOfPixelsHeight");
   const buttonIndex = localStorage.getItem("buttonIndex");
-  const coloringNumber = localStorage.getItem("coloringNumber")?JSON.parse(localStorage.getItem("coloringNumber")):[];
+  const coloringNumber = localStorage.getItem("coloringNumber") ? JSON.parse(localStorage.getItem("coloringNumber")) : [];
   const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
   const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
   const availableColors = JSON.parse(localStorage.getItem('availableColors')) || [];
@@ -104,8 +104,6 @@ $(document).ready(function () {
   //Modal
 
   $(".modal").css({
-    width: "auto",
-    height: "auto",
     padding: "5px"
   });
 

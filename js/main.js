@@ -13,15 +13,9 @@ $(document).ready(function () {
   readJsonFile("../template/templates.json", function (text) {
     var data = JSON.parse(text);
     var templates = data.templates;
-    localStorage.setItem("templates",JSON.stringify(templates));
+    localStorage.setItem("templates", JSON.stringify(templates));
   });
-setTimeout(function () {
-  window.location.href= './pages/displayTemp.html';
-}, 50000);
+  setTimeout(function () {
+    window.location.href = './pages/displayTemp.html';
+  }, 1);
 });
-
-  
-
-	
-
-
