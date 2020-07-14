@@ -6,11 +6,11 @@ $(document).ready(function () {
   const numberOfPixelsWidth = localStorage.getItem("numberOfPixelsWidth");
   const numberOfPixelsHeight = localStorage.getItem("numberOfPixelsHeight");
   const buttonIndex = localStorage.getItem("buttonIndex");
-
-  const coloringNumber = JSON.parse(localStorage.getItem("coloringNumber")) || 0;
+  const coloringNumber = localStorage.getItem("coloringNumber")?JSON.parse(localStorage.getItem("coloringNumber")):[];
   const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
   const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
   const availableColors = JSON.parse(localStorage.getItem('availableColors')) || [];
+  // const availableColors =[];
   const numberOfColors = availableColors.length;
   var isGrid = true;
   const paletteColors = ["#003366", "#336699", "#3366CC", "#003399", "#000099", "#0000CC", "#000066", "#006666", "#006699", "#0099CC", "#0066CC", "#0033CC", "#0000FF", "#3333FF", "#333399", "#669999", "#009999", "#33CCCC", "#00CCFF", "#0099FF", "#0066FF", "#3366FF", "#3333CC", "#666699", "#339966", "#00CC99", "#00FFCC", "#00FFFF", "#33CCFF", "#3399FF", "#6699FF", "#6666FF", "#6600FF", "#6600CC", "#339933", "#00CC66", "#00FF99", "#66FFFF", "#99CCFF", "#9999FF", "#9966FF", "#9933FF", "#9900FF", "#006600", "#00CC00", "#00FF00", "#66FF99", "#99FFCC", "#CCCCFF", "#CC99FF", "#CC66FF", "#CC33FF", "#CC00FF", "#9900CC", "#003300", "#009933", "#33CC33", "#66FF66", "#99FF99", "#CCFFCC", "#FF99FF", "#FF66FF", "#FF00FF", "#CC00CC", "#660066", "#336600", "#009900", "#66FF33", "#99FF66", "#CCFF99", "#FFFFCC", "#FFCCCC", "#FF99CC", "#FF33CC", "#CC0099", "#993399", "#333300", "#669900", "#99FF33", "#CCFF66", "#FFFF99", "#FFCC99", "#FF9999", "#FF6699", "#FF3399", "#CC3399", "#990099", "#666633", "#99CC00", "#CCFF33", "#FFFF66", "#FFCC66", "#FF9966", "#FF6666", "#FF0066", "#CC6699", "#993366", "#999966", "#CCCC00", "#FFFF00", "#FFCC00", "#FF9933", "#FF6600", "#FF5050", "#CC0066", "#660033", "#996633", "#CC9900", "#FF9900", "#CC6600", "#FF3300", "#FF0000", "#CC0000", "#990033", "#663300", "#996600", "#CC3300", "#993300", "#990000", "#800000", "#993333"];
@@ -62,7 +62,7 @@ $(document).ready(function () {
     const numberedColor = Object.values(numberColorAssociation);
     $(".wrapper").append('<div class="bottomWrapper"><div class="bottomPicker"></div></div>');
     for (let i = 0; i < numberedColor.length; i++) {
-      $(".bottomPicker").append(`<div class="color_bottom" id="color${i+1}" tabIndex="${i+1}" style="background-color:${numberedColor[i]};"><p style="font-size: 15px; color:white; text-align: center;">${i}</p></div>`);
+      $(".bottomPicker").append(`<div class="color_bottom" id="color${i+1}" tabIndex="${i+1}" style="background-color:${numberedColor[i]};"><p style="font-size: 15px; color:white; text-align: center;">${i+1}</p></div>`);
     }
   } else {
     if (availableColors.length > 0) {
@@ -104,9 +104,9 @@ $(document).ready(function () {
   //Modal
 
   $(".modal").css({
-    width: auto,
-    height: auto,
-    padding: 5
+    width: "auto",
+    height: "auto",
+    padding: "5px"
   });
 
   $(".modalColor").css({
@@ -199,6 +199,7 @@ $(document).ready(function () {
     switch (e.key) {
       case 'ArrowUp':
         if (isGrid) {
+          console.log("up");
           if (currentIndex == 1) {
             navGrid(numberOfElements - 1);
           } else if (currentIndex <= numberOfPixelsWidth) {
