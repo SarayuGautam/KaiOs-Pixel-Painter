@@ -20,30 +20,11 @@ body {
 }
 
 .splash-screen {
-  background-color: #57c2e0;
+  background-image: url("../images/Home.png");
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.pixel-splash {
-  background-image: url("../images/star.svg");
-  background-repeat: repeat space;
-  background-size: 80px;
-  height: 25vh;
-  width: 20vw;
-}
-
-#splash1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-#splash2 {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  overflow: hidden;
 }
 
 .pixel-text {
@@ -70,6 +51,39 @@ body {
 .center-text {
   text-align: center;
   vertical-align: middle;
+}
+.splash-icons{
+  position: absolute;
+  top:75%;
+  display: inline-flex;
+  left:22.5%;
+  right:20.5%;
+}
+.icons-imgs{
+  position: relative;
+}
+
+#icon-img1{
+  position: absolute;
+  top:0;
+  left: 0;
+}
+
+#icon-img2{
+  position: absolute;
+  bottom:0;
+  left: 25%;
+}
+#icon-img3{
+  position: absolute;
+  top:0;
+  right: 25%;
+}
+
+#icon-img4{
+  position: absolute;
+  bottom:0;
+  right: 0;
 }
 
 .template-page {
