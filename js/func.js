@@ -1,32 +1,32 @@
 //render template from json file
 // A $( document ).ready() block.
-$( document ).ready(function() {
-    var templates = JSON.parse(localStorage.getItem("templates"));
-    var numberOfTemplates = Object.keys(templates).length;
-    for (var i = 1; i <= numberOfTemplates; i++) {
-      $(".template").append(`<div tabIndex="${i}" id="T${i}" class="box"></div>`);
-      $(`.box[tabIndex=${i}]`).data("grid", JSON.stringify(templates[i]));
-      $(`.box[tabIndex=${i}]`).append(`<div class="image" id="preview${i}"></div>`);
-      if (localStorage.getItem(`OverlayedT${i}`)) {
-        $(`.box[id="T${i}"]`).append(`<div class="box-overlay"></div>`);
-        $(`.box[id="T${i}"]`).append(`<img class="tick-img" src="../images/tick.png">`);
-      }
-      if (templates[i].isNew == true) {
-        $(`.box[tabIndex=${i}]`).append(`<img src="../images/new.png" class="new-label">`);
-      }
-      if (i < 3) { //cache x number of templates
-        $(`#preview${i}`).cacheImages({
-          url: `${templates[i].previewUrl}`
-        });
-        $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function (url, image) {});
-      } else {
-        $(`#preview${i}`).css({
-          "background-image": `url("${templates[i].previewUrl}")`
-        });
-      }
+$(document).ready(function () {
+  var templates = JSON.parse(localStorage.getItem("templates"));
+  var numberOfTemplates = Object.keys(templates).length;
+  for (var i = 1; i <= numberOfTemplates; i++) {
+    $(".template").append(`<div tabIndex="${i}" id="T${i}" class="box"></div>`);
+    $(`.box[tabIndex=${i}]`).data("grid", JSON.stringify(templates[i]));
+    if (localStorage.getItem(`OverlayedT${i}`)) {
+      $(`.box[id="T${i}"]`).append(`<div class="box-overlay"></div>`);
+      $(`.box[id="T${i}"]`).append(`<img class="tick-img" src="../images/tick.png">`);
     }
-    document.getElementById("T1").focus();
-  });
+    $(`.box[tabIndex=${i}]`).append(`<div class="imageWrapper"><div class="image" id="preview${i}"></div></div>`);
+    if (templates[i].isNew == true) {
+      $(`.box[tabIndex=${i}]`).append(`<img src="../images/new.png" class="new-label">`);
+    }
+    if (i < 3) { //cache x number of templates
+      $(`#preview${i}`).cacheImages({
+        url: `${templates[i].previewUrl}`
+      });
+      $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function (url, image) {});
+    } else {
+      $(`#preview${i}`).css({
+        "background-image": `url("${templates[i].previewUrl}")`
+      });
+    }
+  }
+  document.getElementById("T1").focus();
+});
 
 
 

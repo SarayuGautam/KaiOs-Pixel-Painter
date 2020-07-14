@@ -1,6 +1,5 @@
 body {
   height: 100vh;
-
 }
 
 @font-face {
@@ -46,6 +45,7 @@ body {
   position: absolute;
   top: 0px;
   left: 0px;
+  z-index: 10;
 }
 
 .center-text {
@@ -96,10 +96,9 @@ body {
 
 #ad-container {
   height: 17vh;
-  width: 100vw;
+  width: 100%;
   background-color: #9013fe !important;
 }
-
 
 /* .ad-containers {
   position: absolute !important;
@@ -205,20 +204,22 @@ a:hover {
 }
 
 .template {
-  display: inline-grid;
+  display: grid;
   grid-template-columns: 46vw 46vw;
+  justify-items: center;
   grid-gap: 4vw;
   grid-auto-flow: row;
 }
 
 .box {
-  width: 46vw;
-  height: 46vw;
-  /* margin: 1.5vw; */
+  width: 40vw;
+  height: 40vw;
+  outline: none;
   background-color: #ffffff;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
   position: relative;
   display: flex;
+  border-radius: 4px;
   justify-content: center;
   align-items: center;
 }
@@ -262,14 +263,22 @@ a:hover {
 
 .box-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 46vw;
-  height: 46vw;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
   background-color: rgba(0, 0, 0, 0.3);
-  z-index: 2;
+  z-index: 8;
+}
+
+.imageWrapper {
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+
 }
 
 .image {
@@ -278,10 +287,13 @@ a:hover {
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  width: 30vw;
-  height: 30vw;
+  height: 90%;
+  width: 90%;
+  border-radius: 4px;
   background-position: center;
   background-size: cover;
+  object-fit: cover;
+
 }
 
 .tick-img {
@@ -289,23 +301,24 @@ a:hover {
   bottom: 0;
   right: 0;
   width: 20px;
+  z-index: 9;
 }
 
 .pixel {
   border: 1px solid rgba(34, 167, 240, 0.25);
 }
 
-
 .pixel:focus {
   border: 2px solid red !important;
 }
-.box:focus {
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
+
+.box:focus .imageWrapper {
+  border: 2px solid red;
+
 }
 
 .bottomWrapper {
   padding: 0 5px;
-
 }
 
 .bottomPicker {
@@ -349,7 +362,6 @@ a:hover {
   box-shadow: inset 0 0 5px #888888;
 }
 
-
 .modalColor {
   display: grid;
   border-radius: 8px;
@@ -358,4 +370,9 @@ a:hover {
 
 .colorPixel:focus {
   border: 2px solid black;
+}
+
+#colorModal {
+  width: auto !important;
+  height: auto !important;
 }
