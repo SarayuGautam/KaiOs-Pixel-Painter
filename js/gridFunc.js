@@ -5,6 +5,7 @@ $(document).ready(function () {
   const canvasHeight = localStorage.getItem("canvasHeight");
   const numberOfPixelsWidth = localStorage.getItem("numberOfPixelsWidth");
   const numberOfPixelsHeight = localStorage.getItem("numberOfPixelsHeight");
+  const challengeTime = localStorage.getItem("challengeTime");
   const buttonIndex = localStorage.getItem("buttonIndex");
   const coloringNumber = localStorage.getItem("coloringNumber") ? JSON.parse(localStorage.getItem("coloringNumber")) : [];
   const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
@@ -19,8 +20,28 @@ $(document).ready(function () {
   const widthOfColor = (canvasWidth) / numberOfPaletteColors;
   const sizeOfColor = heightOfColor > widthOfColor ? widthOfColor : heightOfColor;
 
+  function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
 
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
 
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+if(buttonIndex==1){
+  $("#ad-container2").append(`<div id="time" class="timer-overlay"></div>`);
+  display = document.querySelector('#time');
+  startTimer(challengeTime, display);
+}
 
 
   //Grid

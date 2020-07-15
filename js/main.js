@@ -19,7 +19,7 @@ $(document).ready(function () {
   });
   setTimeout(function () {
     window.location.href = './pages/displayTemp.html';
-  }, 10000);
+  }, 1000);
 });
 
 document.addEventListener('keydown', handlekeyDownTemplate);

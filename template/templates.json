@@ -1,6 +1,7 @@
 { "templates":
     {"1":{"pixelsPerWidth" : 29,
            "pixelsPerHeight" :29,
+           "challengeTime":300,
         "availableColors" : ["#ff6f00","#fcbe37","#81d8d0","#f9c2cc","#bf929a","#8bbf8c","#0c6772","#2c5e00","#782351"],
         "isNew":true,
         "drawingColorAssociation" : {
@@ -78,6 +79,7 @@
             1,1,1,1,1,1,1,1,1,1,2,2,0,0,2,0,2,0,1,1,1,1,1,1,1,1,1,1,1
         ]},"2":{"pixelsPerWidth" : 29,
             "pixelsPerHeight" :29,
+            "challengeTime":300,
             "isNew":false,
             "availableColors" : ["#ff6f00","#fcbe37","#81d8d0","#f9c2cc","#bf929a","#8bbf8c","#0c6772","#2c5e00","#782351"],
             "drawingColorAssociation" : {
@@ -155,6 +157,7 @@
                 1,1,1,1,1,1,1,1,1,1,2,2,0,0,2,0,2,0,1,1,1,1,1,1,1,1,1,1,1
             ]},"3":{"pixelsPerWidth" : 29,
                 "pixelsPerHeight" :29,
+                "challengeTime":300,
                   "isNew":false,
                 "availableColors" : ["#ff6f00","#fcbe37","#81d8d0","#f9c2cc","#bf929a","#8bbf8c","#0c6772","#2c5e00","#782351"],
                 "drawingColorAssociation" : {
@@ -232,6 +235,7 @@
                     1,1,1,1,1,1,1,1,1,1,2,2,0,0,2,0,2,0,1,1,1,1,1,1,1,1,1,1,1
                 ]},"4":{"pixelsPerWidth" : 29,
                     "pixelsPerHeight" :29,
+                    "challengeTime":300,
                     "isNew":true,
                     "availableColors" : ["#ff6f00","#fcbe37","#81d8d0","#f9c2cc","#bf929a","#8bbf8c","#0c6772","#2c5e00","#782351"],
                     "drawingColorAssociation" : {
@@ -309,6 +313,7 @@
                         1,1,1,1,1,1,1,1,1,1,2,2,0,0,2,0,2,0,1,1,1,1,1,1,1,1,1,1,1
                     ]},"5":{"pixelsPerWidth" : 29,
                         "pixelsPerHeight" :29,
+                        "challengeTime":300,
                         "isNew":false,
                         "availableColors" : ["#ff6f00","#fcbe37","#81d8d0","#f9c2cc","#bf929a","#8bbf8c","#0c6772","#2c5e00","#782351"],
                         "drawingColorAssociation" : {

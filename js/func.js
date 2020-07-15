@@ -46,6 +46,7 @@ function drawCanvas(grid, index) {
   const numberOfPixelsHeight = grid.pixelsPerHeight;
   const drawing = grid.drawing;
   const association = grid.drawingColorAssociation;
+  const challengeTime = grid.challengeTime;
 
   const colorGrid = drawing.map((drawPixel) => {
     return (association[drawPixel]);
@@ -66,6 +67,7 @@ function drawCanvas(grid, index) {
   localStorage.setItem('availableColors', JSON.stringify(availableColors));
   localStorage.setItem("padding", padding);
   localStorage.setItem("widthOfPixel", widthOfPixel);
+  localStorage.setItem("challengeTime",challengeTime);
   localStorage.setItem("heightOfPixel", heightOfPixel);
   localStorage.setItem("canvasSize", canvasSize);
   localStorage.setItem("buttonIndex", index);
