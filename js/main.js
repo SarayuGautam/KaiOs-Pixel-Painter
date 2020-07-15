@@ -1,3 +1,5 @@
+//render template from json file
+
 function readJsonFile(file, callback) {
   var rawFile = new XMLHttpRequest();
   rawFile.overrideMimeType("application/json");
@@ -17,5 +19,14 @@ $(document).ready(function () {
   });
   setTimeout(function () {
     window.location.href = './pages/displayTemp.html';
-  }, 1);
+  }, 10000);
 });
+
+document.addEventListener('keydown', handlekeyDownTemplate);
+
+function handlekeyDownTemplate(e) {
+  switch (e.key) {
+    case 'SoftRight':
+      window.close(); 
+  }
+}

@@ -1,4 +1,4 @@
-//render template from json file
+
 // A $( document ).ready() block.
 $(document).ready(function () {
   var templates = JSON.parse(localStorage.getItem("templates"));
@@ -32,8 +32,6 @@ $(document).ready(function () {
 
 
 
-//function to choose between the modes of coloring
-
 
 
 
@@ -43,8 +41,6 @@ $(document).ready(function () {
 //Function to draw canvas
 
 function drawCanvas(grid, index) {
-
-  //defining constants
 
   const numberOfPixelsWidth = grid.pixelsPerWidth;
   const numberOfPixelsHeight = grid.pixelsPerHeight;
@@ -91,8 +87,6 @@ function drawCanvas(grid, index) {
 
 //send grid display
 
-
-
 const softkeyCallbackTempPage = {
   center: function () {
     const currentElement = $(":focus");
@@ -111,27 +105,9 @@ const softkeyCallbackTempPage = {
 
 
 
-
-
-
-
-
-
-document.addEventListener('keydown', handlekeyDownTemplate);
-
-
-
-
-
-
-
-
-
-
-
 //Handle Keydown
 
-
+document.addEventListener('keydown', handlekeyDownTemplate);
 function handlekeyDownTemplate(e) {
   const currentIndex = document.activeElement.tabIndex;
   const isModalOpen = $('#chooseModal').is(':visible');
@@ -190,6 +166,8 @@ function handlekeyDownTemplate(e) {
       case 'SoftRight':
         if (isModalOpen) {
           $("#chooseModal").modal('hide');
+        }else{
+          window.close();
         }
         break;
   }
@@ -202,7 +180,6 @@ function handlekeyDownTemplate(e) {
 
 
 //navigate template
-
 
 function navTemp(move) {
   const currentIndex = document.activeElement.tabIndex;

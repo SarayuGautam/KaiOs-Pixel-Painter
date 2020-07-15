@@ -240,7 +240,7 @@ a:hover {
   border: solid 1px #3f93ab;
   background-color: #57c2e0;
   color: white;
-  z-index: 2;
+  z-index: 1000;
 }
 
 #softkey-left {
