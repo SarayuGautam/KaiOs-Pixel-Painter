@@ -188,7 +188,9 @@ a:hover {
 .grid-page {
   background-color: #333333;
   overflow: hidden;
+  position: relative;
 }
+
 
 .wrapper {
   display: flex;
@@ -308,7 +310,6 @@ a:hover {
   object-fit: cover;
 
 }
-
 .tick-img {
   position: absolute;
   bottom: 0;

@@ -32,15 +32,21 @@ $(document).ready(function () {
         display.textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-            timer = duration;
+          $("#time").remove();
+          $("#challengeModal").modal('show');
+          $("#challengeModal").on('shown.bs.modal', function (e) {
+            $(".choice[tabIndex=1]").focus();
+          });
         }
     }, 1000);
 }
 
 if(buttonIndex==1){
-  $("#ad-container2").append(`<div id="time" class="timer-overlay"></div>`);
+  var minutes = Math.floor(challengeTime / 60);
+  var seconds = challengeTime - minutes * 60;
+  $("#ad-container2").append(`<div id="time" class="timer-overlay">0${minutes}:0${seconds}</div>`);
   display = document.querySelector('#time');
-  startTimer(challengeTime, display);
+  startTimer(2, display);
 }
 
 
