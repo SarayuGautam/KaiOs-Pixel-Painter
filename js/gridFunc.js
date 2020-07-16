@@ -22,7 +22,7 @@ $(document).ready(function () {
 
   function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
-    setInterval(function () {
+   var timerFunc= setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -31,12 +31,11 @@ $(document).ready(function () {
 
         display.textContent = minutes + ":" + seconds;
 
-        if (--timer < 0) {
+        if (--timer <= 0) {
+          clearInterval(timerFunc);
           $("#time").remove();
           $("#challengeModal").modal('show');
-          $("#challengeModal").on('shown.bs.modal', function (e) {
-            $(".choice[tabIndex=1]").focus();
-          });
+          $(".choice[tabIndex=1]").focus();      
         }
     }, 1000);
 }
@@ -130,13 +129,8 @@ if(buttonIndex==1){
 
   //Modal
 
-  $(".modal").css({
-    padding: "5px"
-  });
-
   $(".modalColor").css({
-    // width: canvasWidth,
-    // height: canvasHeight,
+  
     "grid-template-columns": `repeat(${numberOfPaletteColors},${sizeOfColor}px)`,
     "grid-template-rows": `repeat(${numberOfPaletteColors},${sizeOfColor}px)`,
   });

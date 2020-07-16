@@ -152,7 +152,7 @@ a {
 
 #mode1 {
   background-color: #f5a623;
-  margin-top: 12vh;
+  margin-top: 10vh;
 }
 
 #mode1:focus {
@@ -161,12 +161,20 @@ a {
 
 #mode2 {
   background-color: #4a90e2;
-  margin-bottom: 12vh;
+  margin-bottom: 10vh;
 }
-
 #mode2:focus {
   box-shadow: 0px 7px 0px 0px rgba(51, 118, 195, 1);
 }
+
+
+#continue:focus{
+  box-shadow: 0px 7px 0px 0px #0275d8;
+}
+#exit:focus{
+  box-shadow: 0px 7px 0px 0px #d9534f ;
+}
+
 
 .best-time {
   margin: 10px auto;
@@ -191,6 +199,9 @@ a:hover {
   position: relative;
 }
 
+.modal{
+  padding:5px;
+}
 
 .wrapper {
   display: flex;
@@ -317,7 +328,24 @@ a:hover {
   width: 20px;
   z-index: 9;
 }
+.modal-text{
+  text-align: center;
+}
 
+.no-border{
+  border:none;
+}
+
+#challengeModal{
+  position: absolute;
+  height: 64vh;
+  top:10%;
+  left:5%;
+  right: 5%;
+}    
+.ui-dialog-titlebar-close {
+  visibility: hidden;
+}
 .pixel {
   border: 1px solid rgba(34, 167, 240, 0.25);
 }

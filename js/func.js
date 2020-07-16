@@ -49,7 +49,7 @@ function drawCanvas(grid, index) {
   const challengeTime = grid.challengeTime;
 
   const colorGrid = drawing.map((drawPixel) => {
-    return (association[drawPixel]);
+    return (association[drawPixel]);relative
   });
   const availableColors = grid.availableColors;
 
