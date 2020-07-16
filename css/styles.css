@@ -134,7 +134,6 @@ body {
 a {
   color: inherit;
 }
-
 .mode {
   position: relative;
   color: white;
@@ -169,10 +168,10 @@ a {
 
 
 #continue:focus{
-  box-shadow: 0px 7px 0px 0px #0275d8;
+  box-shadow: 0px 5px 0px 0px #0275d8;
 }
 #exit:focus{
-  box-shadow: 0px 7px 0px 0px #d9534f ;
+  box-shadow: 0px 5px 0px 0px #dc3545;
 }
 
 
