@@ -111,9 +111,12 @@ const softkeyCallbackTempPage = {
 
 document.addEventListener('keydown', handlekeyDownTemplate);
 function handlekeyDownTemplate(e) {
+
+  const activeElm = document.activeElement;
   const currentIndex = document.activeElement.tabIndex;
   const isModalOpen = $('#chooseModal').is(':visible');
   const numberOfElements = document.getElementsByClassName("box").length;
+  window.scroll({top: activeElm.offsetTop-65, behavior: 'smooth'});
   switch (e.key) {
     case 'ArrowUp':
       if (isModalOpen) {
@@ -146,8 +149,8 @@ function handlekeyDownTemplate(e) {
         } else {
           navTemp(1);
         }
-        break;
       }
+      break;
       case 'ArrowLeft':
         if (!isModalOpen) {
           if (currentIndex == 1) {

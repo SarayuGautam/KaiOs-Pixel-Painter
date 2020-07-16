@@ -95,13 +95,16 @@ body {
   scrollbar-color: #f2f4f5;
   overflow-y: scroll;
   overflow-x: hidden;
+  height: 100vh;
 }
 
 .ad-containers {
   height: 17vh;
   width: 100%;
   background-color: #9013fe !important;
-  position: relative;
+  position: fixed;
+  top:0;
+  z-index: 30;
 }
 .timer-overlay{
   position: absolute;
@@ -226,21 +229,21 @@ a:hover {
   display: grid;
   justify-content: center;
   align-content: center;
-  margin-top: 2vh;
+  margin-top: 19vh;
   margin-bottom: 10vh;
 }
 
 .template {
   display: grid;
-  grid-template-columns: 46vw 46vw;
+  grid-template-columns: 43vw 43vw;
   justify-items: center;
   grid-gap: 4vw;
   grid-auto-flow: row;
 }
 
 .box {
-  width: 40vw;
-  height: 40vw;
+  width: 43vw;
+  height: 43vw;
   outline: none;
   background-color: #ffffff;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
