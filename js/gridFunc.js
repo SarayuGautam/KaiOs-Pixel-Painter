@@ -82,12 +82,6 @@ if(buttonIndex==1){
 
 
 
- if(document.activeElement.hasClass('color_bottom')||document.activeElement.hasClass('customPicker')){
-   $('#softkey-left').text('drawing');
-   $('#softkey-center').text('SELECT');
- }
-
-
 
 
 
@@ -184,6 +178,10 @@ if(buttonIndex==1){
     },
     left: function () {
       isGrid = !isGrid;
+      if(isGrid){
+        $('#softkey-left').text('color');
+        $('#softkey-center').text('DRAW');
+      }
       var fGrid = document.getElementById(localStorage.getItem("fGrid"));
       $(":focus").blur();
       if (availableColors.length > 0||buttonIndex==1) {
@@ -191,12 +189,16 @@ if(buttonIndex==1){
         if (isGrid) {
           fGrid ? fGrid.focus() : $("#pixel1").focus();
         } else {
+          $('#softkey-left').text('drawing');
+          $('#softkey-center').text('SELECT');
           fColor ? fColor.focus() : $("#color1").focus();
         }
       } else {
         if (isGrid) {
           fGrid ? fGrid.focus() : $("#pixel1").focus();
         } else {
+          $('#softkey-left').text('drawing');
+          $('#softkey-center').text('SELECT');
           $(".customPicker").focus();
         }
       }

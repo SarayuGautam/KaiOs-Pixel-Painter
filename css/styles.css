@@ -212,6 +212,8 @@ a:hover {
   flex-direction: column;
   justify-content: space-between;
   height: 76vh;
+  margin-top: 17vh;
+  overflow: hidden;
 }
 
 .canvas {
