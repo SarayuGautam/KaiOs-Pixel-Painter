@@ -91,11 +91,8 @@ body {
 
 .template-page {
   background-color: #f2f4f5;
-  scrollbar-width: none;
-  scrollbar-color: #f2f4f5;
-  overflow-y: scroll;
-  overflow-x: hidden;
   height: 100vh;
+  overflow: hidden;
 }
 
 .ad-containers {
@@ -232,6 +229,10 @@ a:hover {
   justify-content: center;
   align-content: center;
   margin-top: 19vh;
+  scrollbar-width: none;
+  scrollbar-color: #f2f4f5;
+  overflow-y: scroll;
+  overflow-x: hidden;
   margin-bottom: 10vh;
 }
 
@@ -345,7 +346,7 @@ a:hover {
 #challengeModal{
   position: absolute;
   height: 64vh;
-  top:10%;
+  top:19vh;
   left:5%;
   right: 5%;
 }    

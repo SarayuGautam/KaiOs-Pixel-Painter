@@ -79,6 +79,11 @@ function drawCanvas(grid, index) {
     localStorage.setItem("coloringNumber", JSON.stringify(coloringNumber));
     localStorage.setItem("numberColorAssociation", JSON.stringify(numberColorAssociation));
   }
+  localStorage.removeItem('currentColor');
+  localStorage.removeItem('fColor');
+  localStorage.removeItem('paletteColor');
+  localStorage.removeItem('fPalette');
+  localStorage.removeItem('fGrid');
   window.location.href = "./displayGrid.html";
 }
 
@@ -116,7 +121,7 @@ function handlekeyDownTemplate(e) {
   const currentIndex = document.activeElement.tabIndex;
   const isModalOpen = $('#chooseModal').is(':visible');
   const numberOfElements = document.getElementsByClassName("box").length;
-  window.scroll({top: activeElm.offsetTop-65, behavior: 'smooth'});
+  window.scroll({top: activeElm.offsetTop, behavior: 'smooth'});
   switch (e.key) {
     case 'ArrowUp':
       if (isModalOpen) {

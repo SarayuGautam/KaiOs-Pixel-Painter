@@ -45,6 +45,14 @@ $(document).ready(function () {
     }, 1000);
 }
 
+if(performance.navigation.type == 1){
+  localStorage.removeItem('currentColor');
+  localStorage.removeItem('fColor');
+  localStorage.removeItem('paletteColor');
+  localStorage.removeItem('fPalette');
+  localStorage.removeItem('fGrid');
+}
+
 if(buttonIndex==1){
   var minutes = Math.floor(challengeTime / 60);
   var seconds = challengeTime - minutes * 60;
@@ -154,10 +162,10 @@ if(buttonIndex==1){
     center: function () {
       let focused = $(":focus");
       if (focused.hasClass("pixel")) {
-        availableColors.length > 0 ? $(":focus").css({
-          "background-color": localStorage.getItem("currentColor")
+       ( availableColors.length > 0||buttonIndex==1) ? $(":focus").css({
+          "background-color": localStorage.getItem("currentColor")?localStorage.getItem("currentColor"):$("#color1").css("background-color")
         }) : $(":focus").css({
-          "background-color": localStorage.getItem("paletteColor")
+          "background-color": localStorage.getItem("paletteColor")?ocalStorage.getItem("currentColor"):$("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
         let currentColor = focused.css("background-color");
@@ -335,6 +343,16 @@ if(buttonIndex==1){
         }
         break;
       case 'Enter':
+        if(isChallengeModal){
+          if($(":focus").attr("id")=="continue"){
+            $.modal.close();
+            var fGrid = document.getElementById(localStorage.getItem("fGrid"));
+            $(":focus").blur();
+            fGrid ? fGrid.focus() : $("#pixel1").focus();
+          }else if($(":focus").attr("id")=="exit"){
+            window.location.href = "./displayTemp.html";
+          }
+        }
         softkeycallbackGridColor.center();
         break;
       case 'SoftLeft':
