@@ -29,7 +29,7 @@ body {
 .pixel-text {
   font-family: "press_start_2pregular";
   font-weight: bold;
-  color:#2e2e2c;
+  color: #2e2e2c;
   font-size: 9vh;
   margin: 0;
   padding: 0;
@@ -40,7 +40,7 @@ body {
   font-family: "Chalkduster";
   color: white;
   font-size: 7.5vh;
-  margin :0;
+  margin: 0;
   padding: 0;
 }
 
@@ -55,37 +55,37 @@ body {
 .center-text {
   text-align: center;
 }
-.splash-icons{
+.splash-icons {
   position: absolute;
-  top:75%;
+  top: 75%;
   display: inline-flex;
-  left:22.5%;
-  right:20.5%;
+  left: 22.5%;
+  right: 20.5%;
 }
-.icons-imgs{
+.icons-imgs {
   position: relative;
 }
 
-#icon-img1{
+#icon-img1 {
   position: absolute;
-  top:0;
+  top: 0;
   left: 0;
 }
 
-#icon-img2{
+#icon-img2 {
   position: absolute;
-  bottom:0;
+  bottom: 0;
   left: 25%;
 }
-#icon-img3{
+#icon-img3 {
   position: absolute;
-  top:0;
+  top: 0;
   right: 25%;
 }
 
-#icon-img4{
+#icon-img4 {
   position: absolute;
-  bottom:0;
+  bottom: 0;
   right: 0;
 }
 
@@ -99,20 +99,20 @@ body {
   height: 17vh;
   width: 100%;
   background-color: #9013fe !important;
-  position: fixed;
-  top:0;
+
+  top: 0;
   z-index: 30;
 }
-.timer-overlay{
+.timer-overlay {
   position: absolute;
   bottom: 0;
-  width:30vw;
+  width: 30vw;
   text-align: center;
   left: 35%;
   background-color: rgba(0, 0, 0, 1);
   z-index: 8;
   color: white;
-  padding:5px 10px;
+  padding: 5px 10px;
 }
 
 /* .ad-containers {
@@ -143,7 +143,7 @@ a {
   font-weight: bold;
 }
 
-.mode>img {
+.mode > img {
   position: absolute;
   width: 13vw;
   height: 13vw;
@@ -155,7 +155,7 @@ a {
   background-color: #f5a623;
   margin-top: 6vh;
 }
-.upperChoice{
+.upperChoice {
   margin-bottom: 6vh;
 }
 #mode1:focus {
@@ -170,20 +170,18 @@ a {
   box-shadow: 0px 7px 0px 0px rgba(51, 118, 195, 1);
 }
 
-
-#continue:focus{
+#continue:focus {
   box-shadow: 0px 5px 0px 0px #0275d8;
 }
-#exit:focus{
+#exit:focus {
   box-shadow: 0px 5px 0px 0px #dc3545;
 }
-
 
 .best-time {
   margin: 10px auto;
 }
 
-.best-time>p {
+.best-time > p {
   font-size: 4vh;
   font-weight: bold;
   color: #d39021;
@@ -202,8 +200,8 @@ a:hover {
   position: relative;
 }
 
-.modal{
-  padding:5px;
+.modal {
+  padding: 5px;
 }
 
 .wrapper {
@@ -230,12 +228,14 @@ a:hover {
   display: grid;
   justify-content: center;
   align-content: center;
-  margin-top: 19vh;
+  padding: 15px 0;
+  /* margin-top: 19vh; */
   scrollbar-width: none;
   scrollbar-color: #f2f4f5;
   overflow-y: scroll;
-  overflow-x: hidden;
-  margin-bottom: 10vh;
+  /* overflow-x: hidden; */
+  height: 76vh;
+  /* margin-bottom: 10vh; */
 }
 
 .template {
@@ -243,6 +243,7 @@ a:hover {
   grid-template-columns: 43vw 43vw;
   justify-items: center;
   grid-gap: 4vw;
+  height: 100%;
   grid-auto-flow: row;
 }
 
@@ -267,7 +268,7 @@ a:hover {
 }
 
 .softkey {
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   bottom: 0;
   width: 100%;
@@ -313,7 +314,6 @@ a:hover {
   height: 100%;
   width: 100%;
   border-radius: 4px;
-
 }
 
 .image {
@@ -328,7 +328,6 @@ a:hover {
   background-position: center;
   background-size: cover;
   object-fit: cover;
-
 }
 .tick-img {
   position: absolute;
@@ -337,23 +336,23 @@ a:hover {
   width: 20px;
   z-index: 9;
 }
-.modal-text{
+.modal-text {
   text-align: center;
 }
 
-.no-border{
-  border:none;
+.no-border {
+  border: none;
 }
 
-#challengeModal{
+#challengeModal {
   position: absolute;
   height: 64vh;
-  top:19vh;
-  left:5%;
+  top: 19vh;
+  left: 5%;
   right: 5%;
-}    
-#chooseModal{
-  top:19vh;
+}
+#chooseModal {
+  top: 19vh;
 }
 .ui-dialog-titlebar-close {
   visibility: hidden;
@@ -368,7 +367,6 @@ a:hover {
 
 .box:focus .imageWrapper {
   border: 2px solid red;
-
 }
 
 .bottomWrapper {

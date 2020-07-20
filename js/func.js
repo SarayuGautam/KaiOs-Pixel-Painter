@@ -126,7 +126,6 @@ function handlekeyDownTemplate(e) {
       if (isModalOpen) {
         navMode(-1);
       } else {
-        scrollTo(0, -$(activeElm).height());
         if (currentIndex == 1) {
           navTemp(numberOfElements - 1);
         } else if (currentIndex <= 2) {
@@ -140,7 +139,6 @@ function handlekeyDownTemplate(e) {
       if (isModalOpen) {
         navMode(+1);
       } else {
-        scrollTo(0, $(activeElm).height());
         if (currentIndex == numberOfElements || currentIndex > (numberOfElements - 2)) {
           navTemp(+2 - numberOfElements);
         } else {
