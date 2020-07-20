@@ -1,4 +1,3 @@
-
 // A $( document ).ready() block.
 $(document).ready(function () {
   var templates = JSON.parse(localStorage.getItem("templates"));
@@ -49,7 +48,7 @@ function drawCanvas(grid, index) {
   const challengeTime = grid.challengeTime;
 
   const colorGrid = drawing.map((drawPixel) => {
-    return (association[drawPixel]);relative
+    return (association[drawPixel]);
   });
   const availableColors = grid.availableColors;
 
@@ -67,7 +66,7 @@ function drawCanvas(grid, index) {
   localStorage.setItem('availableColors', JSON.stringify(availableColors));
   localStorage.setItem("padding", padding);
   localStorage.setItem("widthOfPixel", widthOfPixel);
-  localStorage.setItem("challengeTime",challengeTime);
+  localStorage.setItem("challengeTime", challengeTime);
   localStorage.setItem("heightOfPixel", heightOfPixel);
   localStorage.setItem("canvasSize", canvasSize);
   localStorage.setItem("buttonIndex", index);
@@ -115,21 +114,19 @@ const softkeyCallbackTempPage = {
 //Handle Keydown
 
 document.addEventListener('keydown', handlekeyDownTemplate);
+
 function handlekeyDownTemplate(e) {
 
   const activeElm = document.activeElement;
   const currentIndex = document.activeElement.tabIndex;
   const isModalOpen = $('#chooseModal').is(':visible');
   const numberOfElements = document.getElementsByClassName("box").length;
-  if(!isModalOpen){
-  activeElm.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});;
-    
-  }
   switch (e.key) {
     case 'ArrowUp':
       if (isModalOpen) {
         navMode(-1);
       } else {
+        scrollTo(0, -$(activeElm).height());
         if (currentIndex == 1) {
           navTemp(numberOfElements - 1);
         } else if (currentIndex <= 2) {
@@ -143,6 +140,7 @@ function handlekeyDownTemplate(e) {
       if (isModalOpen) {
         navMode(+1);
       } else {
+        scrollTo(0, $(activeElm).height());
         if (currentIndex == numberOfElements || currentIndex > (numberOfElements - 2)) {
           navTemp(+2 - numberOfElements);
         } else {
@@ -159,30 +157,30 @@ function handlekeyDownTemplate(e) {
         }
       }
       break;
-      case 'ArrowLeft':
-        if (!isModalOpen) {
-          if (currentIndex == 1) {
-            navTemp(numberOfElements - 1);
-          } else {
-            navTemp(-1);
-          }
-        }
-        break;
-      case 'Enter':
-        if (isModalOpen) {
-          const currentGrid = $(".mode").data("currentGrid");
-          drawCanvas(currentGrid, currentIndex);
+    case 'ArrowLeft':
+      if (!isModalOpen) {
+        if (currentIndex == 1) {
+          navTemp(numberOfElements - 1);
         } else {
-          softkeyCallbackTempPage.center();
+          navTemp(-1);
         }
-        break;
-      case 'SoftRight':
-        if (isModalOpen) {
-          $("#chooseModal").modal('hide');
-        }else{
-          window.close();
-        }
-        break;
+      }
+      break;
+    case 'Enter':
+      if (isModalOpen) {
+        const currentGrid = $(".mode").data("currentGrid");
+        drawCanvas(currentGrid, currentIndex);
+      } else {
+        softkeyCallbackTempPage.center();
+      }
+      break;
+    case 'SoftRight':
+      if (isModalOpen) {
+        $("#chooseModal").modal('hide');
+      } else {
+        window.close();
+      }
+      break;
   }
 }
 
@@ -208,8 +206,8 @@ function navMode(move) {
   targetElement.focus();
 }
 
-getNewAd("ad-container");
+// getNewAd("ad-container");
 
-document.addEventListener("DOMContentLoaded", () => {
-  getFullAd();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   getFullAd();
+// });
