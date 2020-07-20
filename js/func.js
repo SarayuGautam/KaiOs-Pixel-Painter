@@ -121,7 +121,10 @@ function handlekeyDownTemplate(e) {
   const currentIndex = document.activeElement.tabIndex;
   const isModalOpen = $('#chooseModal').is(':visible');
   const numberOfElements = document.getElementsByClassName("box").length;
-  window.scroll({top: activeElm.offsetTop, behavior: 'smooth'});
+  if(!isModalOpen){
+  activeElm.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});;
+    
+  }
   switch (e.key) {
     case 'ArrowUp':
       if (isModalOpen) {

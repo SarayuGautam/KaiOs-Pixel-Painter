@@ -1,34 +1,38 @@
 {
-"name":"Pixel Painter",
-"version":"1.0.0",
-"description":"A pixel painter app in kaios",
-"icons": {
- "56": "/icons/icon56_56.png",
- "112": "/icons/icon112_112.png"
-},
-"launch_path": "/index.html",
- "developer":{
- 	"name":"Sarayu and Gabriel!"
- },
- "categories":["games","entertainment"],
- "default_locale": "en",
-"locales": {
-  "ar": {
-    "name" : " ... ",
-    "description" : " ... "
- },
- "fr": {
-    "name" : " ... ",
-    "description" : " ... "
- },
- "zh-TW": {
-    "name" : " ... ",
-    "description" : " ... "
+  "version": "1.0.0",
+  "name":"Pixel Painter",
+  "short_name": "Pixel Painter",
+  "description":"A pixel painter app in kaios",
+  "subtitle": "Pixel Painter",
+  "type": "web",
+  "fullscreen": "true",
+  "categories": [
+    "entertainment",
+    "utilities"
+  ],
+  "launch_path": "/index.html",
+  "icons": {
+    "56": "/icons/icon56_56.png",
+    "112": "/icons/icon112_112.png"
+  },
+  "theme_color": "#4A90E2",
+  "developer": {
+    "name": "Sarayu and Gabriel!",
+    "url": "https://google.com"
+  },
+  "default_locale": "en-US",
+  "locales": {
+    "en-US": {
+      "name":"Pixel Painter",
+      "short_name": "Pixel Painter",
+      "description":"A pixel painter app in kaios",
+      "subtitle": "Pixel Painter"
+    },
+    "en-GB": {
+      "name":"Pixel Painter",
+      "short_name": "Pixel Painter",
+      "description":"A pixel painter app in kaios",
+      "subtitle": "Pixel Painter"
+    }
   }
-},
-
-	"dependencies": {
-		"ads-sdk": "1.3.0"
-	}
-
 }
