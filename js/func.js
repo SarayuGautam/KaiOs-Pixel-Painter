@@ -27,6 +27,7 @@ $(document).ready(function () {
   document.getElementById("T1").focus();
 });
 
+getNewAd("ad-container1");
 
 
 
@@ -108,7 +109,14 @@ const softkeyCallbackTempPage = {
 };
 
 
-
+// if(! getNewAd("ad-container")){
+//   $("#ad-container").css({
+//     height:0
+//   });
+//   $(".temp-container").css({
+//     padding:"0px 0px"
+//   })
+// }
 
 
 //Handle Keydown
@@ -139,7 +147,10 @@ function handlekeyDownTemplate(e) {
       if (isModalOpen) {
         navMode(+1);
       } else {
-        if (currentIndex == numberOfElements || currentIndex > (numberOfElements - 2)) {
+        if(currentIndex == numberOfElements){
+          navTemp(+1 - numberOfElements);
+        }
+        if (currentIndex > (numberOfElements - 2)) {
           navTemp(+2 - numberOfElements);
         } else {
           navTemp(+2);
@@ -204,7 +215,7 @@ function navMode(move) {
   targetElement.focus();
 }
 
-// getNewAd("ad-container");
+
 
 // document.addEventListener("DOMContentLoaded", () => {
 //   getFullAd();

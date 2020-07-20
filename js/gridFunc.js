@@ -411,7 +411,7 @@ if(buttonIndex==1){
 
 
 //Ads
-getNewAd("ad-container");
+getNewAd("ad-container2");
 
 document.addEventListener("DOMContentLoaded", () => {
   getFullAd();
