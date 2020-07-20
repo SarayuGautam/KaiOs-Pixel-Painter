@@ -45,6 +45,8 @@ $(document).ready(function () {
     }, 1000);
 }
 
+
+
 if(performance.navigation.type == 1){
   localStorage.removeItem('currentColor');
   localStorage.removeItem('fColor');
@@ -375,9 +377,14 @@ if(buttonIndex==1){
   };
 
 
+ 
 
 
-
+  document.addEventListener("focus",()=>{
+    var fGrid = document.getElementById(localStorage.getItem("fGrid"));
+          $(":focus").blur();
+          fGrid ? fGrid.focus() : $("#pixel1").focus();
+  })
 
 
 

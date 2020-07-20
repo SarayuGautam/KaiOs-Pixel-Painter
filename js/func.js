@@ -35,7 +35,11 @@ getNewAd("ad-container1");
 
 
 
-
+document.addEventListener("focus",()=>{
+  if(document.activeElement==$obj.is('body')){
+  $("#T1").focus();
+  }
+})
 
 
 //Function to draw canvas
@@ -109,14 +113,6 @@ const softkeyCallbackTempPage = {
 };
 
 
-// if(! getNewAd("ad-container")){
-//   $("#ad-container").css({
-//     height:0
-//   });
-//   $(".temp-container").css({
-//     padding:"0px 0px"
-//   })
-// }
 
 
 //Handle Keydown
@@ -217,6 +213,6 @@ function navMode(move) {
 
 
 
-// document.addEventListener("DOMContentLoaded", () => {
-//   getFullAd();
-// });
+document.addEventListener("DOMContentLoaded", () => {
+  getFullAd();
+});
