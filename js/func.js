@@ -205,5 +205,5 @@ function navMode(move) {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  getFullAd();
+  getFullAdPageTemp();
 });

@@ -410,5 +410,5 @@ $(document).ready(function () {
 getNewAd("ad-container2");
 
 document.addEventListener("DOMContentLoaded", () => {
-  getFullAd();
+  getFullAdPageGrid();
 });
