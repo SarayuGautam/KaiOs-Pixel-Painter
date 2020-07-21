@@ -17,29 +17,20 @@ $(document).ready(function () {
       $(`#preview${i}`).cacheImages({
         url: `${templates[i].previewUrl}`
       });
-      $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function (url, image) {});
+      $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function (url, image) { });
     } else {
       $(`#preview${i}`).css({
         "background-image": `url("${templates[i].previewUrl}")`
       });
     }
   }
-  document.getElementById("T1").focus();
+  if ($(":focus").attr("class") != "box") {
+    document.getElementById("T1").focus();
+  }
 });
 
 getNewAd("ad-container1");
 
-
-
-
-
-
-
-document.addEventListener("focus",()=>{
-  if(document.activeElement==$obj.is('body')){
-  $("#T1").focus();
-  }
-})
 
 
 //Function to draw canvas
@@ -143,7 +134,7 @@ function handlekeyDownTemplate(e) {
       if (isModalOpen) {
         navMode(+1);
       } else {
-        if(currentIndex == numberOfElements){
+        if (currentIndex == numberOfElements) {
           navTemp(+1 - numberOfElements);
         }
         if (currentIndex > (numberOfElements - 2)) {
