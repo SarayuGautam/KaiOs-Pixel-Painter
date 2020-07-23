@@ -34,11 +34,11 @@ $(document).ready(function () {
       if (--timer <= 0) {
         clearInterval(timerFunc);
         $("#time").remove();
-        $("#challengeModal").modal('show');
+        $("#appModal").modal('show');
         $('.close-modal').css({
           display: "none"
         });
-        if ($(`#challengeModal`).is(':visible')) {
+        if ($(`#appModal`).is(':visible')) {
           $(".choice[tabIndex=1]").focus();
         }
       }
@@ -58,7 +58,7 @@ $(document).ready(function () {
     var seconds = challengeTime - minutes * 60;
     $("#ad-container2").append(`<div id="time" class="timer-overlay">0${minutes}:0${seconds}</div>`);
     display = document.querySelector('#time');
-    startTimer(challengeTime, display);
+    startTimer(1, display);
   }
 
 
@@ -229,7 +229,7 @@ $(document).ready(function () {
     const numberOfElements = document.getElementsByClassName("pixel").length;
     const numberOfPalette = paletteColors.length;
     const isModalOpen = $('#colorModal').is(':visible');
-    const isChallengeModal = $(`#challengeModal`).is(':visible');
+    const isappModal = $(`#appModal`).is(':visible');
     switch (e.key) {
       case 'ArrowUp':
         if (isGrid) {
@@ -303,7 +303,7 @@ $(document).ready(function () {
               navPalette(1);
             }
           }
-        } if (isChallengeModal) {
+        } if (isappModal) {
           isGrid = false;
           $(":focus").blur();
           $(".choice[tabIndex=2]").focus();
@@ -331,14 +331,14 @@ $(document).ready(function () {
             }
           }
         }
-        if (isChallengeModal) {
+        if (isappModal) {
           isGrid = false;
           $(":focus").blur();
           $(".choice[tabIndex=1]").focus();
         }
         break;
       case 'Enter':
-        if (isChallengeModal) {
+        if (isappModal) {
           if ($(":focus").attr("id") == "continue") {
             $.modal.close();
             var fGrid = document.getElementById(localStorage.getItem("fGrid"));
@@ -409,6 +409,6 @@ $(document).ready(function () {
 //Ads
 getNewAd("ad-container2");
 
-document.addEventListener("DOMContentLoaded", () => {
-  getFullAdPageGrid();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   getFullAdPageGrid();
+// });
