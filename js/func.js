@@ -1,29 +1,28 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
-  var templates = window.navigator.online ? JSON.parse(localStorage.getItem("templatesFirebase")) : JSON.parse(localStorage.getItem("templates"));
-  console.log(templates);
-  var numberOfTemplates = Object.keys(templates).length;
-  for (var i = 1; i < numberOfTemplates; i++) {
-    $(".template").append(`<div tabIndex="${i}" id="T${i}" class="box"></div>`);
-    $(`.box[tabIndex=${i}]`).data("grid", JSON.stringify(templates[i]));
-    if (localStorage.getItem(`OverlayedT${i}`)) {
-      $(`.box[id="T${i}"]`).append(`<div class="box-overlay"></div>`);
-      $(`.box[id="T${i}"]`).append(`<img class="tick-img" src="../images/tick.png">`);
+  var templates = window.navigator.onLine ? JSON.parse(localStorage.getItem("templatesFirebase")) : JSON.parse(localStorage.getItem("templates"));
+  var numberOfTemplates = templates.length;
+  for (var i = 0; i < numberOfTemplates; i++) {
+    $(".template").append(`<div tabIndex="${i+1}" id="T${i+1}" class="box"></div>`);
+    $(`.box[tabIndex=${i+1}]`).data("grid", JSON.stringify(templates[i]));
+    if (localStorage.getItem(`OverlayedT${i+1}`)) {
+      $(`.box[id="T${i+1}"]`).append(`<div class="box-overlay"></div>`);
+      $(`.box[id="T${i+1}"]`).append(`<img class="tick-img" src="../images/tick.png">`);
     }
-    $(`.box[tabIndex=${i}]`).append(`<div class="imageWrapper"><div class="image" id="preview${i}"></div></div>`);
+    $(`.box[tabIndex=${i+1}]`).append(`<div class="imageWrapper"><div class="image" id="preview${i+1}"></div></div>`);
     if (templates[i].isNew == true) {
-      $(`.box[tabIndex=${i}]`).append(`<img src="../images/new.png" class="new-label">`);
+      $(`.box[tabIndex=${i+1}]`).append(`<img src="../images/new.png" class="new-label">`);
     }
-    if (i < 3) { //cache x number of templates
-      $(`#preview${i}`).cacheImages({
-        url: `${templates[i].previewUrl}`
-      });
-      $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function (url, image) { });
-    } else {
-      $(`#preview${i}`).css({
-        "background-image": `url("${templates[i].previewUrl}")`
-      });
-    }
+    // if (i < 3) { //cache x number of templates
+    //   $(`#preview${i+1}`).cacheImages({
+    //     url: `${templates[i].previewUrl}`
+    //   });
+    //   $.fn.cacheImages.fetchURL(`${templates[i].previewUrl}`, function (url, image) {});
+    // } else {
+    // }
+    $(`#preview${i+1}`).css({
+      "background-image": `url("${templates[i].previewUrl}")`
+    });
   }
   if ($(":focus").attr("class") != "box") {
     document.getElementById("T1").focus();

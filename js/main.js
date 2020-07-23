@@ -20,24 +20,26 @@ $(document).ready(function () {
     fetch("https://pixel-painter-8af7b.firebaseio.com/templates.json")
       .then((res) => res.json())
       .then((templates) => {
-        if (localStorage.getItem("templatesFirebase")) {
-          localStorage.removeItem("templatesFirebase")
-        }
         localStorage.setItem("templatesFirebase", JSON.stringify(templates));
         window.location.href = './pages/displayTemp.html';
       })
-      .catch((err) => { console.log(err) });
+      .catch((err) => {
+        console.log(err)
+        let isTemplate = localStorage.getItem("templatesFirebase");
+        isTemplate ? localStorage.setItem("templates", isTemplate) :
+          readJsonFile("../template/templates.json", function (text) {
+            localStorage.setItem("templates", text);
+            window.location.href = './pages/displayTemp.html';
+          });
+      });
   } else {
     let isTemplate = localStorage.getItem("templatesFirebase");
-    isTemplate ? localStorage.setItem("templates", JSON.stringify(isTemplate)) :
+    isTemplate ? localStorage.setItem("templates", isTemplate) :
       readJsonFile("../template/templates.json", function (text) {
-        var data = JSON.parse(text);
-        var templates = data.templates;
-        localStorage.setItem("templates", JSON.stringify(templates));
+        localStorage.setItem("templates", text);
         window.location.href = './pages/displayTemp.html';
       });
   }
-
   // setTimeout(function () {
   // }, 5000);
 });
