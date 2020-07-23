@@ -1,8 +1,9 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
-  var templates = JSON.parse(localStorage.getItem("templates"));
+  var templates = window.navigator.online ? JSON.parse(localStorage.getItem("templatesFirebase")) : JSON.parse(localStorage.getItem("templates"));
+  console.log(templates);
   var numberOfTemplates = Object.keys(templates).length;
-  for (var i = 1; i <= numberOfTemplates; i++) {
+  for (var i = 1; i < numberOfTemplates; i++) {
     $(".template").append(`<div tabIndex="${i}" id="T${i}" class="box"></div>`);
     $(`.box[tabIndex=${i}]`).data("grid", JSON.stringify(templates[i]));
     if (localStorage.getItem(`OverlayedT${i}`)) {

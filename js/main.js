@@ -12,14 +12,34 @@ function readJsonFile(file, callback) {
   rawFile.send(null);
 }
 $(document).ready(function () {
-  readJsonFile("../template/templates.json", function (text) {
-    var data = JSON.parse(text);
-    var templates = data.templates;
-    localStorage.setItem("templates", JSON.stringify(templates));
-  });
-  setTimeout(function () {
-    window.location.href = './pages/displayTemp.html';
-  }, 5000);
+  //check internet connection
+  //1. If available fetch from firebase and use that + write in template.json file(update)(delete previous and replace)
+  //2. If not available read from template from json file
+
+  if (window.navigator.onLine) {
+    fetch("https://pixel-painter-8af7b.firebaseio.com/templates.json")
+      .then((res) => res.json())
+      .then((templates) => {
+        if (localStorage.getItem("templatesFirebase")) {
+          localStorage.removeItem("templatesFirebase")
+        }
+        localStorage.setItem("templatesFirebase", JSON.stringify(templates));
+        window.location.href = './pages/displayTemp.html';
+      })
+      .catch((err) => { console.log(err) });
+  } else {
+    let isTemplate = localStorage.getItem("templatesFirebase");
+    isTemplate ? localStorage.setItem("templates", JSON.stringify(isTemplate)) :
+      readJsonFile("../template/templates.json", function (text) {
+        var data = JSON.parse(text);
+        var templates = data.templates;
+        localStorage.setItem("templates", JSON.stringify(templates));
+        window.location.href = './pages/displayTemp.html';
+      });
+  }
+
+  // setTimeout(function () {
+  // }, 5000);
 });
 
 document.addEventListener('keydown', handlekeyDownTemplate);
@@ -27,6 +47,6 @@ document.addEventListener('keydown', handlekeyDownTemplate);
 function handlekeyDownTemplate(e) {
   switch (e.key) {
     case 'SoftRight':
-      window.close(); 
+      window.close();
   }
 }
