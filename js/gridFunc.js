@@ -34,11 +34,11 @@ $(document).ready(function () {
       if (--timer <= 0) {
         clearInterval(timerFunc);
         $("#time").remove();
-        $("#appModal").modal('show');
+        $("#challengeModal").modal('show');
         $('.close-modal').css({
           display: "none"
         });
-        if ($(`#appModal`).is(':visible')) {
+        if ($(`#challengeModal`).is(':visible')) {
           $(".choice[tabIndex=1]").focus();
         }
       }
@@ -58,7 +58,7 @@ $(document).ready(function () {
     var seconds = challengeTime - minutes * 60;
     $("#ad-container2").append(`<div id="time" class="timer-overlay">0${minutes}:0${seconds}</div>`);
     display = document.querySelector('#time');
-    startTimer(1, display);
+    startTimer(challengeTime, display);
   }
 
 
@@ -229,7 +229,7 @@ $(document).ready(function () {
     const numberOfElements = document.getElementsByClassName("pixel").length;
     const numberOfPalette = paletteColors.length;
     const isModalOpen = $('#colorModal').is(':visible');
-    const isappModal = $(`#appModal`).is(':visible');
+    const ischallengeModal = $(`#challengeModal`).is(':visible');
     switch (e.key) {
       case 'ArrowUp':
         if (isGrid) {
@@ -303,7 +303,7 @@ $(document).ready(function () {
               navPalette(1);
             }
           }
-        } if (isappModal) {
+        } if (ischallengeModal) {
           isGrid = false;
           $(":focus").blur();
           $(".choice[tabIndex=2]").focus();
@@ -331,14 +331,14 @@ $(document).ready(function () {
             }
           }
         }
-        if (isappModal) {
+        if (ischallengeModal) {
           isGrid = false;
           $(":focus").blur();
           $(".choice[tabIndex=1]").focus();
         }
         break;
       case 'Enter':
-        if (isappModal) {
+        if (ischallengeModal) {
           if ($(":focus").attr("id") == "continue") {
             $.modal.close();
             var fGrid = document.getElementById(localStorage.getItem("fGrid"));

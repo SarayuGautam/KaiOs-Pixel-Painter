@@ -1,0 +1,76 @@
+#appModal {
+  position: absolute;
+  height: 80vh;
+  top: 8vh;
+  left: 5%;
+  right: 5%;
+  padding: 0;
+}
+
+.clippedHead{
+  height: 18vh;
+  background-color: #1b196a;
+  /* clip-path: polygon(0 0, 100% 0, 100% 47%, 0 30%); */
+   -ms-transform: skewY(4deg); /* IE 9 */
+  transform: skewY(4deg); /* Standard syntax */
+}
+
+.appList{
+  height: 62vh;
+  background-color:#f4f6f4;
+}
+
+.list-group{
+    max-height: 60vh;
+   overflow:auto; 
+   margin:4vh 1.5vw 3vh 3vw; 
+   scrollbar-width: none;
+}
+
+.list-group:after {
+  clear: both;
+  display: block;
+  content: "";
+}
+.imageApp{
+height: 13vh;
+margin: 0;
+margin-bottom: 7vh;
+}
+.list-group-item{
+  margin-bottom: 3vh;
+  padding: 2vw;
+  background-color: #ffffff;
+}
+.appImg>img{
+  height: 13vh;
+  margin-right: 3vw;
+}
+.getDownload{
+  padding-right: 3vw;
+}
+.download{
+  height: 8vh;
+}
+.appCategory{
+  margin-bottom: 2vh;
+  width: 20vw;
+  height: 7vh;
+  text-align: center;
+  color: white;
+  background-color: #9013fe;
+  border-radius: 15%;
+}
+.appName{
+  font-weight: bold;
+}
+.description{
+  display: block;
+  color: #afafaf;
+  font-weight: bold;
+}
+/* .des-text{
+  line-height: 0.1;
+  letter-spacing: 0.1;
+  font-stretch: condensed;
+} */
