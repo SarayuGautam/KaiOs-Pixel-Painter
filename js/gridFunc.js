@@ -10,6 +10,7 @@ $(document).ready(function () {
   const coloringNumber = localStorage.getItem("coloringNumber") ? JSON.parse(localStorage.getItem("coloringNumber")) : [];
   const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
   const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
+  const apps = window.navigator.onLine ? JSON.parse(localStorage.getItem("appsFirebase")) : JSON.parse(localStorage.getItem("apps"));
   // const availableColors = JSON.parse(localStorage.getItem('availableColors')) || [];
   const availableColors = [];
   const numberOfColors = availableColors.length;
@@ -21,7 +22,8 @@ $(document).ready(function () {
   const sizeOfColor = heightOfColor > widthOfColor ? widthOfColor : heightOfColor;
 
   function startTimer(duration, display) {
-    var timer = duration, minutes, seconds;
+    var timer = duration,
+      minutes, seconds;
     var timerFunc = setInterval(function () {
       minutes = parseInt(timer / 60, 10);
       seconds = parseInt(timer % 60, 10);
@@ -44,6 +46,7 @@ $(document).ready(function () {
       }
     }, 1000);
   }
+  const listGroup = $('.list-group');
 
   if (performance.navigation.type == 1) {
     localStorage.removeItem('currentColor');
@@ -164,7 +167,7 @@ $(document).ready(function () {
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }) : $(":focus").css({
+        }): $(":focus").css({
           "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
@@ -193,8 +196,7 @@ $(document).ready(function () {
         $('#softkey-left').text('color');
         $('#softkey-center').text('DRAW');
         fGrid ? fGrid.focus() : $("#pixel1").focus();
-      }
-      else {
+      } else {
         $('#softkey-left').text('drawing');
         $('#softkey-center').text('SELECT');
         if (availableColors.length > 0 || buttonIndex == 1) {
@@ -303,7 +305,8 @@ $(document).ready(function () {
               navPalette(1);
             }
           }
-        } if (ischallengeModal) {
+        }
+        if (ischallengeModal) {
           isGrid = false;
           $(":focus").blur();
           $(".choice[tabIndex=2]").focus();

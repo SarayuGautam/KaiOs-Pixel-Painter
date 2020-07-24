@@ -16,6 +16,7 @@ $(document).ready(function () {
   //1. If available fetch from firebase and use that + write in template.json file(update)(delete previous and replace)
   //2. If not available read from template from json file
   setTimeout(function () {
+    fetchApp();
     if (window.navigator.onLine) {
       fetch("https://pixel-painter-8af7b.firebaseio.com/templates.json")
         .then((res) => res.json())
@@ -32,6 +33,7 @@ $(document).ready(function () {
               window.location.href = './pages/displayTemp.html';
             });
         });
+
     } else {
       let isTemplate = localStorage.getItem("templatesFirebase");
       isTemplate ? localStorage.setItem("templates", isTemplate) :
