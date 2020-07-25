@@ -255,7 +255,7 @@ $(document).ready(function () {
         fPalette ? fPalette.focus() : $("#colorPixel1").focus();
         isGrid = false;
       } else if (focused.hasClass("list-group-item")) {
-        activity();
+        Script.load("../appPromotion/executePromote.js");
       }
     },
     left: function () {
@@ -301,13 +301,13 @@ $(document).ready(function () {
     const currentIndex = document.activeElement.tabIndex;
     const numberOfElements = document.getElementsByClassName("pixel").length;
     const numberOfPalette = paletteColors.length;
+    const numberofApps = apps.length;
     const isModalOpen = $('#colorModal').is(':visible');
     const ischallengeModal = $(`#challengeModal`).is(':visible');
-
+    const isappModal = $(`#appModal`).is(':visible');
     switch (e.key) {
       case 'ArrowUp':
         if (isGrid) {
-          console.log("up");
           if (currentIndex == 1) {
             navGrid(numberOfElements - 1);
           } else if (currentIndex <= numberOfPixelsWidth) {
@@ -332,6 +332,13 @@ $(document).ready(function () {
             }
           }
         }
+        if (isappModal) {
+          if (currentIndex == 1) {
+            navAppModal(numberofApps - 1);
+          } else {
+            navAppModal(-1);
+          }
+        }
         break;
       case 'ArrowDown':
         if (isGrid) {
@@ -353,6 +360,13 @@ $(document).ready(function () {
             } else {
               navPalette(+numberOfPaletteColors);
             }
+          }
+        }
+        if (isappModal) {
+          if (currentIndex == numberofApps) {
+            navAppModal(1 - numberofApps);
+          } else {
+            navAppModal(+1);
           }
         }
         break;
@@ -430,6 +444,8 @@ $(document).ready(function () {
         break;
       case 'SoftRight':
         if (isGrid) {
+          $(':focus').blur();
+          isGrid = !isGrid;
           appModalVisible();
           $('.softkey-grid').remove();
           $(`.grid-page`).append('<footer class="softkey-app-modal"></footer>')
@@ -437,7 +453,10 @@ $(document).ready(function () {
             ` <small id="softkey-center-app" style="text-align:center;">DOWNLOAD</small>
             <small id="softkey-right-app" style="text-align:center;">Close</small>`
           );
-          // window.location.href = "./displayTemp.html";
+
+        } else if (isappModal) {
+          $.modal.close();
+          window.location.href = "./displayTemp.html";
         } else {
           if (isModalOpen) {
             $.modal.close();
@@ -483,6 +502,14 @@ $(document).ready(function () {
     const next = currentIndex + move;
     const targetElement = $(`.colorPixel[tabIndex=${next}]`).eq(0);
     targetElement.focus();
+  }
+
+  function navAppModal(move) {
+    const currentIndex = document.activeElement.tabIndex;
+    const next = currentIndex + move;
+    const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
+    $(":focus").removeClass("appActive");
+    targetElement.focus().addClass("appActive");
   }
 });
 
