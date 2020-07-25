@@ -21,6 +21,14 @@ $(document).ready(function () {
   const widthOfColor = (canvasWidth) / numberOfPaletteColors;
   const sizeOfColor = heightOfColor > widthOfColor ? widthOfColor : heightOfColor;
 
+
+
+
+
+
+
+
+  // Timer Function Code
   function startTimer(duration, display) {
     var timer = duration,
       minutes, seconds;
@@ -46,7 +54,56 @@ $(document).ready(function () {
       }
     }, 1000);
   }
+
+
+
+
+
+
+  //appPromotion
+
   const listGroup = $('.list-group');
+  for (i = 0; i < apps.length; i++) {
+    var app = apps[i];
+    listGroup.append(`<a href="#" class="list-group-item list-group-item-action flex-column align-items-start" tabIndex=${i + 1}></a>`);
+    $(`.list-group-item[tabIndex=${i + 1}]`).append(
+      `<div class="d-flex imageApp w-100 justify-content-between">
+        <div class="appImg d-flex w-70 justify-content-between">
+          <img src=${app.image}>
+            <div class="d-flex flex-column nameCategory">
+              <div class="appCategory">
+                <small>${app.category}</small>
+              </div>
+              <small class="appName">${app.title}</small>
+            </div>
+              </div>
+          <div class="getDownload appActive w-30">
+            <img class="download" src="../images/download.png">
+              <small>Get</small>
+              </div>
+          </div>
+          <small class="description">Description</small>
+          <small class="mb-1 des-text">${app.description} </small>  `
+    )
+  }
+
+  function appModalVisible() {
+    $("#time").remove();
+    $("#appModal").modal('show');
+    $('.close-modal').css({
+      display: "none"
+    });
+    if ($(`#appModal`).is(':visible')) {
+      $(".list-group-item[tabIndex=1]").focus().addClass('appActive');
+    }
+  }
+
+
+
+
+
+
+  // Clear Local Storage While Refresh
 
   if (performance.navigation.type == 1) {
     localStorage.removeItem('currentColor');
@@ -56,6 +113,11 @@ $(document).ready(function () {
     localStorage.removeItem('fGrid');
   }
 
+
+
+
+
+  // Display Timer
   if (buttonIndex == 1) {
     var minutes = Math.floor(challengeTime / 60);
     var seconds = challengeTime - minutes * 60;
@@ -63,6 +125,13 @@ $(document).ready(function () {
     display = document.querySelector('#time');
     startTimer(challengeTime, display);
   }
+
+
+
+
+
+
+
 
 
   //Grid
@@ -167,7 +236,7 @@ $(document).ready(function () {
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }): $(":focus").css({
+        }) : $(":focus").css({
           "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
@@ -185,6 +254,8 @@ $(document).ready(function () {
         });
         fPalette ? fPalette.focus() : $("#colorPixel1").focus();
         isGrid = false;
+      } else if (focused.hasClass("list-group-item")) {
+        activity();
       }
     },
     left: function () {
@@ -232,6 +303,7 @@ $(document).ready(function () {
     const numberOfPalette = paletteColors.length;
     const isModalOpen = $('#colorModal').is(':visible');
     const ischallengeModal = $(`#challengeModal`).is(':visible');
+
     switch (e.key) {
       case 'ArrowUp':
         if (isGrid) {
@@ -358,7 +430,14 @@ $(document).ready(function () {
         break;
       case 'SoftRight':
         if (isGrid) {
-          window.location.href = "./displayTemp.html";
+          appModalVisible();
+          $('.softkey-grid').remove();
+          $(`.grid-page`).append('<footer class="softkey-app-modal"></footer>')
+          $(".softkey-app-modal ").append(
+            ` <small id="softkey-center-app" style="text-align:center;">DOWNLOAD</small>
+            <small id="softkey-right-app" style="text-align:center;">Close</small>`
+          );
+          // window.location.href = "./displayTemp.html";
         } else {
           if (isModalOpen) {
             $.modal.close();
