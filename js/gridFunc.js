@@ -510,6 +510,7 @@ $(document).ready(function () {
     const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
     $(":focus").removeClass("appActive");
     targetElement.focus().addClass("appActive");
+    targetElement.scrollIntoView(alignToTop);
   }
 });
 
