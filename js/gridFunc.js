@@ -51,6 +51,13 @@ $(document).ready(function () {
         if ($(`#challengeModal`).is(':visible')) {
           $(".choice[tabIndex=1]").focus();
         }
+        $('.softkey-app-modal').remove();
+        $(`.grid-page`).append('<footer class="softkey-grid"></footer>')
+        $(".softkey-grid ").append(
+          `  <div id="softkey-left" style="text-align:center;">color</div>
+              <div id="softkey-center" style="text-align:center;">DRAW</div>
+              <div id="softkey-right" style="text-align:center;">finish</div>`
+        );
       }
     }, 1000);
   }
@@ -65,7 +72,7 @@ $(document).ready(function () {
   const listGroup = $('.list-group');
   for (i = 0; i < apps.length; i++) {
     var app = apps[i];
-    listGroup.append(`<a href="#" class="list-group-item list-group-item-action flex-column align-items-start" tabIndex=${i + 1}></a>`);
+    listGroup.append(`<a href="#" class="list-group-item list-group-item-action flex-column align-items-start" tabIndex=${i + 1} data-appId=${app.storeAppName}></a>`);
     $(`.list-group-item[tabIndex=${i + 1}]`).append(
       `<div class="d-flex imageApp w-100 justify-content-between">
         <div class="appImg d-flex w-70 justify-content-between">
@@ -74,7 +81,7 @@ $(document).ready(function () {
               <div class="appCategory">
                 <small>${app.category}</small>
               </div>
-              <small class="appName">${i}${app.title}</small>
+              <small class="appName">${app.title}</small>
             </div>
               </div>
           <div class="getDownload w-30">
@@ -236,7 +243,7 @@ $(document).ready(function () {
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }): $(":focus").css({
+        }) : $(":focus").css({
           "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
@@ -255,7 +262,14 @@ $(document).ready(function () {
         fPalette ? fPalette.focus() : $("#colorPixel1").focus();
         isGrid = false;
       } else if (focused.hasClass("list-group-item")) {
-        Script.load("../appPromotion/executePromote.js");
+        var storeAppName = focused.attr("data-appId");
+        var activity = new MozActivity({
+          name: "inline-open-by-name",
+          data: {
+            name: storeAppName,
+            type: "name"
+          }
+        });
       }
     },
     left: function () {
