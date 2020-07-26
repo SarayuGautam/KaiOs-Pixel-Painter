@@ -74,7 +74,7 @@ $(document).ready(function () {
               <div class="appCategory">
                 <small>${app.category}</small>
               </div>
-              <small class="appName">${i}${app.title}</small>
+              <small class="appName">${app.title}</small>
             </div>
               </div>
           <div class="getDownload w-30">
