@@ -53,7 +53,6 @@
   scrollbar-width: none;
 }
 
-
 .imageApp {
   height: 13vh;
   margin: 0;
@@ -111,8 +110,10 @@ small.des-text {
   font-size: 10px;
   font-weight: 800;
   line-height: 13px;
-  text-align: justify;
+  text-overflow: ellipsis;
+  overflow: hidden;
   display: block;
+  max-height: 39px;
 }
 
 .list-group-item.appActive {
@@ -120,8 +121,7 @@ small.des-text {
   border-radius: 8px;
 }
 
-
-.getDownload.appActive {
+.list-group-item.appActive .getDownload {
   display: flex;
   flex-direction: column;
   font-weight: 900;
@@ -138,7 +138,6 @@ small.des-text {
   color: white;
   z-index: 1000;
 }
-
 
 #softkey-center-app {
   position: absolute;

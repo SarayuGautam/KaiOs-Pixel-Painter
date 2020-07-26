@@ -74,10 +74,10 @@ $(document).ready(function () {
               <div class="appCategory">
                 <small>${app.category}</small>
               </div>
-              <small class="appName">${app.title}</small>
+              <small class="appName">${i}${app.title}</small>
             </div>
               </div>
-          <div class="getDownload appActive w-30">
+          <div class="getDownload w-30">
             <img class="download" src="../images/download.png">
               <small>Get</small>
               </div>
@@ -236,7 +236,7 @@ $(document).ready(function () {
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }) : $(":focus").css({
+        }): $(":focus").css({
           "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
@@ -506,11 +506,15 @@ $(document).ready(function () {
 
   function navAppModal(move) {
     const currentIndex = document.activeElement.tabIndex;
+    if (move > 0) {
+      $(".list-group").scrollTop($(".list-group").scrollTop() + 130);
+    } else {
+      $(".list-group").scrollTop(($(".list-group").scrollTop() - 130));
+    }
     const next = currentIndex + move;
     const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
     $(":focus").removeClass("appActive");
     targetElement.focus().addClass("appActive");
-    targetElement.scrollIntoView(alignToTop);
   }
 });
 
