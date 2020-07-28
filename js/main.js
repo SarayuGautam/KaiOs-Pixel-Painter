@@ -69,10 +69,14 @@ $(document).ready(function () {
       console.log("hola");
       readJsonFile("../template/templates.json", function (text) {
         localStorage.setItem("templates", text);
-        window.location.href = './pages/displayTemp.html';
+        setTimeout(function () {
+          window.location.href = './pages/displayTemp.html';
+        }, 3000);
       });
     } else {
-      window.location.href = './pages/displayTemp.html';
+      setTimeout(function () {
+        window.location.href = './pages/displayTemp.html';
+      }, 3000);
     }
   }
 });
