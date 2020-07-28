@@ -81,7 +81,7 @@ $(document).ready(function () {
               <div class="appCategory">
                 <small>${app.category}</small>
               </div>
-              <small class="appName">${app.title}</small>
+              <small class="appName">${i + 1}${app.title}</small>
             </div>
               </div>
           <div class="getDownload w-30">
@@ -442,6 +442,7 @@ $(document).ready(function () {
         break;
       case 'Enter':
         if (ischallengeModal) {
+          $(":focus").removeClass("appActive");
           if ($(":focus").attr("id") == "continue") {
             $.modal.close();
             var fGrid = document.getElementById(localStorage.getItem("fGrid"));
@@ -520,15 +521,15 @@ $(document).ready(function () {
 
   function navAppModal(move) {
     const currentIndex = document.activeElement.tabIndex;
-    if (move > 0) {
-      $(".list-group").scrollTop($(".list-group").scrollTop() + 130);
-    } else {
-      $(".list-group").scrollTop(($(".list-group").scrollTop() - 130));
-    }
     const next = currentIndex + move;
     const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
     $(":focus").removeClass("appActive");
     targetElement.focus().addClass("appActive");
+    targetElement.scrollIntoView({
+      behavior: "auto",
+      block: "start",
+      inline: "nearest"
+    });
   }
 });
 

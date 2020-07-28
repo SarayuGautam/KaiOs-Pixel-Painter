@@ -48,9 +48,7 @@
 .list-group {
   max-height: 69vh;
   margin-bottom: 6vh;
-  overflow: auto;
-  padding: 8vh 1.5vw 8vh 3vw;
-  scrollbar-width: none;
+  padding: 8vh 3vw 8vh 3vw;
 }
 
 .imageApp {

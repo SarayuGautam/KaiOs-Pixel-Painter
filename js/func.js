@@ -174,6 +174,7 @@ function handlekeyDownTemplate(e) {
     case 'SoftRight':
       if (isModalOpen) {
         $("#chooseModal").modal('hide');
+        document.getElementById("T1").focus();
       } else {
         window.close();
       }
