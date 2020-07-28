@@ -243,7 +243,7 @@ $(document).ready(function () {
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }) : $(":focus").css({
+        }): $(":focus").css({
           "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
@@ -525,11 +525,9 @@ $(document).ready(function () {
     const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
     $(":focus").removeClass("appActive");
     targetElement.focus().addClass("appActive");
-    targetElement.scrollIntoView({
-      behavior: "auto",
-      block: "start",
-      inline: "nearest"
-    });
+    if (move > 0) {
+      targetElement.scrollIntoView();
+    }
   }
 });
 

@@ -14,41 +14,49 @@ function readJsonFile(file, callback) {
 
 
 $(document).ready(function () {
-
   if (window.navigator.onLine) {
-    fetch("https://pixel-painter-8af7b.firebaseio.com/apps.json")
-      .then((res) => res.json())
-      .then((apps) => {
-        localStorage.setItem("apps", JSON.stringify(apps));
-      })
-      .catch((err) => {
-        console.log(err)
-        let isApp = localStorage.getItem("apps");
-        if (isApp == null) {
-          readJsonFile("../appPromotion/apps.json", function (text) {
-            localStorage.setItem("apps", text);
-          });
-        }
-      });
-    fetch("https://pixel-painter-8af7b.firebaseio.com/templates.json")
-      .then((res) => res.json())
-      .then((templates) => {
-        localStorage.setItem("templates", JSON.stringify(templates));
-        window.location.href = './pages/displayTemp.html';
-      })
-      .catch((err) => {
-        console.log(err)
-        let isTemplate = localStorage.getItem("templates");
-        if (isTemplate == null) {
-          console.log("hola");
-          readJsonFile("../template/templates.json", function (text) {
-            localStorage.setItem("templates", text);
-            window.location.href = './pages/displayTemp.html';
-          });
-        } else {
+    Promise.race([
+      Promise.all([
+        new Promise((resolve, _) => {
+          fetch("https://pixel-painter-8af7b.firebaseio.com/apps.json")
+            .then((res) => res.json())
+            .then((apps) => {
+              localStorage.setItem("apps", JSON.stringify(apps));
+              return resolve("resolved");
+            }).catch(err => _(err))
+        }),
+        new Promise((resolve, _) => {
+          fetch("https://pixel-painter-8af7b.firebaseio.com/templates.json")
+            .then((res) => res.json())
+            .then((templates) => {
+              localStorage.setItem("templates", JSON.stringify(templates));
+              return resolve("resolved");
+            }).catch(err => _(err))
+        })
+      ]),
+      new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 3000))
+    ]).then((res) => {
+      console.log(res)
+      window.location.href = './pages/displayTemp.html';
+    }).catch((err) => {
+      console.log(err)
+      let isApp = localStorage.getItem("apps");
+      if (isApp == null) {
+        readJsonFile("../appPromotion/apps.json", function (text) {
+          localStorage.setItem("apps", text);
+        });
+      };
+      let isTemplate = localStorage.getItem("templates");
+      if (isTemplate == null) {
+        console.log("hola");
+        readJsonFile("../template/templates.json", function (text) {
+          localStorage.setItem("templates", text);
           window.location.href = './pages/displayTemp.html';
-        }
-      });
+        });
+      } else {
+        window.location.href = './pages/displayTemp.html';
+      }
+    })
   } else {
     let isApp = localStorage.getItem("apps");
     if (isApp == null) {
@@ -77,4 +85,3 @@ function handlekeyDownTemplate(e) {
       window.close();
   }
 }
-

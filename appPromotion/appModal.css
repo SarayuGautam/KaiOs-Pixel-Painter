@@ -46,9 +46,12 @@
 }
 
 .list-group {
-  max-height: 69vh;
-  margin-bottom: 6vh;
-  padding: 8vh 3vw 8vh 3vw;
+  max-height: 60vh;
+  margin-top: 6vh;
+  padding: 3vw 3vw;
+  /* padding-bottom: 9vh; */
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .imageApp {
