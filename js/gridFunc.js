@@ -10,7 +10,7 @@ $(document).ready(function () {
   const coloringNumber = localStorage.getItem("coloringNumber") ? JSON.parse(localStorage.getItem("coloringNumber")) : [];
   const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
   const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
-  const apps = window.navigator.onLine ? JSON.parse(localStorage.getItem("appsFirebase")) : JSON.parse(localStorage.getItem("apps"));
+  const apps = JSON.parse(localStorage.getItem("apps"));
   // const availableColors = JSON.parse(localStorage.getItem('availableColors')) || [];
   const availableColors = [];
   const numberOfColors = availableColors.length;
