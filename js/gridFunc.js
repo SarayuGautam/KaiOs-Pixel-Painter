@@ -243,7 +243,7 @@ $(document).ready(function () {
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }): $(":focus").css({
+        }) : $(":focus").css({
           "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
@@ -495,7 +495,6 @@ $(document).ready(function () {
 
 
 
-
   //Navigation Functions
   function navGrid(move) {
     const currentIndex = document.activeElement.tabIndex;
@@ -525,9 +524,7 @@ $(document).ready(function () {
     const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
     $(":focus").removeClass("appActive");
     targetElement.focus().addClass("appActive");
-    if (move > 0) {
-      targetElement.scrollIntoView();
-    }
+    scrollIntoViewIfNeeded($(targetElement), { instant: false, $container: $(".list-group"), animationOptions: { duration: 1000 } });
   }
 });
 

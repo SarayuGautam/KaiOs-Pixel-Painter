@@ -51,8 +51,9 @@
   margin-top: 8vh;
   padding-left: 3vw;
   padding-right: 1.2vw;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .imageApp {
