@@ -47,13 +47,12 @@
 }
 
 .list-group {
-  max-height: 60vh;
+  height: 60vh;
   margin-top: 8vh;
   padding-left: 3vw;
   padding-right: 1.2vw;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
-  scroll-behavior: smooth;
 }
 
 .imageApp {
