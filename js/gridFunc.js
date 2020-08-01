@@ -77,13 +77,11 @@ $(document).ready(function () {
       `<div class="d-flex imageApp w-100 justify-content-between">
         <div class="appImg d-flex w-70 justify-content-between">
           <img src=${app.image}>
-            <div class="d-flex flex-column nameCategory">
-              <div class="appCategory">
-                <small>${app.category}</small>
-              </div>
+            <div>
+              <small class="appCategory">${app.category}</small>
               <small class="appName">${i + 1}${app.title}</small>
             </div>
-              </div>
+          </div>
           <div class="getDownload w-30">
             <img class="download" src="../images/download.png">
               <small>Get</small>
@@ -284,12 +282,14 @@ $(document).ready(function () {
           dataUrl = canvas.toDataURL();
           saveCanvas(dataUrl);
         }).catch(err => console.log(err));
-        setTimeout(function () { window.location.href = "./displayTemp.html"; }, 2000);
+        setTimeout(function () {
+          window.location.href = "./displayTemp.html";
+        }, 2000);
       }
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }) : $(":focus").css({
+        }): $(":focus").css({
           "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
@@ -587,6 +587,7 @@ $(document).ready(function () {
       $(".list-group").scrollTop(($(".list-group").scrollTop() - 130));
     }
     const next = currentIndex + move;
+    console.log(next);
     const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
     $(":focus").removeClass("appActive");
     targetElement.focus().addClass("appActive");
