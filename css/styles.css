@@ -278,7 +278,7 @@ a:hover {
   z-index: 1000;
 }
 
-.softkey-grid {
+.softkey-grid,.softkey-canvas {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -301,6 +301,13 @@ a:hover {
   left: 43%;
   text-align: center;
 }
+
+#softkey-center-canvas{
+  position: absolute;
+  left: 33%;
+  text-align: center;
+}
+
 
 #softkey-right {
   position: absolute;

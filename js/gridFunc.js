@@ -230,9 +230,43 @@ $(document).ready(function () {
 
 
 
+  function downloadImage(url, fileName) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url, true);
+    xhr.responseType = "blob";
+    xhr.onload = function () {
+      var urlCreator = window.URL || window.webkitURL;
+      var imageUrl = urlCreator.createObjectURL(this.response);
+      var tag = document.createElement('a');
+      tag.href = imageUrl;
+      tag.download = fileName;
+      document.body.appendChild(tag);
+      tag.click();
+      document.body.removeChild(tag);
+    };
+    xhr.send();
+  }
 
+  function getRandName() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+    for (var i = 0; i < 5; i++) {
 
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    }
+
+    return "PixelPainter" + text + ".png";
+  }
+
+  function saveCanvas(url) {
+    try {
+      downloadImage(url, getRandName());
+    } catch (error) {
+      console.log("error");
+    }
+  }
 
 
   //Press Grid or Custom Palette
@@ -240,6 +274,12 @@ $(document).ready(function () {
   const softkeycallbackGridColor = {
     center: function () {
       let focused = $(":focus");
+      if (localStorage.getItem("downloadFlag")) {
+        var canvas = $(".downloadablecanvas");
+        var url = canvas.toDataURL("../images.png");
+        saveCanvas(url);
+        console.log("saved");
+      }
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
@@ -304,7 +344,6 @@ $(document).ready(function () {
 
 
 
-
   //Handle Key Events
 
   document.addEventListener('keydown', handleKeyDownGrid);
@@ -330,7 +369,7 @@ $(document).ready(function () {
             navGrid(-numberOfPixelsWidth);
           }
         } else {
-          if (availableColors.length > 0) {
+          if (availableColors.length > 0 || buttonIndex == 1) {
             if (currentIndex == numberOfColors) {
               navColor(1 - numberOfColors);
             } else {
@@ -362,7 +401,7 @@ $(document).ready(function () {
             navGrid(+numberOfPixelsWidth);
           }
         } else {
-          if (availableColors.length > 0) {
+          if (availableColors.length > 0 || buttonIndex == 1) {
             if (currentIndex == 1) {
               navColor(numberOfColors - 1);
             } else {
@@ -392,7 +431,7 @@ $(document).ready(function () {
             navGrid(1);
           }
         } else {
-          if (availableColors.length > 0) {
+          if (availableColors.length > 0 || buttonIndex == 1) {
             if (currentIndex == numberOfColors) {
               navColor(1 - numberOfColors);
             } else {
@@ -420,7 +459,7 @@ $(document).ready(function () {
             navGrid(-1);
           }
         } else {
-          if (availableColors.length > 0) {
+          if (availableColors.length > 0 || buttonIndex == 1) {
             if (currentIndex == 1) {
               navColor(numberOfColors - 1);
             } else {
@@ -471,7 +510,20 @@ $(document).ready(function () {
 
         } else if (isappModal) {
           $.modal.close();
-          window.location.href = "./displayTemp.html";
+          localStorage.setItem("downloadFlag", true);
+          $("#challengeModal").remove();
+          $("#time").remove();
+          $(".bottomWrapper").remove();
+          $('.softkey-grid').remove();
+          $(`.grid-page`).append('<footer class="softkey-canvas"></footer>')
+          $(".softkey-canvas ").append(
+            ` <div id="softkey-center-canvas">DOWNLOAD</div>`
+          );
+          $(".pixel").text("");
+          $(".pixel").css({
+            border: "none"
+          });
+          $(".canvas").addClass("downloadableCanvas")
         } else {
           if (isModalOpen) {
             $.modal.close();
