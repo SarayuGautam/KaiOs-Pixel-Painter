@@ -102,9 +102,11 @@ $(document).ready(function () {
     });
     if ($(`#appModal`).is(':visible')) {
       $(":focus").blur();
+      isGrid = false;
       $(".list-group-item[tabIndex=1]").focus().addClass('appActive');
     }
   }
+  isGrid = !isGrid;
 
 
 
@@ -362,6 +364,7 @@ $(document).ready(function () {
     const isModalOpen = $('#colorModal').is(':visible');
     const ischallengeModal = $(`#challengeModal`).is(':visible');
     const isappModal = $(`#appModal`).is(':visible');
+    isGrid = !isGrid;
     switch (e.key) {
       case 'ArrowUp':
         if (isGrid) {
@@ -514,10 +517,12 @@ $(document).ready(function () {
 
         } else if (isappModal) {
           $.modal.close();
+          isGrid = !isGrid;
           $(":focus").blur();
           $("#challengeModal").remove();
           $("#time").remove();
           $(".bottomWrapper").remove();
+          $(".customPicker").remove();
           $('.softkey-grid').remove();
           $(`.grid-page`).append('<footer class="softkey-canvas"></footer>')
           $(".softkey-canvas ").append(
