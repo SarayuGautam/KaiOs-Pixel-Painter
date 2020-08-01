@@ -101,6 +101,7 @@ $(document).ready(function () {
       display: "none"
     });
     if ($(`#appModal`).is(':visible')) {
+      $(":focus").blur();
       $(".list-group-item[tabIndex=1]").focus().addClass('appActive');
     }
   }
@@ -261,6 +262,7 @@ $(document).ready(function () {
   }
 
   function saveCanvas(url) {
+    console.log(url);
     try {
       downloadImage(url, getRandName());
     } catch (error) {
@@ -275,11 +277,12 @@ $(document).ready(function () {
     center: function () {
       let focused = $(":focus");
       if (localStorage.getItem("downloadFlag")) {
-        var canvas = $(".downloadableCanvas").eq(0);
-        console.log(canvas);
-        // var url = canvas.toDataURL();
-        // saveCanvas(url);
-        // console.log(url);
+        localStorage.removeItem("downloadFlag")
+        html2canvas(document.querySelector(".canvas")).then(canvas => {
+          dataUrl = canvas.toDataURL();
+          saveCanvas(dataUrl);
+        }).catch(err => console.log(err));
+        setTimeout(function () { window.location.href = "./displayTemp.html"; }, 2000);
       }
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
@@ -327,7 +330,7 @@ $(document).ready(function () {
         $('#softkey-center').text('SELECT');
         if (availableColors.length > 0 || buttonIndex == 1) {
           fColor ? fColor.focus() : $("#color1").focus();
-        } else if (availableColors.length == 0 || buttonIndex == 2) {
+        } else if (availableColocontinrs.length == 0 || buttonIndex == 2) {
           $(".customPicker").focus();
         }
       }
@@ -511,6 +514,7 @@ $(document).ready(function () {
 
         } else if (isappModal) {
           $.modal.close();
+          $(":focus").blur();
           $("#challengeModal").remove();
           $("#time").remove();
           $(".bottomWrapper").remove();
@@ -523,7 +527,6 @@ $(document).ready(function () {
           $(".pixel").css({
             border: "none"
           });
-          $(".canvas").addClass("downloadableCanvas");
           localStorage.setItem("downloadFlag", true);
         } else {
           if (isModalOpen) {
@@ -573,11 +576,15 @@ $(document).ready(function () {
 
   function navAppModal(move) {
     const currentIndex = document.activeElement.tabIndex;
+    if (move > 0) {
+      $(".list-group").scrollTop($(".list-group").scrollTop() + 130);
+    } else {
+      $(".list-group").scrollTop(($(".list-group").scrollTop() - 130));
+    }
     const next = currentIndex + move;
     const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
     $(":focus").removeClass("appActive");
     targetElement.focus().addClass("appActive");
-    scrollIntoViewIfNeeded($(targetElement), { instant: false, $container: $(".list-group"), animationOptions: { duration: 1000 } });
   }
 });
 

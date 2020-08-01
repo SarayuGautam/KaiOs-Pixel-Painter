@@ -5,7 +5,6 @@
   left: 5%;
   right: 5%;
   padding: 0;
-  background-color: #f4f6f4;
 }
 
 .clippedHead {
@@ -47,12 +46,11 @@
 }
 
 .list-group {
-  height: 60vh;
-  margin-top: 8vh;
-  padding-left: 3vw;
-  padding-right: 1.2vw;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  max-height: 69vh;
+  margin-bottom: 6vh;
+  overflow: auto;
+  padding: 8vh 1.5vw 8vh 3vw;
+  scrollbar-width: none;
 }
 
 .imageApp {
