@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 
 
-
+  $(".C").remove();
 
 
 
@@ -275,10 +275,11 @@ $(document).ready(function () {
     center: function () {
       let focused = $(":focus");
       if (localStorage.getItem("downloadFlag")) {
-        var canvas = $(".downloadablecanvas");
-        var url = canvas.toDataURL("../images.png");
-        saveCanvas(url);
-        console.log("saved");
+        var canvas = $(".downloadableCanvas").eq(0);
+        console.log(canvas);
+        // var url = canvas.toDataURL();
+        // saveCanvas(url);
+        // console.log(url);
       }
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
@@ -510,7 +511,6 @@ $(document).ready(function () {
 
         } else if (isappModal) {
           $.modal.close();
-          localStorage.setItem("downloadFlag", true);
           $("#challengeModal").remove();
           $("#time").remove();
           $(".bottomWrapper").remove();
@@ -523,7 +523,8 @@ $(document).ready(function () {
           $(".pixel").css({
             border: "none"
           });
-          $(".canvas").addClass("downloadableCanvas")
+          $(".canvas").addClass("downloadableCanvas");
+          localStorage.setItem("downloadFlag", true);
         } else {
           if (isModalOpen) {
             $.modal.close();
