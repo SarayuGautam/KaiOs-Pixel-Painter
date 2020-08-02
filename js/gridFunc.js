@@ -91,12 +91,12 @@ $(document).ready(function () {
   function appModalVisible() {
     $("#time").remove();
     $("#appModal").modal('show');
-    isGrid = false;
-    $(".pixel").attr('tabindex', '-1');
     $('.close-modal').css({
       display: "none"
     });
     if ($(`#appModal`).is(':visible')) {
+      isGrid = false;
+      $(".pixel").attr('tabindex', '-1');
       $(".list-group-item[tabIndex=1]").focus().addClass('appActive');
     }
   }
@@ -127,7 +127,7 @@ $(document).ready(function () {
     var seconds = challengeTime - minutes * 60;
     $("#ad-container2").append(`<div id="time" class="timer-overlay">0${minutes}:0${seconds}</div>`);
     display = document.querySelector('#time');
-    startTimer(challengeTime, display);
+    startTimer(2, display);
   }
 
 
@@ -500,15 +500,7 @@ $(document).ready(function () {
         softkeycallbackGridColor.left();
         break;
       case 'SoftRight':
-        if (isGrid) {
-          appModalVisible();
-          $('.softkey-grid').remove();
-          $(`.grid-page`).append('<footer class="softkey-app-modal"></footer>')
-          $(".softkey-app-modal ").append(
-            ` <small id="softkey-center-app" style="text-align:center;">DOWNLOAD</small>
-            <small id="softkey-right-app" style="text-align:center;">Close</small>`
-          );
-        } else if (isappModal) {
+        if (isappModal) {
           $.modal.close();
           $("#challengeModal").remove();
           $("#time").remove();
@@ -527,11 +519,20 @@ $(document).ready(function () {
         } else {
           if (isModalOpen) {
             $.modal.close();
+            isGrid = !isGrid;
+            var fGrid = document.getElementById(localStorage.getItem("fGrid"));
+            $(":focus").blur();
+            fGrid ? fGrid.focus() : $("#pixel1").focus();
           }
-          isGrid = !isGrid;
-          var fGrid = document.getElementById(localStorage.getItem("fGrid"));
-          $(":focus").blur();
-          fGrid ? fGrid.focus() : $("#pixel1").focus();
+          else if (!isappModal && !isModalOpen) {
+            appModalVisible();
+            $('.softkey-grid').remove();
+            $(`.grid-page`).append('<footer class="softkey-app-modal"></footer>')
+            $(".softkey-app-modal ").append(
+              ` <small id="softkey-center-app" style="text-align:center;">DOWNLOAD</small>
+            <small id="softkey-right-app" style="text-align:center;">Close</small>`
+            );
+          }
         }
         break;
     }
