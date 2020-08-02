@@ -1,7 +1,6 @@
 // A $( document ).ready() block.
 $(document).ready(function () {
   var templates = JSON.parse(localStorage.getItem("templates"));
-  console.log(templates);
   var numberOfTemplates = templates.length;
   for (var i = 0; i < numberOfTemplates; i++) {
     $(".template").append(`<div tabIndex="${i + 1}" id="T${i + 1}" class="box"></div>`);

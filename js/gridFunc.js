@@ -24,10 +24,6 @@ $(document).ready(function () {
 
 
 
-  $(".C").remove();
-
-
-
   // Timer Function Code
   function startTimer(duration, display) {
     var timer = duration,
@@ -95,12 +91,12 @@ $(document).ready(function () {
   function appModalVisible() {
     $("#time").remove();
     $("#appModal").modal('show');
+    isGrid = false;
+    $(".pixel").attr('tabindex', '-1');
     $('.close-modal').css({
       display: "none"
     });
     if ($(`#appModal`).is(':visible')) {
-      $(":focus").blur();
-      isGrid = false;
       $(".list-group-item[tabIndex=1]").focus().addClass('appActive');
     }
   }
@@ -289,7 +285,7 @@ $(document).ready(function () {
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
           "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }): $(":focus").css({
+        }) : $(":focus").css({
           "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
         });
       } else if (focused.hasClass("colorPixel")) {
@@ -505,8 +501,6 @@ $(document).ready(function () {
         break;
       case 'SoftRight':
         if (isGrid) {
-          $(':focus').blur();
-          isGrid = !isGrid;
           appModalVisible();
           $('.softkey-grid').remove();
           $(`.grid-page`).append('<footer class="softkey-app-modal"></footer>')
@@ -514,11 +508,8 @@ $(document).ready(function () {
             ` <small id="softkey-center-app" style="text-align:center;">DOWNLOAD</small>
             <small id="softkey-right-app" style="text-align:center;">Close</small>`
           );
-
         } else if (isappModal) {
           $.modal.close();
-          isGrid = !isGrid;
-          $(":focus").blur();
           $("#challengeModal").remove();
           $("#time").remove();
           $(".bottomWrapper").remove();
@@ -581,16 +572,15 @@ $(document).ready(function () {
 
   function navAppModal(move) {
     const currentIndex = document.activeElement.tabIndex;
+    $(":focus").blur().removeClass("appActive");
+    const next = currentIndex + move;
+    const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
+    targetElement.focus().addClass("appActive");
     if (move > 0) {
       $(".list-group").scrollTop($(".list-group").scrollTop() + 130);
     } else {
       $(".list-group").scrollTop(($(".list-group").scrollTop() - 130));
     }
-    const next = currentIndex + move;
-    console.log(next);
-    const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
-    $(":focus").removeClass("appActive");
-    targetElement.focus().addClass("appActive");
   }
 });
 
