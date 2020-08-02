@@ -127,7 +127,7 @@ $(document).ready(function () {
     var seconds = challengeTime - minutes * 60;
     $("#ad-container2").append(`<div id="time" class="timer-overlay">0${minutes}:0${seconds}</div>`);
     display = document.querySelector('#time');
-    startTimer(2, display);
+    startTimer(challengeTime, display);
   }
 
 
@@ -274,13 +274,12 @@ $(document).ready(function () {
       let focused = $(":focus");
       if (localStorage.getItem("downloadFlag")) {
         localStorage.removeItem("downloadFlag")
-        html2canvas(document.querySelector(".canvas")).then(canvas => {
+        html2canvas(document.querySelector(".canvas"), {
+          backgroundColor: "FFFFFF"
+        }).then(canvas => {
           dataUrl = canvas.toDataURL();
           saveCanvas(dataUrl);
         }).catch(err => console.log(err));
-        setTimeout(function () {
-          window.location.href = "./displayTemp.html";
-        }, 2000);
       }
       if (focused.hasClass("pixel")) {
         (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
