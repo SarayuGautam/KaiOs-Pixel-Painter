@@ -360,10 +360,17 @@ $(document).ready(function () {
     const isModalOpen = $('#colorModal').is(':visible');
     const ischallengeModal = $(`#challengeModal`).is(':visible');
     const isappModal = $(`#appModal`).is(':visible');
-    isGrid = !isGrid;
     switch (e.key) {
       case 'ArrowUp':
-        if (isGrid) {
+        if (isappModal) {
+          isGrid = false;
+          if (currentIndex == 1) {
+            navAppModal(numberofApps - 1);
+          } else {
+            navAppModal(-1);
+          }
+        }
+        else if (isGrid) {
           if (currentIndex == 1) {
             navGrid(numberOfElements - 1);
           } else if (currentIndex <= numberOfPixelsWidth) {
@@ -388,16 +395,16 @@ $(document).ready(function () {
             }
           }
         }
-        if (isappModal) {
-          if (currentIndex == 1) {
-            navAppModal(numberofApps - 1);
-          } else {
-            navAppModal(-1);
-          }
-        }
         break;
       case 'ArrowDown':
-        if (isGrid) {
+        if (isappModal) {
+          if (currentIndex == numberofApps) {
+            navAppModal(1 - numberofApps);
+          } else {
+            navAppModal(+1);
+          }
+        }
+        else if (isGrid) {
           if (currentIndex == numberOfElements || currentIndex > (numberOfElements - numberOfPixelsWidth)) {
             navGrid(+numberOfPixelsWidth - numberOfElements);
           } else {
@@ -416,13 +423,6 @@ $(document).ready(function () {
             } else {
               navPalette(+numberOfPaletteColors);
             }
-          }
-        }
-        if (isappModal) {
-          if (currentIndex == numberofApps) {
-            navAppModal(1 - numberofApps);
-          } else {
-            navAppModal(+1);
           }
         }
         break;
