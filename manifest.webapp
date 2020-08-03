@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "name":"Pixel Painter",
+  "name": "Pixel Painter",
   "short_name": "Pixel Painter",
-  "description":"A pixel painter app in kaios",
+  "description": "A pixel painter app in kaios",
   "subtitle": "Pixel Painter",
   "type": "web",
   "fullscreen": "true",
@@ -23,16 +23,29 @@
   "default_locale": "en-US",
   "locales": {
     "en-US": {
-      "name":"Pixel Painter",
+      "name": "Pixel Painter",
       "short_name": "Pixel Painter",
-      "description":"A pixel painter app in kaios",
+      "description": "A pixel painter app in kaios",
       "subtitle": "Pixel Painter"
     },
     "en-GB": {
-      "name":"Pixel Painter",
+      "name": "Pixel Painter",
       "short_name": "Pixel Painter",
-      "description":"A pixel painter app in kaios",
+      "description": "A pixel painter app in kaios",
       "subtitle": "Pixel Painter"
     }
-  }
+  },
+  "permissions": {
+    "alarms": {
+      "description": "Required to schedule notification"
+    },
+    "desktop-notification": {
+      "description": "Required to send notifications"
+    }
+  },
+  "messages": [
+    {
+      "alarm": "/index.html"
+    }
+  ]
 }

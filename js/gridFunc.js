@@ -275,9 +275,12 @@ $(document).ready(function () {
       if (localStorage.getItem("downloadFlag")) {
         localStorage.removeItem("downloadFlag")
         html2canvas(document.querySelector(".canvas"), {
-          backgroundColor: "FFFFFF"
         }).then(canvas => {
-          dataUrl = canvas.toDataURL();
+          // console.log(canvas);
+          // canvas.getContext('2D', {
+          //   alpha: false
+          // });
+          dataUrl = canvas.toDataURL('image/png', 1.0);
           saveCanvas(dataUrl);
         }).catch(err => console.log(err));
       }
