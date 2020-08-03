@@ -258,11 +258,10 @@ $(document).ready(function () {
   }
 
   function saveCanvas(url) {
-    console.log(url);
     try {
       downloadImage(url, getRandName());
     } catch (error) {
-      console.log("error");
+      console.log(error);
     }
   }
 
@@ -276,12 +275,12 @@ $(document).ready(function () {
         localStorage.removeItem("downloadFlag")
         html2canvas(document.querySelector(".canvas"), {
         }).then(canvas => {
-          // console.log(canvas);
-          // canvas.getContext('2D', {
-          //   alpha: false
-          // });
-          dataUrl = canvas.toDataURL('image/png', 1.0);
-          saveCanvas(dataUrl);
+          var ctx = canvas.getContext('2d');
+          ctx.mozImageSmoothingEnabled = false;
+          ctx.canvas.toBlob(function (blob) {
+            var url = URL.createObjectURL(blob);
+            saveCanvas(url);
+          }, 'image/png', 1.0);
         }).catch(err => console.log(err));
       }
       if (focused.hasClass("pixel")) {

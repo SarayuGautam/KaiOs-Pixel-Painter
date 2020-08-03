@@ -51,7 +51,7 @@ function drawCanvas(grid, index) {
   const screenWidth = document.documentElement.clientWidth;
   const screenHeight = document.documentElement.clientHeight;
   const padding = 0.17 * screenHeight;
-  const canvasHeight = screenHeight - 2.2 * padding;
+  const canvasHeight = Math.ceil(screenHeight - 2.2 * padding);
   const canvasWidth = screenWidth;
   const canvasSize = canvasHeight * canvasWidth;
   var widthOfPixel = (canvasWidth / numberOfPixelsWidth);
