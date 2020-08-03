@@ -94,7 +94,7 @@ $(document).ready(function () {
       ]),
       new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 3000))
     ]).then((res) => {
-      // window.location.href = './pages/displayTemp.html';
+      window.location.href = './pages/displayTemp.html';
     }).catch((err) => {
       console.log(err)
       let isApp = localStorage.getItem("apps");
@@ -108,10 +108,10 @@ $(document).ready(function () {
         console.log("hola");
         readJsonFile("../template/templates.json", function (text) {
           localStorage.setItem("templates", text);
-          // window.location.href = './pages/displayTemp.html';
+          window.location.href = './pages/displayTemp.html';
         });
       } else {
-        // window.location.href = './pages/displayTemp.html';
+        window.location.href = './pages/displayTemp.html';
       }
     })
   } else {
@@ -127,12 +127,12 @@ $(document).ready(function () {
       readJsonFile("../template/templates.json", function (text) {
         localStorage.setItem("templates", text);
         setTimeout(function () {
-          // window.location.href = './pages/displayTemp.html';
+          window.location.href = './pages/displayTemp.html';
         }, 3000);
       });
     } else {
       setTimeout(function () {
-        // window.location.href = './pages/displayTemp.html';
+        window.location.href = './pages/displayTemp.html';
       }, 3000);
     }
   }
