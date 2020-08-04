@@ -272,7 +272,12 @@ $(document).ready(function () {
     center: function () {
       let focused = $(":focus");
       if (localStorage.getItem("downloadFlag")) {
-        localStorage.removeItem("downloadFlag")
+        localStorage.removeItem("downloadFlag");
+        $(".pixel").
+          each(function () {
+            $(this).css("border", "solid " + $(this).css("background-color"));
+            $(this).css({ "grid-gap": "0 0" });
+          });
         html2canvas(document.querySelector(".canvas"), {
         }).then(canvas => {
           var ctx = canvas.getContext('2d');
@@ -514,7 +519,7 @@ $(document).ready(function () {
           );
           $(".pixel").text("");
           $(".pixel").css({
-            border: "none"
+            border: "none",
           });
           localStorage.setItem("downloadFlag", true);
         } else {
