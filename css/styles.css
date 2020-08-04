@@ -212,6 +212,7 @@ a:hover {
 }
 
 .canvas {
+  background-color: black;
   display: grid;
 }
 
