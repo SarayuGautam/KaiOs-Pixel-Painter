@@ -151,7 +151,10 @@ const softkeyCallbackTempPage = {
     const currentElement = $(":focus");
     const tempId = currentElement.attr("id");
     const drawGrid = JSON.parse(currentElement.data("grid"));
-    $("#chooseModal").modal();
+    $("#chooseModal").modal('show');
+    $('.close-modal').css({
+      display: "none"
+    });
     $("#chooseModal").on('shown.bs.modal', function (e) {
       $(".mode[tabIndex=1]").focus();
       $(".mode").data("currentGrid", drawGrid);
@@ -266,7 +269,7 @@ function handlekeyDownTemplate(e) {
         $("#chooseModal").modal('hide');
         document.getElementById("T1").focus();
       } else if (isappModal) {
-        $("#appModal").modal('hide');
+        $.modal.close();
         document.getElementById("T1").focus();
         $('.softkey-app-modal').remove();
         $(`.template-page`).append('<footer class="softkey"></footer>')

@@ -1,5 +1,8 @@
+.jquery-modal{
+  Z-index:500 !important;
+}
+
 #appModal {
-  z-index: 10000;
   position: absolute;
   height: 83vh;
   top: 8vh;
