@@ -55,6 +55,7 @@ body {
 .center-text {
   text-align: center;
 }
+
 .splash-icons {
   position: absolute;
   top: 75%;
@@ -62,6 +63,7 @@ body {
   left: 22.5%;
   right: 20.5%;
 }
+
 .icons-imgs {
   position: relative;
 }
@@ -77,6 +79,7 @@ body {
   bottom: 0;
   left: 25%;
 }
+
 #icon-img3 {
   position: absolute;
   top: 0;
@@ -101,6 +104,7 @@ body {
   top: 0;
   z-index: 30;
 }
+
 .timer-overlay {
   position: absolute;
   top: 5vh;
@@ -134,6 +138,7 @@ body {
 a {
   color: inherit;
 }
+
 .mode {
   position: relative;
   color: white;
@@ -141,7 +146,7 @@ a {
   font-weight: bold;
 }
 
-.mode > img {
+.mode>img {
   position: absolute;
   width: 13vw;
   height: 13vw;
@@ -153,9 +158,11 @@ a {
   background-color: #f5a623;
   margin-top: 6vh;
 }
+
 .upperChoice {
   margin-bottom: 6vh;
 }
+
 #mode1:focus {
   box-shadow: 0px 7px 0px 0px rgba(211, 144, 33, 1);
 }
@@ -164,6 +171,7 @@ a {
   background-color: #4a90e2;
   margin-bottom: 6vh;
 }
+
 #mode2:focus {
   box-shadow: 0px 7px 0px 0px rgba(51, 118, 195, 1);
 }
@@ -171,6 +179,7 @@ a {
 #continue:focus {
   box-shadow: 0px 5px 0px 0px #0275d8;
 }
+
 #exit:focus {
   box-shadow: 0px 5px 0px 0px #dc3545;
 }
@@ -179,7 +188,7 @@ a {
   margin: 10px auto;
 }
 
-.best-time > p {
+.best-time>p {
   font-size: 4vh;
   font-weight: bold;
   color: #d39021;
@@ -278,7 +287,8 @@ a:hover {
   z-index: 1000;
 }
 
-.softkey-grid,.softkey-canvas {
+.softkey-grid,
+.softkey-canvas {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -302,7 +312,7 @@ a:hover {
   text-align: center;
 }
 
-#softkey-center-canvas{
+#softkey-center-canvas {
   position: absolute;
   left: 33%;
   text-align: center;
@@ -347,6 +357,7 @@ a:hover {
   background-size: cover;
   object-fit: cover;
 }
+
 .tick-img {
   position: absolute;
   bottom: 0;
@@ -354,6 +365,7 @@ a:hover {
   width: 20px;
   z-index: 9;
 }
+
 .modal-text {
   text-align: center;
 }
@@ -370,12 +382,16 @@ a:hover {
   right: 5%;
 }
 
-#chooseModal {
-  top: 19vh;
+#chooseModal.modal {
+  padding: 0;
+  height: auto;
+  width: 100%;
 }
+
 .ui-dialog-titlebar-close {
   visibility: hidden;
 }
+
 .pixel {
   border: 1px solid rgba(34, 167, 240, 0.25);
 }
@@ -437,7 +453,7 @@ a:hover {
   display: grid;
   border-radius: 8px;
   overflow: hidden;
-  }
+}
 
 .colorPixel:focus {
   border: 2px solid black;
@@ -446,7 +462,7 @@ a:hover {
 #colorModal {
   width: auto !important;
   height: auto !important;
-    position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
