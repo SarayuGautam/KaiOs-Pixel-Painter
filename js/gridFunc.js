@@ -14,6 +14,7 @@ $(document).ready(function () {
   const availableColors = [];
   const numberOfColors = availableColors.length;
   var isGrid = true;
+  var isTimerFinished = true;
   const paletteColors = ["#003366", "#336699", "#3366CC", "#003399", "#000099", "#0000CC", "#000066", "#006666", "#006699", "#0099CC", "#0066CC", "#0033CC", "#0000FF", "#3333FF", "#333399", "#669999", "#009999", "#33CCCC", "#00CCFF", "#0099FF", "#0066FF", "#3366FF", "#3333CC", "#666699", "#339966", "#00CC99", "#00FFCC", "#00FFFF", "#33CCFF", "#3399FF", "#6699FF", "#6666FF", "#6600FF", "#6600CC", "#339933", "#00CC66", "#00FF99", "#66FFFF", "#99CCFF", "#9999FF", "#9966FF", "#9933FF", "#9900FF", "#006600", "#00CC00", "#00FF00", "#66FF99", "#99FFCC", "#CCCCFF", "#CC99FF", "#CC66FF", "#CC33FF", "#CC00FF", "#9900CC", "#003300", "#009933", "#33CC33", "#66FF66", "#99FF99", "#CCFFCC", "#FF99FF", "#FF66FF", "#FF00FF", "#CC00CC", "#660066", "#336600", "#009900", "#66FF33", "#99FF66", "#CCFF99", "#FFFFCC", "#FFCCCC", "#FF99CC", "#FF33CC", "#CC0099", "#993399", "#333300", "#669900", "#99FF33", "#CCFF66", "#FFFF99", "#FFCC99", "#FF9999", "#FF6699", "#FF3399", "#CC3399", "#990099", "#666633", "#99CC00", "#CCFF33", "#FFFF66", "#FFCC66", "#FF9966", "#FF6666", "#FF0066", "#CC6699", "#993366", "#999966", "#CCCC00", "#FFFF00", "#FFCC00", "#FF9933", "#FF6600", "#FF5050", "#CC0066", "#660033", "#996633", "#CC9900", "#FF9900", "#CC6600", "#FF3300", "#FF0000", "#CC0000", "#990033", "#663300", "#996600", "#CC3300", "#993300", "#990000", "#800000", "#993333"];
   const numberOfPaletteColors = Math.floor(Math.sqrt(paletteColors.length));
   const heightOfColor = (canvasHeight) / numberOfPaletteColors;
@@ -25,6 +26,7 @@ $(document).ready(function () {
 
   // Timer Function Code
   function startTimer(duration, display) {
+    isTimerFinished = false;
     var timer = duration,
       minutes, seconds;
     var timerFunc = setInterval(function () {
@@ -40,19 +42,18 @@ $(document).ready(function () {
         clearInterval(timerFunc);
         $("#time").remove();
         $("#challengeModal").modal('show');
+        isTimerFinished = true;
+        $(".modal-text").empty();
+        $(".modal-text").append(` <p>You've lost the challenge.</p>
+        <p>Do you want to continue drawing or exit?</p>
+        <button type="button" id="continue" tabIndex="1" class="btn btn-primary choice mr-2 px-3">Continue</button>
+        <button type="button" id="exit" tabIndex="2" class="btn btn-danger choice px-4">Exit</button>`);
         $('.close-modal').css({
           display: "none"
         });
         if ($(`#challengeModal`).is(':visible')) {
           $(".choice[tabIndex=1]").focus();
         }
-        $('.softkey-app-modal').remove();
-        $(`.grid-page`).append('<footer class="softkey-grid"></footer>')
-        $(".softkey-grid ").append(
-          `  <div id="softkey-left" style="text-align:center;">color</div>
-              <div id="softkey-center" style="text-align:center;">DRAW</div>
-              <div id="softkey-right" style="text-align:center;">finish</div>`
-        );
       }
     }, 1000);
   }
@@ -248,11 +249,16 @@ $(document).ready(function () {
         }).catch(err => console.log(err));
       }
       if (focused.hasClass("pixel")) {
-        (availableColors.length > 0 || buttonIndex == 1) ? $(":focus").css({
-          "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
-        }) : $(":focus").css({
-          "background-color": localStorage.getItem("paletteColor") ? ocalStorage.getItem("currentColor") : $("#colorPixel1").css("background-color")
-        });
+        if (availableColors.length > 0 || buttonIndex == 1) {
+          $(":focus").css({
+            "background-color": localStorage.getItem("currentColor") ? localStorage.getItem("currentColor") : $("#color1").css("background-color")
+          });
+        } else if (availableColors.length <= 0 && buttonIndex == 2) {
+          console.log("clicked");
+          $(":focus").css({
+            "background-color": localStorage.getItem("paletteColor") ? localStorage.getItem("paletteColor") : $("#colorPixel1").css("background-color")
+          });
+        }
       } else if (focused.hasClass("colorPixel")) {
         let currentColor = focused.css("background-color");
         localStorage.setItem("paletteColor", currentColor);
@@ -293,7 +299,7 @@ $(document).ready(function () {
         $('#softkey-center').text('SELECT');
         if (availableColors.length > 0 || buttonIndex == 1) {
           fColor ? fColor.focus() : $("#color1").focus();
-        } else if (availableColocontinrs.length == 0 || buttonIndex == 2) {
+        } else if (availableColors.length == 0 || buttonIndex == 2) {
           $(".customPicker").focus();
         }
       }
@@ -436,8 +442,29 @@ $(document).ready(function () {
             var fGrid = document.getElementById(localStorage.getItem("fGrid"));
             $(":focus").blur();
             fGrid ? fGrid.focus() : $("#pixel1").focus();
-          } else if ($(":focus").attr("id") == "exit") {
-            window.location.href = "./displayTemp.html";
+          } else if (
+            $(":focus").attr("id") == "exit") {
+            $.modal.close();
+            if (buttonIndex == 2 || (buttonIndex == 1 && isTimerFinished == false)) {
+              $(":focus").blur();
+              $(".pixel").attr("tabIndex", -1);
+              $("#challengeModal").remove();
+              $("#time").remove();
+              $(".bottomWrapper").remove();
+              $(".customPicker").remove();
+              $('.softkey-grid').remove();
+              $(`.grid-page`).append('<footer class="softkey-canvas"></footer>')
+              $(".softkey-canvas ").append(
+                ` <div id="softkey-center-canvas">DOWNLOAD</div>`
+              );
+              $(".pixel").text("");
+              $(".pixel").css({
+                border: "none",
+              });
+              localStorage.setItem("downloadFlag", true);
+            } else if (buttonIndex == 1 && isTimerFinished == true) {
+              window.location.href = "./displayTemp.html";
+            }
           }
         }
         softkeycallbackGridColor.center();
@@ -446,30 +473,43 @@ $(document).ready(function () {
         softkeycallbackGridColor.left();
         break;
       case 'SoftRight':
-        if (isModalOpen) {
+        if (buttonIndex == 2) {
+          $("#challengeModal").modal('show');
+          $(".modal-text").empty();
+          $(".modal-text").append(`<p>Do you want to finish?</p>
+        <p>You  won't be able to edit the drawing anymore.</p>
+        <button type="button" id="continue" tabIndex="1" class="btn btn-primary choice mr-2 px-2">Continue</button>
+        <button type="button" id="exit" tabIndex="2" class="btn btn-danger choice px-3">Finish</button>`);
+          $('.close-modal').css({
+            display: "none"
+          });
+          if ($(`#challengeModal`).is(':visible')) {
+            $(".choice[tabIndex=1]").focus();
+          }
+        } else if (buttonIndex == 1) {
+          $("#challengeModal").modal('show');
+          $(".modal-text").empty();
+          $(".modal-text").append(`<p>You'll lose the challenge.</p>
+        <p>Do you want to continue drawing or finish this?</p>
+        <button type="button" id="continue" tabIndex="1" class="btn btn-primary choice mr-2 px-2">Continue</button>
+        <button type="button" id="exit" tabIndex="2" class="btn btn-danger choice px-3">Finish</button>`);
+          $('.close-modal').css({
+            display: "none"
+          });
+          if ($(`#challengeModal`).is(':visible')) {
+            $(".choice[tabIndex=1]").focus();
+          }
+        }
+        else if (isModalOpen) {
           $.modal.close();
           isGrid = !isGrid;
           var fGrid = document.getElementById(localStorage.getItem("fGrid"));
           $(":focus").blur();
           fGrid ? fGrid.focus() : $("#pixel1").focus();
-        } else {
-          $(":focus").blur();
-          $(".pixel").attr("tabIndex", -1);
-          $("#challengeModal").remove();
-          $("#time").remove();
-          $(".bottomWrapper").remove();
-          $(".customPicker").remove();
-          $('.softkey-grid').remove();
-          $(`.grid-page`).append('<footer class="softkey-canvas"></footer>')
-          $(".softkey-canvas ").append(
-            ` <div id="softkey-center-canvas">DOWNLOAD</div>`
-          );
-          $(".pixel").text("");
-          $(".pixel").css({
-            border: "none",
-          });
-          localStorage.setItem("downloadFlag", true);
         }
+        // else {
+
+        // }
         break;
     }
   };
