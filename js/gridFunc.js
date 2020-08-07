@@ -10,7 +10,6 @@ $(document).ready(function () {
   const coloringNumber = localStorage.getItem("coloringNumber") ? JSON.parse(localStorage.getItem("coloringNumber")) : [];
   const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
   const colorGrid = JSON.parse(localStorage.getItem('colorGrid'));
-  const apps = JSON.parse(localStorage.getItem("apps"));
   // const availableColors = JSON.parse(localStorage.getItem('availableColors')) || [];
   const availableColors = [];
   const numberOfColors = availableColors.length;
@@ -60,46 +59,6 @@ $(document).ready(function () {
 
 
 
-
-
-
-  //appPromotion
-
-  const listGroup = $('.list-group');
-  for (i = 0; i < apps.length; i++) {
-    var app = apps[i];
-    listGroup.append(`<a href="#" class="list-group-item list-group-item-action flex-column align-items-start" tabIndex=${i + 1} data-appId=${app.storeAppName}></a>`);
-    $(`.list-group-item[tabIndex=${i + 1}]`).append(
-      `<div class="d-flex imageApp w-100 justify-content-between">
-        <div class="appImg d-flex w-70 justify-content-between">
-          <img src=${app.image}>
-            <div>
-              <small class="appCategory">${app.category}</small>
-              <small class="appName">${i + 1}${app.title}</small>
-            </div>
-          </div>
-          <div class="getDownload w-30">
-            <img class="download" src="../images/download.png">
-              <small>Get</small>
-              </div>
-          </div>
-          <small class="description">Description</small>
-          <small class="mb-1 des-text">${app.description} </small>  `
-    )
-  }
-
-  function appModalVisible() {
-    $("#time").remove();
-    $("#appModal").modal('show');
-    $('.close-modal').css({
-      display: "none"
-    });
-    if ($(`#appModal`).is(':visible')) {
-      isGrid = false;
-      $(".pixel").attr('tabindex', '-1');
-      $(".list-group-item[tabIndex=1]").focus().addClass('appActive');
-    }
-  }
   isGrid = !isGrid;
 
 
@@ -357,26 +316,14 @@ $(document).ready(function () {
   document.addEventListener('keydown', handleKeyDownGrid);
 
   function handleKeyDownGrid(e) {
-
-
     const currentIndex = document.activeElement.tabIndex;
     const numberOfElements = document.getElementsByClassName("pixel").length;
     const numberOfPalette = paletteColors.length;
-    const numberofApps = apps.length;
     const isModalOpen = $('#colorModal').is(':visible');
     const ischallengeModal = $(`#challengeModal`).is(':visible');
-    const isappModal = $(`#appModal`).is(':visible');
     switch (e.key) {
       case 'ArrowUp':
-        if (isappModal) {
-          isGrid = false;
-          if (currentIndex == 1) {
-            navAppModal(numberofApps - 1);
-          } else {
-            navAppModal(-1);
-          }
-        }
-        else if (isGrid) {
+        if (isGrid) {
           if (currentIndex == 1) {
             navGrid(numberOfElements - 1);
           } else if (currentIndex <= numberOfPixelsWidth) {
@@ -403,14 +350,7 @@ $(document).ready(function () {
         }
         break;
       case 'ArrowDown':
-        if (isappModal) {
-          if (currentIndex == numberofApps) {
-            navAppModal(1 - numberofApps);
-          } else {
-            navAppModal(+1);
-          }
-        }
-        else if (isGrid) {
+        if (isGrid) {
           if (currentIndex == numberOfElements || currentIndex > (numberOfElements - numberOfPixelsWidth)) {
             navGrid(+numberOfPixelsWidth - numberOfElements);
           } else {
@@ -506,8 +446,15 @@ $(document).ready(function () {
         softkeycallbackGridColor.left();
         break;
       case 'SoftRight':
-        if (isappModal) {
+        if (isModalOpen) {
           $.modal.close();
+          isGrid = !isGrid;
+          var fGrid = document.getElementById(localStorage.getItem("fGrid"));
+          $(":focus").blur();
+          fGrid ? fGrid.focus() : $("#pixel1").focus();
+        } else {
+          $(":focus").blur();
+          $(".pixel").attr("tabIndex", -1);
           $("#challengeModal").remove();
           $("#time").remove();
           $(".bottomWrapper").remove();
@@ -522,23 +469,6 @@ $(document).ready(function () {
             border: "none",
           });
           localStorage.setItem("downloadFlag", true);
-        } else {
-          if (isModalOpen) {
-            $.modal.close();
-            isGrid = !isGrid;
-            var fGrid = document.getElementById(localStorage.getItem("fGrid"));
-            $(":focus").blur();
-            fGrid ? fGrid.focus() : $("#pixel1").focus();
-          }
-          else if (!isappModal && !isModalOpen) {
-            appModalVisible();
-            $('.softkey-grid').remove();
-            $(`.grid-page`).append('<footer class="softkey-app-modal"></footer>')
-            $(".softkey-app-modal ").append(
-              ` <small id="softkey-center-app" style="text-align:center;">DOWNLOAD</small>
-            <small id="softkey-right-app" style="text-align:center;">Close</small>`
-            );
-          }
         }
         break;
     }
@@ -575,19 +505,6 @@ $(document).ready(function () {
     const next = currentIndex + move;
     const targetElement = $(`.colorPixel[tabIndex=${next}]`).eq(0);
     targetElement.focus();
-  }
-
-  function navAppModal(move) {
-    const currentIndex = document.activeElement.tabIndex;
-    $(":focus").blur().removeClass("appActive");
-    const next = currentIndex + move;
-    const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
-    targetElement.focus().addClass("appActive");
-    if (move > 0) {
-      $(".list-group").scrollTop($(".list-group").scrollTop() + 130);
-    } else {
-      $(".list-group").scrollTop(($(".list-group").scrollTop() - 130));
-    }
   }
 });
 

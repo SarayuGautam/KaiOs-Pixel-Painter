@@ -33,6 +33,57 @@ getNewAd("ad-container1");
 
 
 
+
+
+
+
+//appPromotion
+const apps = JSON.parse(localStorage.getItem("apps"));
+
+const listGroup = $('.list-group');
+for (i = 0; i < apps.length; i++) {
+  var app = apps[i];
+  listGroup.append(`<a href="#" class="list-group-item list-group-item-action flex-column align-items-start" tabIndex=${i + 1} data-appId=${app.storeAppName}></a>`);
+  $(`.list-group-item[tabIndex=${i + 1}]`).append(
+    `<div class="d-flex imageApp w-100 justify-content-between">
+        <div class="appImg d-flex w-70 justify-content-between">
+          <img src=${app.image}>
+            <div>
+              <small class="appCategory">${app.category}</small>
+              <small class="appName">${i + 1}${app.title}</small>
+            </div>
+          </div>
+          <div class="getDownload w-30">
+            <img class="download" src="../images/download.png">
+              <small>Get</small>
+              </div>
+          </div>
+          <small class="description">Description</small>
+          <small class="mb-1 des-text">${app.description} </small>  `
+  )
+}
+
+function appModalVisible() {
+  $("#appModal").modal('show');
+  $('.close-modal').css({
+    display: "none"
+  });
+  if ($(`#appModal`).is(':visible')) {
+    $(":focus").blur();
+    $(".box").attr('tabindex', '-1');
+    $(".list-group-item[tabIndex=1]").focus().addClass('appActive');
+  }
+}
+
+
+
+
+
+
+
+
+
+
 //Function to draw canvas
 
 function drawCanvas(grid, index) {
@@ -87,6 +138,12 @@ function drawCanvas(grid, index) {
 
 
 
+
+
+
+
+
+
 //send grid display
 
 const softkeyCallbackTempPage = {
@@ -106,19 +163,37 @@ const softkeyCallbackTempPage = {
 
 
 
+
+
+
+
+
+
+
+
+
 //Handle Keydown
 
 document.addEventListener('keydown', handlekeyDownTemplate);
 
 function handlekeyDownTemplate(e) {
-
   const activeElm = document.activeElement;
   const currentIndex = document.activeElement.tabIndex;
+  const numberofApps = apps.length;
   const isModalOpen = $('#chooseModal').is(':visible');
+  const isappModal = $(`#appModal`).is(':visible');
   const numberOfElements = document.getElementsByClassName("box").length;
   switch (e.key) {
     case 'ArrowUp':
-      if (isModalOpen) {
+      if (isappModal) {
+        isGrid = false;
+        if (currentIndex == 1) {
+          navAppModal(numberofApps - 1);
+        } else {
+          navAppModal(-1);
+        }
+      }
+      else if (isModalOpen) {
         navMode(-1);
       } else {
         if (currentIndex == 1) {
@@ -131,7 +206,14 @@ function handlekeyDownTemplate(e) {
       }
       break;
     case 'ArrowDown':
-      if (isModalOpen) {
+      if (isappModal) {
+        if (currentIndex == numberofApps) {
+          navAppModal(1 - numberofApps);
+        } else {
+          navAppModal(+1);
+        }
+      }
+      else if (isModalOpen) {
         navMode(+1);
       } else {
         if (currentIndex == numberOfElements) {
@@ -170,10 +252,28 @@ function handlekeyDownTemplate(e) {
         softkeyCallbackTempPage.center();
       }
       break;
+    case 'SoftLeft':
+      appModalVisible();
+      $('.softkey').remove();
+      $(`.template-page`).append('<footer class="softkey-app-modal"></footer>')
+      $(".softkey-app-modal ").append(
+        ` <small id="softkey-center-app" style="text-align:center;">DOWNLOAD</small>
+            <small id="softkey-right-app" style="text-align:center;">Close</small>`
+      );
+      break;
     case 'SoftRight':
       if (isModalOpen) {
         $("#chooseModal").modal('hide');
         document.getElementById("T1").focus();
+      } else if (isappModal) {
+        $("#appModal").modal('hide');
+        document.getElementById("T1").focus();
+        $('.softkey-app-modal').remove();
+        $(`.template-page`).append('<footer class="softkey"></footer>')
+        $(".softkey").append(
+          `   <div id="softkey-center">SELECT</div>
+              <small id="softkey-left" class="px-2">Other-Apps</small>`
+        );
       } else {
         window.close();
       }
@@ -194,6 +294,22 @@ if (performance.navigation.type == 1) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //navigate template
 
 function navTemp(move) {
@@ -210,6 +326,18 @@ function navMode(move) {
   targetElement.focus();
 }
 
+function navAppModal(move) {
+  const currentIndex = document.activeElement.tabIndex;
+  $(":focus").blur().removeClass("appActive");
+  const next = currentIndex + move;
+  const targetElement = $(`.list-group-item[tabIndex=${next}]`).eq(0);
+  targetElement.focus().addClass("appActive");
+  if (move > 0) {
+    $(".list-group").scrollTop($(".list-group").scrollTop() + 130);
+  } else {
+    $(".list-group").scrollTop(($(".list-group").scrollTop() - 130));
+  }
+}
 
 
 document.addEventListener("DOMContentLoaded", () => {
