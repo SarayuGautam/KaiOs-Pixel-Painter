@@ -245,6 +245,7 @@ $(document).ready(function () {
           ctx.canvas.toBlob(function (blob) {
             var url = URL.createObjectURL(blob);
             saveCanvas(url);
+            window.location.href("./displayTemp.html")
           }, 'image/png', 1.0);
         }).catch(err => console.log(err));
       }

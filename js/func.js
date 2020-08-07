@@ -155,10 +155,10 @@ const softkeyCallbackTempPage = {
     $('.close-modal').css({
       display: "none"
     });
-    $("#chooseModal").on('shown.bs.modal', function (e) {
+    if ($(`#chooseModal`).is(':visible')) {
       $(".mode[tabIndex=1]").focus();
       $(".mode").data("currentGrid", drawGrid);
-    });
+    }
     localStorage.setItem(`Overlayed${tempId}`, tempId);
   },
 };
