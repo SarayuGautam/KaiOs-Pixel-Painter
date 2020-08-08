@@ -184,22 +184,38 @@ $(document).ready(function () {
   }
 
 
-
   function downloadImage(url, fileName) {
-    var xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
-    xhr.responseType = "blob";
-    xhr.onload = function () {
-      var urlCreator = window.URL || window.webkitURL;
-      var imageUrl = urlCreator.createObjectURL(this.response);
-      var tag = document.createElement('a');
-      tag.href = imageUrl;
-      tag.download = fileName;
-      document.body.appendChild(tag);
-      tag.click();
-      document.body.removeChild(tag);
-    };
-    xhr.send();
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", url, true);
+      xhr.responseType = "blob";
+      xhr.onload = function () {
+        var urlCreator = window.URL || window.webkitURL;
+        var imageUrl = urlCreator.createObjectURL(this.response);
+        var tag = document.createElement('a');
+        tag.href = imageUrl;
+        tag.download = fileName;
+        document.body.appendChild(tag);
+        tag.click();
+        document.body.removeChild(tag);
+        if (this.status >= 200 && this.status < 300) {
+          resolve(xhr.response);
+        } else {
+          reject({
+            status: this.status,
+            statusText: this.statusText
+          })
+        }
+      };
+      xhr.onerror = function () {
+        reject({
+          status: this.status,
+          statusText: xhr.statusText
+        });
+      };
+      xhr.send();
+    });
+
   }
 
   function getRandName() {
@@ -215,13 +231,7 @@ $(document).ready(function () {
     return "PixelPainter" + text + ".png";
   }
 
-  function saveCanvas(url) {
-    try {
-      downloadImage(url, getRandName());
-    } catch (error) {
-      console.log(error);
-    }
-  }
+
 
 
   //Press Grid or Custom Palette
@@ -229,22 +239,17 @@ $(document).ready(function () {
   const softkeycallbackGridColor = {
     center: function () {
       let focused = $(":focus");
+
       if (localStorage.getItem("downloadFlag")) {
         localStorage.removeItem("downloadFlag");
         $(".pixel").
-          each(function () {
-            $(this).css("border", "solid " + $(this).css("background-color"));
-            $(this).css({ "grid-gap": "0 0" });
+        each(function () {
+          $(this).css("border", "solid " + $(this).css("background-color"));
+          $(this).css({
+            "grid-gap": "0 0"
           });
-        html2canvas(document.querySelector(".canvas"), {
-        }).then(canvas => {
-          var ctx = canvas.getContext('2d');
-          ctx.mozImageSmoothingEnabled = false;
-          ctx.canvas.toBlob(function (blob) {
-            var url = URL.createObjectURL(blob);
-            saveCanvas(url);
-          }, 'image/png', 1.0);
-        }).then(res => window.location.href = "./displayTemp.html").catch(err => console.log(err));
+        });
+        downloadCanvas().then(res => window.location.href = "./displayTemp.html").catch(err => console.log(err));
       }
       if (focused.hasClass("pixel")) {
         if (availableColors.length > 0 || buttonIndex == 1) {
@@ -433,6 +438,9 @@ $(document).ready(function () {
         }
         break;
       case 'Enter':
+        if ($("#softkey-center-canvas").text() === "DOWNLOAD") {
+          localStorage.setItem("downloadFlag", true);
+        }
         if (ischallengeModal) {
           $(":focus").removeClass("appActive");
           if ($(":focus").attr("id") == "continue") {
@@ -459,13 +467,13 @@ $(document).ready(function () {
               $(".pixel").css({
                 border: "none",
               });
-              localStorage.setItem("downloadFlag", true);
             } else if (buttonIndex == 1 && isTimerFinished == true) {
               window.location.href = "./displayTemp.html";
             }
           }
         }
         softkeycallbackGridColor.center();
+
         break;
       case 'SoftLeft':
         softkeycallbackGridColor.left();
@@ -497,8 +505,7 @@ $(document).ready(function () {
           if ($(`#challengeModal`).is(':visible')) {
             $(".choice[tabIndex=1]").focus();
           }
-        }
-        else if (isModalOpen) {
+        } else if (isModalOpen) {
           $.modal.close();
           isGrid = !isGrid;
           var fGrid = document.getElementById(localStorage.getItem("fGrid"));
@@ -543,6 +550,21 @@ $(document).ready(function () {
     const next = currentIndex + move;
     const targetElement = $(`.colorPixel[tabIndex=${next}]`).eq(0);
     targetElement.focus();
+  }
+
+  function downloadCanvas() {
+    return new Promise((resolve, _) => {
+      html2canvas(document.querySelector(".canvas"), {}).then(canvas => {
+        var ctx = canvas.getContext('2d');
+        ctx.mozImageSmoothingEnabled = false;
+        ctx.canvas.toBlob(function (blob) {
+          var url = URL.createObjectURL(blob);
+          downloadImage(url, getRandName()).then((_) => {
+            resolve("success");
+          })
+        }, 'image/png', 1.0);
+      }).catch(err => _(err));
+    });
   }
 });
 
