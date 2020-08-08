@@ -84,6 +84,8 @@ $(document).ready(function () {
     var minutes = Math.floor(challengeTime / 60);
     var seconds = challengeTime - minutes * 60;
     $("#ad-container2").append(`<div id="time" class="timer-overlay">0${minutes}:0${seconds}</div>`);
+    localStorage.setItem("bestMinute", `${minutes}`);
+    localStorage.setItem("bestSecond", `${seconds}`);
     display = document.querySelector('#time');
     startTimer(challengeTime, display);
   }

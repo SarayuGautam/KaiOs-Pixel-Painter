@@ -151,13 +151,19 @@ const softkeyCallbackTempPage = {
     const currentElement = $(":focus");
     const tempId = currentElement.attr("id");
     const drawGrid = JSON.parse(currentElement.data("grid"));
+    var bestMinute = localStorage.getItem("bestMinute");
+    var bestSecond = localStorage.getItem("bestSecond");
     $("#chooseModal").modal('show');
     $('.close-modal').css({
       display: "none"
     });
     if ($(`#chooseModal`).is(':visible')) {
+
       $(".mode[tabIndex=1]").focus();
       $(".mode").data("currentGrid", drawGrid);
+      if (bestSecond || bestMinute) {
+        $(".best-time").append(` <p>Best time: ${bestMinute} min ${bestSecond} sec</p>`);
+      }
     }
     localStorage.setItem(`Overlayed${tempId}`, tempId);
   },
