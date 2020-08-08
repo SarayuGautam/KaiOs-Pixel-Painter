@@ -244,7 +244,7 @@ $(document).ready(function () {
             var url = URL.createObjectURL(blob);
             saveCanvas(url);
           }, 'image/png', 1.0);
-        }).catch(err => console.log(err));
+        }).then(res => window.location.href = "./displayTemp.html").catch(err => console.log(err));
       }
       if (focused.hasClass("pixel")) {
         if (availableColors.length > 0 || buttonIndex == 1) {
