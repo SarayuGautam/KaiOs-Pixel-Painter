@@ -245,12 +245,12 @@ $(document).ready(function () {
       if (localStorage.getItem("downloadFlag")) {
         localStorage.removeItem("downloadFlag");
         $(".pixel").
-        each(function () {
-          $(this).css("border", "solid " + $(this).css("background-color"));
-          $(this).css({
-            "grid-gap": "0 0"
+          each(function () {
+            $(this).css("border", "solid " + $(this).css("background-color"));
+            $(this).css({
+              "grid-gap": "0 0"
+            });
           });
-        });
         downloadCanvas().then(res => window.location.href = "./displayTemp.html").catch(err => console.log(err));
       }
       if (focused.hasClass("pixel")) {
@@ -455,7 +455,7 @@ $(document).ready(function () {
             $.modal.close();
             if (buttonIndex == 2 || (buttonIndex == 1 && isTimerFinished == false)) {
               $(":focus").blur();
-              $(".pixel").attr("tabIndex", -1);
+              $(".pixel").attr("tabIndex", "-1");
               $("#challengeModal").remove();
               $("#time").remove();
               $(".bottomWrapper").remove();
@@ -463,7 +463,8 @@ $(document).ready(function () {
               $('.softkey-grid').remove();
               $(`.grid-page`).append('<footer class="softkey-canvas"></footer>')
               $(".softkey-canvas ").append(
-                ` <div id="softkey-center-canvas">DOWNLOAD</div>`
+                `<div id="softkey-left">Home</div>
+                 <div id="softkey-center-canvas">DOWNLOAD</div>`
               );
               $(".pixel").text("");
               $(".pixel").css({
@@ -478,7 +479,11 @@ $(document).ready(function () {
 
         break;
       case 'SoftLeft':
-        softkeycallbackGridColor.left();
+        if ($("#softkey-center-canvas").text() === "DOWNLOAD") {
+          window.location.href = "./displayTemp.html";
+        } else {
+          softkeycallbackGridColor.left();
+        }
         break;
       case 'SoftRight':
         if (buttonIndex == 2) {
@@ -514,9 +519,6 @@ $(document).ready(function () {
           $(":focus").blur();
           fGrid ? fGrid.focus() : $("#pixel1").focus();
         }
-        // else {
-
-        // }
         break;
     }
   };
