@@ -27,6 +27,7 @@ function addalarm(adate) {
     console.error('err');
   }
 }
+
 function setAlarms() {
   addalarm(tomorrow);
   addalarm(day3);
@@ -34,11 +35,13 @@ function setAlarms() {
 }
 
 function removealarm() {
-  var request = navigator.mozAlarms.getAll(); request.onsuccess = function () {
+  var request = navigator.mozAlarms.getAll();
+  request.onsuccess = function () {
     this.result.forEach(function (alarm) {
       navigator.mozAlarms.remove(alarm.id);
     });
-  }; request.onerror = function () {
+  };
+  request.onerror = function () {
     console.log('operation failed: ' + this.error);
   };
 }
@@ -49,7 +52,9 @@ function addatrun() {
 }
 
 function displayNotification() {
-  var options = { tag: "pixelpainter" };
+  var options = {
+    tag: "pixelpainter"
+  };
   var notifications = ["Check out the new Pixel Painter templates", "It's a new day, lets make a new drawing", "Time to draw with Pixel Painter", "Did you missed these new templates? Check them out!"]
   var notification = new Notification(notifications[Math.floor(Math.random() * notifications.length)], options);
   addatrun();
@@ -74,7 +79,7 @@ $(document).ready(function () {
   });
 
   if (!localStorage.getItem("bestScores")) {
-    localStorage.setItem("bestScores", {});
+    localStorage.setItem("bestScores", "{}");
   };
   if (window.navigator.onLine) {
     Promise.race([

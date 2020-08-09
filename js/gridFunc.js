@@ -242,12 +242,12 @@ $(document).ready(function () {
       if (localStorage.getItem("downloadFlag")) {
         localStorage.removeItem("downloadFlag");
         $(".pixel").
-          each(function () {
-            $(this).css("border", "solid " + $(this).css("background-color"));
-            $(this).css({
-              "grid-gap": "0 0"
-            });
+        each(function () {
+          $(this).css("border", "solid " + $(this).css("background-color"));
+          $(this).css({
+            "grid-gap": "0 0"
           });
+        });
         downloadCanvas().then(res => window.location.href = "./displayTemp.html").catch(err => console.log(err));
       }
       if (focused.hasClass("pixel")) {
