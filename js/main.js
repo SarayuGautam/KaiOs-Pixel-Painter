@@ -72,6 +72,10 @@ $(document).ready(function () {
   navigator.mozSetMessageHandler('alarm', function () {
     displayNotification();
   });
+
+  if (!localStorage.getItem("bestScores")) {
+    localStorage.setItem("bestScores", {});
+  };
   if (window.navigator.onLine) {
     Promise.race([
       Promise.all([

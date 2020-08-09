@@ -93,6 +93,8 @@ function drawCanvas(grid, index) {
   const drawing = grid.drawing;
   const association = grid.drawingColorAssociation;
   const challengeTime = grid.challengeTime;
+  const templateId = grid.template_id;
+  console.log(templateId);
 
   const colorGrid = drawing.map((drawPixel) => {
     return (association[drawPixel]);
@@ -119,6 +121,7 @@ function drawCanvas(grid, index) {
   localStorage.setItem("buttonIndex", index);
   localStorage.setItem("canvasHeight", canvasHeight);
   localStorage.setItem("canvasWidth", canvasWidth);
+  localStorage.setItem("templateId", templateId);
   if (index == 1) {
     const coloringNumber = grid.coloringNumber;
     const numberColorAssociation = grid.numberColorAssociation;
@@ -151,8 +154,8 @@ const softkeyCallbackTempPage = {
     const currentElement = $(":focus");
     const tempId = currentElement.attr("id");
     const drawGrid = JSON.parse(currentElement.data("grid"));
-    var bestMinute = localStorage.getItem("bestMinute");
-    var bestSecond = localStorage.getItem("bestSecond");
+    // var bestMinute = localStorage.getItem("bestMinute");
+    // var bestSecond = localStorage.getItem("bestSecond");
     $("#chooseModal").modal('show');
     $('.close-modal').css({
       display: "none"
@@ -161,9 +164,9 @@ const softkeyCallbackTempPage = {
 
       $(".mode[tabIndex=1]").focus();
       $(".mode").data("currentGrid", drawGrid);
-      if (bestSecond || bestMinute) {
-        $(".best-time").append(` <p>Best time: ${bestMinute} min ${bestSecond} sec</p>`);
-      }
+      // if (bestSecond || bestMinute) {
+      //   $(".best-time").append(` <p>Best time: ${bestMinute} min ${bestSecond} sec</p>`);
+      // }
     }
     localStorage.setItem(`Overlayed${tempId}`, tempId);
   },

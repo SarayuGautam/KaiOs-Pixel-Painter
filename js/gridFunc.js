@@ -6,6 +6,7 @@ $(document).ready(function () {
   const numberOfPixelsWidth = localStorage.getItem("numberOfPixelsWidth");
   const numberOfPixelsHeight = localStorage.getItem("numberOfPixelsHeight");
   const challengeTime = localStorage.getItem("challengeTime");
+  const templateId = localStorage.getItem("templateId");
   const buttonIndex = localStorage.getItem("buttonIndex");
   const coloringNumber = localStorage.getItem("coloringNumber") ? JSON.parse(localStorage.getItem("coloringNumber")) : [];
   const numberColorAssociation = JSON.parse(localStorage.getItem("numberColorAssociation"));
@@ -23,19 +24,17 @@ $(document).ready(function () {
 
 
 
-
+  var timeFunc;
   // Timer Function Code
   function startTimer(duration, display) {
     isTimerFinished = false;
     var timer = duration,
       minutes, seconds;
-    var timerFunc = setInterval(function () {
+    timerFunc = setInterval(function () {
       minutes = parseInt(timer / 60, 10);
       seconds = parseInt(timer % 60, 10);
-
       minutes = minutes < 10 ? "0" + minutes : minutes;
       seconds = seconds < 10 ? "0" + seconds : seconds;
-
       display.textContent = minutes + ":" + seconds;
 
       if (--timer <= 0) {
@@ -84,8 +83,6 @@ $(document).ready(function () {
     var minutes = Math.floor(challengeTime / 60);
     var seconds = challengeTime - minutes * 60;
     $("#ad-container2").append(`<div id="time" class="timer-overlay">0${minutes}:0${seconds}</div>`);
-    localStorage.setItem("bestMinute", `${minutes}`);
-    localStorage.setItem("bestSecond", `${seconds}`);
     display = document.querySelector('#time');
     startTimer(challengeTime, display);
   }
@@ -453,11 +450,12 @@ $(document).ready(function () {
           } else if (
             $(":focus").attr("id") == "exit") {
             $.modal.close();
+
             if (buttonIndex == 2 || (buttonIndex == 1 && isTimerFinished == false)) {
               $(":focus").blur();
               $(".pixel").attr("tabIndex", "-1");
               $("#challengeModal").remove();
-              $("#time").remove();
+              $("#time").fadeOut();
               $(".bottomWrapper").remove();
               $(".customPicker").remove();
               $('.softkey-grid').remove();
@@ -470,6 +468,22 @@ $(document).ready(function () {
               $(".pixel").css({
                 border: "none",
               });
+              clearInterval(timerFunc);
+              var bestScores = JSON.parse(localStorage.getItem("bestScores"));
+              if (!bestScores[templateId]) {
+                bestScores[templateId] = 10000000;
+              }
+              let [min, sec] = $("#time").text().split(":");
+              min = parseInt(min);
+              sec = parseInt(sec);
+              let elapsed_time = challengeTime - 60 * min - sec;
+              // let bestMin = Math.floor(elapsed_time / 60);
+              // let bestSec = elapsed_time % 60;
+              if (elapsed_time < bestScores[templateId] && elapsed_time != 0) {
+                bestScores[templateId] = elapsed_time;
+              }
+              localStorage.setItem("bestScores", JSON.stringify(bestScores));
+              console.log("bestScores");
             } else if (buttonIndex == 1 && isTimerFinished == true) {
               window.location.href = "./displayTemp.html";
             }
