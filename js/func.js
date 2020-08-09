@@ -152,10 +152,12 @@ function drawCanvas(grid, index) {
 const softkeyCallbackTempPage = {
   center: function () {
     const currentElement = $(":focus");
+    var templateId = localStorage.getItem("templateId");
     const tempId = currentElement.attr("id");
     const drawGrid = JSON.parse(currentElement.data("grid"));
-    // var bestMinute = localStorage.getItem("bestMinute");
-    // var bestSecond = localStorage.getItem("bestSecond");
+    var bestScores = JSON.parse(localStorage.getItem("bestScores"));
+    let bestMin = Math.floor(bestScores[templateId] / 60);
+    let bestSec = bestScores[templateId] % 60;
     $("#chooseModal").modal('show');
     $('.close-modal').css({
       display: "none"
@@ -164,9 +166,9 @@ const softkeyCallbackTempPage = {
 
       $(".mode[tabIndex=1]").focus();
       $(".mode").data("currentGrid", drawGrid);
-      // if (bestSecond || bestMinute) {
-      //   $(".best-time").append(` <p>Best time: ${bestMinute} min ${bestSecond} sec</p>`);
-      // }
+      if (bestSec || bestMin) {
+        $(".best-time").append(` <p>Best time: ${bestMin} min ${bestSec} sec</p>`);
+      }
     }
     localStorage.setItem(`Overlayed${tempId}`, tempId);
   },

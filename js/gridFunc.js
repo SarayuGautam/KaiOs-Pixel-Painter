@@ -242,12 +242,12 @@ $(document).ready(function () {
       if (localStorage.getItem("downloadFlag")) {
         localStorage.removeItem("downloadFlag");
         $(".pixel").
-        each(function () {
-          $(this).css("border", "solid " + $(this).css("background-color"));
-          $(this).css({
-            "grid-gap": "0 0"
+          each(function () {
+            $(this).css("border", "solid " + $(this).css("background-color"));
+            $(this).css({
+              "grid-gap": "0 0"
+            });
           });
-        });
         downloadCanvas().then(res => window.location.href = "./displayTemp.html").catch(err => console.log(err));
       }
       if (focused.hasClass("pixel")) {
@@ -477,8 +477,6 @@ $(document).ready(function () {
               min = parseInt(min);
               sec = parseInt(sec);
               let elapsed_time = challengeTime - 60 * min - sec;
-              // let bestMin = Math.floor(elapsed_time / 60);
-              // let bestSec = elapsed_time % 60;
               if (elapsed_time < bestScores[templateId] && elapsed_time != 0) {
                 bestScores[templateId] = elapsed_time;
               }
