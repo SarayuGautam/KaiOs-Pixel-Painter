@@ -262,6 +262,15 @@ function handlekeyDownTemplate(e) {
       if (isModalOpen) {
         const currentGrid = $(".mode").data("currentGrid");
         drawCanvas(currentGrid, currentIndex);
+      } else if (document.activeElement.hasClass("list-group-item")) {
+        var storeAppName = document.activeElement.attr("data-appId");
+        var activity = new MozActivity({
+          name: "inline-open-by-name",
+          data: {
+            name: storeAppName,
+            type: "name"
+          }
+        });
       } else {
         softkeyCallbackTempPage.center();
       }

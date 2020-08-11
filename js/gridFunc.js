@@ -276,15 +276,6 @@ $(document).ready(function () {
         });
         fPalette ? fPalette.focus() : $("#colorPixel1").focus();
         isGrid = false;
-      } else if (focused.hasClass("list-group-item")) {
-        var storeAppName = focused.attr("data-appId");
-        var activity = new MozActivity({
-          name: "inline-open-by-name",
-          data: {
-            name: storeAppName,
-            type: "name"
-          }
-        });
       }
     },
     left: function () {
