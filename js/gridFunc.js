@@ -486,9 +486,9 @@ $(document).ready(function () {
               window.location.href = "./displayTemp.html";
             }
           }
+        } else {
+          softkeycallbackGridColor.center();
         }
-        softkeycallbackGridColor.center();
-
         break;
       case 'SoftLeft':
         if ($("#softkey-center-canvas").text() === "DOWNLOAD") {
